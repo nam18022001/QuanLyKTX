@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'offwebsite' => \App\Http\Middleware\onoffwebsite::class,
+        'shutdown' => \App\Http\Middleware\shutdownpage::class,
         'adminlogin' => \App\Http\Middleware\adminlogin::class,
     ];
 }

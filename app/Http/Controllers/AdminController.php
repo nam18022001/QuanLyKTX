@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\User;
-
+use View;
 use Auth;
 class AdminController extends Controller
 {
@@ -32,11 +32,7 @@ class AdminController extends Controller
             return redirect()->back()->with('loginfail', 'Sai email hoặc mật khẩu');
         }
     }
-    public function index()
-    {
-        # code...
-        return view('quan-ly.view.dashboard');
-    }
+    
     public function off()
     {
         # code...
@@ -68,12 +64,6 @@ class AdminController extends Controller
         
         return redirect('/');
     }
-    function __construct()
-    {
-        # code...
-        $page = Page::find(1);
-        // $pageoff = $page->status
-        view()->share('pageoff', $page);
-    }
+    
 }
 

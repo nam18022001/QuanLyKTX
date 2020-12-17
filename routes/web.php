@@ -15,18 +15,27 @@ use App\Http\Controllers\QuanlyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('test', function () {
+//     echo bcrypt('123');
+// });
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/post-dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
 
 // Route của quản lý
 Route::group(['middleware' => 'adminlogin'], function () {
-Route::get('dang-bao-tri', [AdminController::class, 'off']);
-Route::get('shutdown', [AdminController::class, 'shutdown']);
-Route::get('shutup', [AdminController::class, 'shutup']);
+    Route::group(['middleware' => 'shutdown'], function () {
+        // Bảo vệ
+        Route::get('dang-bao-tri', [AdminController::class, 'off']);
+        Route::get('shutdown', [AdminController::class, 'shutdown']);
+        Route::get('shutup', [AdminController::class, 'shutup']);
+    });
+
     Route::group(['prefix' => 'quan-ly'], function () {
-        Route::get('/', [AdminController::class, 'index']);
-        
+        Route::get('/', [QuanLyController::class, 'index']);
+        Route::get('quan-ly-phong-nam', [QuanLyController::class, 'quanlyphongnam']);
+        Route::get('quan-ly-phong-nu', [QuanLyController::class, 'quanlyphongnu']);
+
     });
 });
 // Route của sinh viên

@@ -15,7 +15,7 @@ class CreateGiuongTable extends Migration
     {
         Schema::create('Giuong', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Giuong');
+            $table->string('giuong');
             $table->integer('phi')->nullable();
             $table->integer('demphi')->nullable();
             $table->integer('hoatdong')->nullable();

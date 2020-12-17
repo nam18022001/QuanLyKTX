@@ -58,9 +58,21 @@
 @include('quan-ly.layout.header')
 
 <!-- [ Header ] end -->
+<div class="pcoded-main-container">
+	<div class="pcoded-wrapper">
+		<div class="pcoded-content">
+			<div class="pcoded-inner-content">
+				<div class="main-body">
+					<div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- [ Main Content ] start -->
-@yield('content')
     <!-- Vendor js -->
     <script src="{{asset('admin_assets/assets/js/vendor-all.min.js')}}"></script>
     <script src="{{asset('admin_assets/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>

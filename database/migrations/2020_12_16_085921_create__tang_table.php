@@ -15,7 +15,7 @@ class CreateTangTable extends Migration
     {
         Schema::create('Tang', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Tang');
+            $table->string('tang');
             $table->integer('id_khu')->unsigned();
             $table->foreign('id_khu')->references('id')->on('Khu');
             $table->timestamps();

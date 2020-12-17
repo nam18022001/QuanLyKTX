@@ -15,7 +15,7 @@ class CreatePhongTable extends Migration
     {
         Schema::create('Phong', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Phong');
+            $table->string('phong');
             $table->integer('phi')->nullable();
             $table->integer('id_tang')->unsigned();
             $table->foreign('id_tang')->references('id')->on('Tang');

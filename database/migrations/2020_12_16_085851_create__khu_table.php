@@ -15,7 +15,7 @@ class CreateKhuTable extends Migration
     {
         Schema::create('Khu', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Khu');
+            $table->string('khu');
             $table->timestamps();
         });
     }
