@@ -27,8 +27,8 @@
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fas fa-house-user"></i></span><span class="pcoded-mtext">Quản Lý Phòng</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="{{url('quan-ly/quan-ly-phong-nam')}}" class="">Khu Nam</a></li>
-						<li class=""><a href="{{url('quan-ly/quan-ly-phong-nu')}}" class="">Khu Nữ</a></li>
+						<li class=""><a href="{{url('quan-ly/khu-nam/quan-ly-phong-nam')}}" class="">Khu Nam</a></li>
+						<li class=""><a href="{{url('quan-ly/khu-nu	/quan-ly-phong-nu')}}" class="">Khu Nữ</a></li>
 					</ul>
 				</li>
 				

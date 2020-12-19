@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="{{asset('admin_assets/assets/fontawesome/css/all.css')}}">
 <!-- animation css -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/plugins/animation/css/animate.min.css')}}">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- vendor css -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/css/style.css')}}">
 @yield('css')

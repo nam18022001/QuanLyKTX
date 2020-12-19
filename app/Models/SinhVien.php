@@ -19,4 +19,5 @@ class SinhVien extends Model
         # code...
         return $this->hasOne('App\Models\User', 'id_sinhvien', 'id');
     }
+
 }

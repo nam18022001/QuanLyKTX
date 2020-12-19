@@ -35,4 +35,5 @@ class Phong extends Model
     {
         return $this->hasManyThrough('App\Models\Thue', 'App\Models\Giuong', 'id_phong', 'id_giuong', 'id');
     }
+
 }

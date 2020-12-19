@@ -16,8 +16,11 @@ use App\Http\Controllers\QuanlyController;
 |
 */
 // Route::get('test', function () {
+
 //     echo bcrypt('123');
 // });
+
+
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/post-dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
@@ -33,8 +36,18 @@ Route::group(['middleware' => 'adminlogin'], function () {
 
     Route::group(['prefix' => 'quan-ly'], function () {
         Route::get('/', [QuanLyController::class, 'index']);
-        Route::get('quan-ly-phong-nam', [QuanLyController::class, 'quanlyphongnam']);
-        Route::get('quan-ly-phong-nu', [QuanLyController::class, 'quanlyphongnu']);
+        
+        Route::group(['prefix' => 'khu-nam'], function () {
+            Route::get('quan-ly-phong-nam', [QuanLyController::class, 'quanlyphongnam']);
+            Route::get('tang/{id}', [QuanLyController::class, 'phongnam']);
+            Route::get('phong/{id}',[QuanLyController::class, 'sinhviennam']);
+        });
+
+        Route::group(['prefix' => 'khu-nu'], function () {
+            Route::get('quan-ly-phong-nu', [QuanLyController::class, 'quanlyphongnu']);
+            Route::get('tang/{id}', [QuanLyController::class, 'phongnu']);
+            Route::get('phong/{id}',[QuanLyController::class, 'sinhviennu']);
+        });
 
     });
 });

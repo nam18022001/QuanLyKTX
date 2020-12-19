@@ -1,23 +1,21 @@
 @extends('quan-ly.layout.master')
 @section('title')
-    Quản Lý Phòng Nam
+    Quản Lý Phòng Nữ
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         .online{
-            border: 3px solid rgb(58, 171, 58);
+            border: 1px solid rgb(58, 171, 58);
             border-radius: 100px;
             background-color: rgb(65, 172, 65);
             color: rgb(0, 0, 0);
-            box-shadow: 0 0 5px;
         }
         .offline{
-            border: 3px solid rgb(209, 30, 7);
+            border: 1px solid rgb(209, 30, 7);
             border-radius: 100px;
             background-color:rgb(209, 30, 7);;
             color: rgb(255, 255, 255);
-            box-shadow: 0 0 5px black;
         }
     </style>
 @endsection
@@ -47,7 +45,7 @@
                         @endif
                         </p>
                         @if ($item->hoatdong == 1)
-                        <a href="{{url('quan-ly/khu-nam/phong')}}/{{$item->id}}" class="btn btn-outline-info">Sinh viên trong phòng</a>
+                        <a href="{{url('quan-ly/khu-nu/phong')}}/{{$item->id}}" class="btn btn-outline-info">Sinh viên trong phòng</a>
                         
                     @endif
                 </div>

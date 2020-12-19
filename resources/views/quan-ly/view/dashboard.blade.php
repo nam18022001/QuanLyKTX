@@ -7,8 +7,6 @@
 {{'Quản Lý'}}
 @elseif (Auth::user()->position == 2)
 {{'Tổ quản lý KTX'}}
-@else
-{{'Quản Lý Khu Tầng'}}
 @endif
 @endsection
 @section('content')
@@ -24,7 +22,7 @@
 				</div>
 				<ul class="breadcrumb">
 					<li class="breadcrumb-item"><i class="feather icon-home"></i></li>
-					<li class="breadcrumb-item"><a href="#!">Báo cáo</a></li>
+					<li class="breadcrumb-item"><a href="#">Báo cáo</a></li>
 				</ul>
 			</div>
 		</div>
@@ -40,8 +38,8 @@
 			<div class="card-body">
 				<div class="row align-items-center m-b-25">
 					<div class="col">
-						<h6 class="m-b-5 text-white">Total Profit</h6>
-						<h3 class="m-b-0 text-white">$1,783</h3>
+						<h6 class="m-b-5 text-white">Tổng Số Sinh Viên Ở</h6>
+						<h3 class="m-b-0 text-white">{{$sinhvien}}</h3>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-money-bill-alt text-c-red f-18"></i>
@@ -55,14 +53,13 @@
 			<div class="card-body">
 				<div class="row align-items-center m-b-25">
 					<div class="col">
-						<h6 class="m-b-5 text-white">Total Orders</h6>
-						<h3 class="m-b-0 text-white">15,830</h3>
+						<h6 class="m-b-5 text-white">Tổng Số Người Thuê</h6>
+						<h3 class="m-b-0 text-white">{{$thue}}</h3>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-database text-c-blue f-18"></i>
 					</div>
 				</div>
-				<p class="m-b-0 text-white"><span class="label label-primary m-r-10">+12%</span>From Previous Month</p>
 			</div>
 		</div>
 	</div>
@@ -71,14 +68,13 @@
 			<div class="card-body">
 				<div class="row align-items-center m-b-25">
 					<div class="col">
-						<h6 class="m-b-5 text-white">Average Price</h6>
-						<h3 class="m-b-0 text-white">$6,780</h3>
+						<h6 class="m-b-5 text-white">Tổng Số Tài Khoản</h6>
+						<h3 class="m-b-0 text-white">{{$tongtaikhoan}}</h3>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-dollar-sign text-c-green f-18"></i>
 					</div>
 				</div>
-				<p class="m-b-0 text-white"><span class="label label-success m-r-10">+52%</span>From Previous Month</p>
 			</div>
 		</div>
 	</div>
@@ -94,7 +90,6 @@
 						<i class="fas fa-tags text-c-yellow f-18"></i>
 					</div>
 				</div>
-				<p class="m-b-0 text-white"><span class="label label-warning m-r-10">+52%</span>From Previous Month</p>
 			</div>
 		</div>
 	</div>
@@ -209,34 +204,32 @@
 							<th>Mã sinh viên</th>
 							<th>Email</th>
 							<th>Số điện thoại</th>
-							<th>Khu/Tầng</th>
+							<th>Khu/Tầng: </th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-							<td>Airi Satou</td>
-							<td>Accountant</td>
-							<td>Tokyo</td>
-							<td>33</td>
-							<td>2008/11/28</td>
-							<td>$162,700</td>
-							</tr>
-							<tr>
-							<td>Caesar Vance</td>
-							<td>Pre-Sales Support</td>
-							<td>New York</td>
-							<td>29</td>
-							<td>2011/12/12</td>
-							<td>$106,450</td>
-							</tr>
-							<tr>
-							<td>Bruno Nash</td>
-							<td>Software Engineer</td>
-							<td>Edinburgh</td>
-							<td>21</td>
-							<td>2012/03/29</td>
-							<td>$433,060</td>
-							</tr>
+								@foreach ($truong_tang as $item)
+									<tr>
+										<td>
+											{{$item->Ten}}
+										</td>
+										<td>
+											{{$item->Lop}}
+										</td>
+										<td>
+											{{$item->MSSV}}
+										</td>
+										<td>
+											{{$item->Email}}
+										</td>
+										<td>
+											0{{$item->SDT}}
+										</td>
+										<td>
+											{{$item->giuong->phong->tang->khu->khu}} / {{$item->giuong->phong->tang->tang}} / {{$item->giuong->phong->phong}}
+										</td>
+									</tr>
+								@endforeach
 							</tbody>
 							</table>
 					</div>
