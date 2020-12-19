@@ -47,7 +47,6 @@
 						<i class="fas fa-money-bill-alt text-c-red f-18"></i>
 					</div>
 				</div>
-				<p class="m-b-0 text-white"><span class="label label-danger m-r-10">+11%</span>From Previous Month</p>
 			</div>
 		</div>
 	</div>
