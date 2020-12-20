@@ -1,4 +1,4 @@
-## Một trang web quản lý KTX bằng LARAVEL nho nhỏ đẻ gửi tới các bạn
+## Một trang web quản lý KTX bằng LARAVEL nho nhỏ để gửi tới các bạn
 <p>Facebook: <a href="https://facebook.com/nam1822001">HERE</a></p>
  <p>Ủng hộ tui:  Ngân hàng VP Bank<br>
     Số tài khoản: 190004961<br>
