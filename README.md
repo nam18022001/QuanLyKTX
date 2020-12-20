@@ -7,10 +7,10 @@
 
 ## Hướng dẫn
 <p>Dùng git bash hoặc cmd của bạn vào tới thư mục htdocs trong xampp rồi sao chép và dán lệnh sau: </p>
-<p>git clone https://github.com/nam18022001/QuanLyKTX.git</p>
+<h3>git clone https://github.com/nam18022001/QuanLyKTX.git</h3>
 <p>Đợi nó tải xong thôi.</p>
 <p>Xong rồi thì bạn hãy sao chép và dán vào cmd hoặc git bash lệnh sau: </p>
-<p>cd QuanLyKTX</p>
+<h3>cd QuanLyKTX</h3>
 <p>Và bạn hãy sao chép tiếp và dán vào cmd hoặc git bash lệnh sau:</p>
-<p>composer update</p>
+<h3>composer update</h3>
 <p>Xong rồi đáy bạn chỉ việc chạy như bình thường thôi</p>
