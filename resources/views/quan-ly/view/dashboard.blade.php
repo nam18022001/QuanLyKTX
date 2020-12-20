@@ -69,7 +69,7 @@
 				<div class="row align-items-center m-b-25">
 					<div class="col">
 						<h6 class="m-b-5 text-white">Tổng Số Tài Khoản</h6>
-						<h3 class="m-b-0 text-white">{{$tongtaikhoan}}</h3>
+						<h3 class="m-b-0 text-white">{{$tongtaikhoan }}</h3>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-dollar-sign text-c-green f-18"></i>

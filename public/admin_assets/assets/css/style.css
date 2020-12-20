@@ -106,7 +106,7 @@ strong {
 }
 
 .page-header .page-header-title+.breadcrumb>.breadcrumb-item a {
-    color: #3949AB;
+    color: #31dd59;
     font-weight: 400;
     font-size: 13px;
     font-style: italic;
@@ -310,7 +310,7 @@ p.text-muted {
 
 .card.card-load .card-loader i {
     margin: 0 auto;
-    color: #3949AB;
+    color: #12a2d6;
     font-size: 24px;
     align-items: center;
     display: flex;
@@ -360,7 +360,7 @@ p.text-muted {
 .dropdown-menu>li:active,
 .dropdown-menu>li:focus,
 .dropdown-menu>li:hover {
-    background: #3949AB;
+    background: #37d52f;
     color: #fff;
 }
 
@@ -376,7 +376,7 @@ p.text-muted {
 .dropdown-menu>a:active,
 .dropdown-menu>a:focus,
 .dropdown-menu>a:hover {
-    background: #3949AB;
+    background: #32d829;
     color: #fff;
 }
 
@@ -1985,7 +1985,7 @@ pre[class*=language-]:before {
 .loader-bg .loader-track .loader-fill:after,
 .loader-bg .loader-track .loader-fill:before {
     content: '';
-    background: #3949AB;
+    background: #077278;
     position: absolute;
     top: 0;
     left: 0;
@@ -2372,7 +2372,7 @@ pre[class*=language-]:before {
     border-radius: 0.25rem 0.25rem 0 0;
     padding: 15px;
     position: relative;
-    background: linear-gradient(45deg, #3949AB, #2962FF);
+    background: linear-gradient(45deg, #3be42c, #0bb6dd);
 }
 
 .pcoded-header .dropdown .profile-notification .pro-head img {
@@ -4119,7 +4119,7 @@ pre[class*=language-]:before {
 
 .pcoded-navbar.brand-blue .header-logo,
 .pcoded-navbar[class*="navbar-"].brand-blue .header-logo {
-    background: linear-gradient(45deg, #3949AB, #2962FF);
+    background: linear-gradient(45deg, #fdfdfd, #11b7f3);
 }
 
 .pcoded-navbar.brand-blue .header-logo .b-bg,

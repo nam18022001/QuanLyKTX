@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuanlyController;
+use App\Http\Controllers\AjaxController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,9 @@ use App\Http\Controllers\QuanlyController;
 // Route::get('test', function () {
 
 //     echo bcrypt('123');
+//     echo \Carbon\Carbon::now()->day;
+//     echo \Carbon\Carbon::now()->month;
+//     echo \Carbon\Carbon::now()->year;
 // });
 
 
@@ -36,7 +40,18 @@ Route::group(['middleware' => 'adminlogin'], function () {
 
     Route::group(['prefix' => 'quan-ly'], function () {
         Route::get('/', [QuanLyController::class, 'index']);
-        
+
+        Route::group(['prefix' => 'sinh-vien'], function () {
+            Route::get('/', [QuanLyController::class, 'tongsinhvien']);
+            Route::get('nguoi-thue', [QuanLyController::class, 'tongnguoithue']);
+            Route::get('them', [QuanLyController::class, 'themsinhvien']);
+            Route::post('them', [QuanLyController::class, 'postthemsinhvien']);
+            Route::get('xoa/{id}', [QuanLyController::class, 'xoasinhvien']);
+            Route::get('nguoi-thue/xoa/{id}', [QuanLyController::class, 'xoanguoithue']);
+
+            
+        });
+
         Route::group(['prefix' => 'khu-nam'], function () {
             Route::get('quan-ly-phong-nam', [QuanLyController::class, 'quanlyphongnam']);
             Route::get('tang/{id}', [QuanLyController::class, 'phongnam']);
@@ -47,6 +62,11 @@ Route::group(['middleware' => 'adminlogin'], function () {
             Route::get('quan-ly-phong-nu', [QuanLyController::class, 'quanlyphongnu']);
             Route::get('tang/{id}', [QuanLyController::class, 'phongnu']);
             Route::get('phong/{id}',[QuanLyController::class, 'sinhviennu']);
+        });
+        Route::group(['prefix' => 'load'], function () {
+            Route::get('khu/{id_khu}', [AjaxController::class, 'khu']);
+            Route::get('tang/{id_tang}', [AjaxController::class, 'tang']);
+            Route::get('phong/{id_phong}', [AjaxController::class, 'phong']);
         });
 
     });

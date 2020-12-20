@@ -42,6 +42,14 @@
 <!-- vendor css -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/css/style.css')}}">
 @yield('css')
+<style>
+    i{
+        color: rgb(1, 126, 1);
+    }
+    a:hover{
+        text-decoration: none;
+    }
+</style>
 </head>
 
 <body class="">

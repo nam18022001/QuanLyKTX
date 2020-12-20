@@ -2,8 +2,8 @@
 	<div class="m-header">
 		<a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
 		<a href="index.html" class="b-brand">
-			<img src="assets/images/logo.svg" alt="" class="logo images">
-			<img src="assets/images/logo-icon.svg" alt="" class="logo-thumb images">
+			<img src="{{asset('admin_assets/assets/images/logo.svg')}}" alt="" class="logo images">
+			<img src="{{asset('admin_assets/assets/images/logo-icon.svg')}}" alt="" class="logo-thumb images">
 		</a>
 	</div>
 	<a class="mobile-menu" id="mobile-header" href="#!">
@@ -30,7 +30,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
 										<p>New ticket Added</p>
@@ -42,7 +42,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-2.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>10 min</span></p>
 										<p>Prchace New Theme and make payment</p>
@@ -51,7 +51,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-3.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
 										<p>currently login</p>
@@ -60,7 +60,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
 										<p>Prchace New Theme and make payment</p>
@@ -69,7 +69,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-3.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>1 hour</span></p>
 										<p>currently login</p>
@@ -78,7 +78,7 @@
 							</li>
 							<li class="notification">
 								<div class="media">
-									<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+									<img class="img-radius" src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" alt="Generic placeholder image">
 									<div class="media-body">
 										<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>2 hour</span></p>
 										<p>Prchace New Theme and make payment</p>
@@ -95,11 +95,13 @@
 			<li>
 				<div class="dropdown drp-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="icon feather icon-settings"></i>
+						<img src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" width="40" class="img-radius" alt="User-Profile-Image">
+						&nbsp;
+						<i class="fas fa-chevron-down" style="color: rgba(0, 0, 0, 0.544); font-size: 12px;"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
-							<img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+							<img src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" class="img-radius" alt="User-Profile-Image">
 							<span>John Doe</span>
 							<a href="auth-signin.html" class="dud-logout" title="Logout">
 								<i class="feather icon-log-out"></i>

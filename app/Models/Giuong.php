@@ -20,4 +20,9 @@ class Giuong extends Model
         # code...
         return $this->hasOne('App\Models\SinhVien', 'id_giuong', 'id');
     }
+    public function thue()
+    {
+        # code...
+        return $this->hasOne('App\Models\Thue', 'id_giuong', 'id');
+    }
 }
