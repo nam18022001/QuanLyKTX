@@ -94,16 +94,24 @@
 			</li>
 			<li>
 				<div class="dropdown drp-user">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" width="40" class="img-radius" alt="User-Profile-Image">
+					<a href="#" class="a" data-toggle="dropdown">
+						@if (!empty(Auth::user()->avatar))
+							<img src="{{asset('admin_assets/upload')}}/{{Auth::user()->avatar}}" width="40" class="img-radius" alt="User-Profile-Image">
+							@else
+							<img src="{{asset('logo/green3.png')}}" width="40" class="img-radius" alt="User-Profile-Image">
+						@endif
 						&nbsp;
 						<i class="fas fa-chevron-down" style="color: rgba(0, 0, 0, 0.544); font-size: 12px;"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
-							<img src="{{asset('admin_assets/assets/images/user/avatar-1.jpg')}}" class="img-radius" alt="User-Profile-Image">
+							@if (!empty(Auth::user()->avatar))
+							<img src="{{asset('admin_assets/upload')}}/{{Auth::user()->avatar}}" width="40" class="img-radius" alt="User-Profile-Image">
+							@else
+							<img src="{{asset('logo/green3.png')}}" width="40" class="img-radius" alt="User-Profile-Image">
+						@endif
 							<span>John Doe</span>
-							<a href="auth-signin.html" class="dud-logout" title="Logout">
+							<a href="{{url('quan-ly/dang-xuat')}}" class="dud-logout" title="Logout">
 								<i class="feather icon-log-out"></i>
 							</a>
 						</div>

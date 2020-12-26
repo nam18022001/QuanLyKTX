@@ -8,5 +8,9 @@ use App\Models\Page;
 class PageController extends Controller
 {
     //
-    
+    public function index()
+    {
+        # code...
+        return view('page.layout.master_view');
+    }
 }

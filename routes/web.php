@@ -16,17 +16,15 @@ use App\Http\Controllers\AjaxController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('test', function () {
+Route::get('test', function () {
 
-//     echo bcrypt('123');
-//     echo \Carbon\Carbon::now()->day;
-//     echo \Carbon\Carbon::now()->month;
-//     echo \Carbon\Carbon::now()->year;
-// });
+    echo bcrypt('123');
+
+});
 
 
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
-Route::post('quan-ly/post-dang-nhap', [AdminController::class, 'postlogin']);
+Route::post('quan-ly/dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
 
 // Route của quản lý
@@ -40,6 +38,7 @@ Route::group(['middleware' => 'adminlogin'], function () {
 
     Route::group(['prefix' => 'quan-ly'], function () {
         Route::get('/', [QuanLyController::class, 'index']);
+        Route::get('danh-sach', [QuanLyController::class, 'danhsachquanly']);
 
         Route::group(['prefix' => 'sinh-vien'], function () {
             Route::get('/', [QuanLyController::class, 'tongsinhvien']);
@@ -48,7 +47,9 @@ Route::group(['middleware' => 'adminlogin'], function () {
             Route::post('them', [QuanLyController::class, 'postthemsinhvien']);
             Route::get('xoa/{id}', [QuanLyController::class, 'xoasinhvien']);
             Route::get('nguoi-thue/xoa/{id}', [QuanLyController::class, 'xoanguoithue']);
-
+            Route::get('sua/{id}', [QuanLyController::class, 'suasinhvien']);
+            Route::post('sua/{id}', [QuanLyController::class, 'postsuasinhvien']);
+            
             
         });
 
@@ -71,16 +72,15 @@ Route::group(['middleware' => 'adminlogin'], function () {
 
     });
 });
-// Route của sinh viên
+
+// Route của page
+Route::group(['middleware' => 'offwebsite'], function () {
+    Route::get('/', [PageController::class, 'index']);
+    // Route của sinh viên
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'sinh-vien'], function () {
         
     });
 });
-// Route của page
-Route::group(['middleware' => 'offwebsite'], function () {
-    Route::get('/', function () {
-
-    });
 });
 

@@ -29,7 +29,7 @@ class AdminController extends Controller
             # code...
             return redirect('quan-ly');
         }else{
-            return redirect()->back()->with('loginfail', 'Sai email hoặc mật khẩu');
+            return redirect('quan-ly/dang-nhap')->with('loginfail', 'Sai email hoặc mật khẩu');
         }
     }
     

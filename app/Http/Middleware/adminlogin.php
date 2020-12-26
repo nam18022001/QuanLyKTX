@@ -18,7 +18,7 @@ class adminlogin
     {
         if (Auth::check()) {
             # code...
-            if (Auth::user()->position == 1 || Auth::user()->position == 2 || Auth::user()->position == 3 || Auth::user()->position == 4) {
+            if (Auth::user()->position == 1 || Auth::user()->position == 2) {
                 # code...
                 return $next($request);
             }else{

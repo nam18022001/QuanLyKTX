@@ -54,7 +54,7 @@
                         @endif
 						<img src="{{asset('admin_assets/assets/images/logo-dark.png')}}" alt="" class="img-fluid mb-4">
                         <h4 class="mb-3 f-w-400">Quản Lý Đăng Nhập</h4>
-                        <form action="{{ url('quan-ly/post-dang-nhap') }}" method="post">
+                        <form action="{{ url('quan-ly/dang-nhap') }}" method="post">
                             {{ csrf_field() }}
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">

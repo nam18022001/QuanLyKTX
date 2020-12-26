@@ -1,11 +1,11 @@
 <nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
 	<div class="navbar-wrapper ">
 		<div class="navbar-brand header-logo">
-			<a href="index.html" class="b-brand">
+			<a href="{{url('quan-ly')}}" class="b-brand">
 				<img src="{{asset('logo/green3.png')}}" width="29%" alt="" class="logo images">
 				<img src="{{asset('logo/logoofme1.png')}}"width="60%" alt="" class="logo-thumb images">
 			</a>
-			<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+			<a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
 		</div>
 		<div class="navbar-content scroll-div">
 			<ul class="nav pcoded-inner-navbar">
@@ -52,7 +52,7 @@
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Hồ sơ</a></li>
 						<li class=""><a href="#" class="">Đổi mật khẩu</a></li>
-						<li class=""><a href="#" class="">Đăng xuất</a></li>
+						<li class=""><a href="{{url('quan-ly/dang-xuat')}}" class="">Đăng xuất</a></li>
 					</ul>
 				</li>
 				@if (Auth::user()->position == 1)	

@@ -55,6 +55,86 @@ class QuanlyController extends Controller
             'demsinhvien' => $demsinhvien,
             ]);
     }
+
+    public function suasinhvien($id)
+    {
+        # code...
+        $sinhvien = SinhVien::find($id);
+        $khu = Khu::all();
+        $tang = Tang::all();
+        $phong = Phong::all();
+        $giuong = Giuong::all();
+        return view('quan-ly.view.sinhvien.sua', [
+            'sinhvien' => $sinhvien,
+            'khu' => $khu,
+            'tang' => $tang,
+            'phong' => $phong,
+            'giuong' => $giuong,
+            ]);
+    }
+    public function postsuasinhvien(Request $request, $id)
+    {
+        // # code...
+        $sinhvien = SinhVien::find($id);
+        $giuong = Giuong::find($sinhvien->id_giuong);
+        $giuong->hoatdong = 0;
+        $giuong->save();
+        $sinhvien->id_giuong = $request->giuong;
+        $sinhvien->quyen = $request->quyen;
+        if ($request->hasFile('avatar')) {
+            # code...
+            $avatar = $request->file('avatar');
+            $avatarType = $avatar->extension();
+            if ($avatarType == 'jpg' || $avatarType == 'png' || $avatarType == 'gif' || $avatarType == 'jpeg') {
+                # code...
+                if ($avatar->getSize() < 8388608) {
+                    # code...
+                    $avatarName = $avatar->getClientOriginalName();
+                    $avatarNem = Str::random(5).'-'.$avatarName;
+                    while (file_exists('admin_asets/upload/'.$avatarNem)) {
+                        # code...
+                        $avatarNem = Str::random(5).'-'.$avatarName;
+                    }
+                    $avatar->move('admin_assets/upload/', $avatarNem);
+                    $sinhvien->avatar = $avatarNem;
+                }else {
+                    # code...
+                    return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                }
+            }else {
+                # code...
+                return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
+            }
+
+        }
+            if ($request->mu == 'on') {
+                # code...
+                $this->validate($request, 
+                    [
+                    
+                        'password' => 'bail|min:3|max:100',
+                    ],
+
+                    [
+                        'password.min' => 'Nhập mật khẩu lớn hơn 3 ký tự',
+                        'password.max' => 'Nhập mật khẩu ít hơn 100 ký tự',
+
+                    ]
+                );
+                if ($request->password == $request->repassword) {
+                    # code...
+                    $sinhvien->password = bcrypt($request->repassword);
+                }else {
+                    # code...
+                    return redirect()->back()->with('thongbaoimg', 'Nhập lại mật khẩu không khớp');
+                }
+            }
+                $giuong = Giuong::find($request->giuong);
+                $giuong->hoatdong = 1;
+                $giuong->save();
+                $sinhvien->save();
+                return redirect('quan-ly/sinh-vien')->with('themthanhcong', 'Sửa sinh viên '.$sinhvien->Ten.' thành công');
+    }
     public function themsinhvien()
     {
         # code...

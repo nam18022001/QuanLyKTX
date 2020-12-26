@@ -241,13 +241,18 @@
 	<div class="col-md-6 col-xl-4">
 		<div class="card user-card">
 			<div class="card-header">
-				<h5>Profile</h5>
+				<h5>Hồ Sơ</h5>
 			</div>
 			<div class="card-body  text-center">
 				<div class="usre-image">
-					<img src="{{asset('admin_assets/assets/images/widget/img-round1.jpg')}}" class="img-radius wid-100 m-auto" alt="User-Profile-Image">
+					{{-- <img src="{{asset('admin_assets/assets/images/widget/img-round1.jpg')}}" class="img-radius wid-100 m-auto" alt="User-Profile-Image"> --}}
+					@if (!empty(Auth::user()->avatar))
+							<img src="{{asset('admin_assets/upload')}}/{{Auth::user()->avatar}}" class="img-radius  wid-100 m-auto" alt="User-Profile-Image">
+							@else
+							<img src="{{asset('logo/green3.png')}}" class="img-radius  wid-100 m-auto" alt="User-Profile-Image">
+						@endif
 				</div>
-				<h6 class="f-w-600 m-t-25 m-b-10">Alessa Robert</h6>
+				<h6 class="f-w-600 m-t-25 m-b-10">{{Auth::user()->name}}</h6>
 				<p>Active | Male | Born 23.05.1992</p>
 				<hr>
 				<p class="m-t-15">Activity Level: 87%</p>
