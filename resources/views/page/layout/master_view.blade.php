@@ -49,7 +49,21 @@ input[type=date]:required:invalid::-webkit-datetime-edit {
 input[type=date]:focus::-webkit-datetime-edit {
     color: black !important;
 }
+.img-radius{
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
 
+}
+.img-radius img{
+    width: 250px;
+    height: 250px;
+    display: block;
+    /* image-rendering: pixelated;  */
+
+/* 
+    object-fit: cover; */
+}
 </style>
 
 </head>

@@ -1,4 +1,4 @@
--- Intro -->
+<!-- Intro -->
     <div id="intro" class="basic-1">
         <div class="container">
             <div class="row">

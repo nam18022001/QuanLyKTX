@@ -12,8 +12,8 @@
 
                 <!-- Team Member -->
                 <div class="team-member">
-                    <div class="image-wrapper">
-                        <img class="img-fluid" src="admin_assets/upload/nam1.jpg" alt="alternative">
+                    <div class="image-wrapper img-radius">
+                        <img class="img-fluid " src="admin_assets/upload/nam1.jpg" alt="alternative">
                     </div> <!-- end of image-wrapper -->
                     <p class="p-large">Nguyễn Văn Chức</p>
                     <p class="job-title">Trưởng quản lý</p>
@@ -36,8 +36,8 @@
 
                 <!-- Team Member -->
                 <div class="team-member">
-                    <div class="image-wrapper">
-                        <img class="img-fluid" src="admin_assets/upload/nam2.jpg" alt="alternative">
+                    <div class="image-wrapper img-radius">
+                        <img class="img-fluid " src="admin_assets/upload/nam2.jpg" alt="alternative">
                     </div> <!-- end of image wrapper -->
                     <p class="p-large">Hoàng Nam</p>
                     <p class="job-title">Phó quản lý</p>
@@ -60,7 +60,7 @@
 
                 <!-- Team Member -->
                 <div class="team-member">
-                    <div class="image-wrapper">
+                    <div class="image-wrapper img-radius">
                         <img class="img-fluid" src="admin_assets/upload/nam3.jpg" alt="alternative">
                     </div> <!-- end of image wrapper -->
                     <p class="p-large">Hải Tú</p>
@@ -84,8 +84,8 @@
 
                 <!-- Team Member -->
                 <div class="team-member">
-                    <div class="image-wrapper">
-                        <img class="img-fluid" src="admin_assets/upload/nam4.jpg" alt="alternative">
+                    <div class="image-wrapper img-radius">
+                        <img class="img-fluid " src="admin_assets/upload/nam4.jpg" alt="alternative">
                     </div> <!-- end of image wrapper -->
                     <p class="p-large">Thanh Hằng</p>
                     <p class="job-title">Thư kí</p>
