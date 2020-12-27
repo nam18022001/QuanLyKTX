@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,9 @@ Route::group(['middleware' => 'adminlogin'], function () {
             Route::get('nguoi-thue/xoa/{id}', [QuanLyController::class, 'xoanguoithue']);
             Route::get('sua/{id}', [QuanLyController::class, 'suasinhvien']);
             Route::post('sua/{id}', [QuanLyController::class, 'postsuasinhvien']);
+
+            Route::get('nguoi-thue/sua/{id}', [QuanLyController::class, 'suanguoithue']);
+            Route::post('nguoi-thue/sua/{id}', [QuanLyController::class, 'postsuanguoithue']);
             
             
         });
@@ -76,11 +80,33 @@ Route::group(['middleware' => 'adminlogin'], function () {
 // Route của page
 Route::group(['middleware' => 'offwebsite'], function () {
     Route::get('/', [PageController::class, 'index']);
-    // Route của sinh viên
-Route::group(['prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'sinh-vien'], function () {
-        
+    Route::get('dang-nhap', [UserController::class, 'login']);
+    Route::post('dang-nhap', [UserController::class, 'postlogin']);
+    Route::get('dang-ki', [UserController::class, 'regis']);
+    Route::post('dang-ki', [UserController::class, 'postregis']);
+    Route::get('dang-xuat', [UserController::class, 'logout']);
+
+    Route::group(['prefix' => 'email'], function () {
+        Route::get('verify/{id}/{token}',[UserController::class, 'sendMail']);
     });
-});
+
+    Route::group(['prefix' => 'load'], function () {
+        Route::get('khu/{id_khu}', [AjaxController::class, 'khu']);
+        Route::get('tang/{id_tang}', [AjaxController::class, 'tang']);
+        Route::get('phong/{id_phong}', [AjaxController::class, 'phong']);
+    });
+
+        // Route của sinh viên
+    Route::group(['middleware' => 'offwebsite'], function () {
+        Route::group(['prefix' => 'sinh-vien'], function () {
+            
+        });
+    });
+        // Route của người thuê
+    Route::group(['middleware' => 'offwebsite'], function () {
+        Route::group(['prefix' => 'nguoi-thue'], function () {
+            
+        });
+    });
 });
 

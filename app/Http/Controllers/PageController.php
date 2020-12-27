@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
-
+use Auth;
 class PageController extends Controller
 {
     //
@@ -13,4 +13,5 @@ class PageController extends Controller
         # code...
         return view('page.layout.master_view');
     }
+    
 }

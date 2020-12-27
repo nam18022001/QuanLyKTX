@@ -65,7 +65,7 @@
                 <td>{{$value->MSSV}}</td>
                 <td>{{$value->CMND}}</td>
                 <td>{{$value->QueQuan}}</td>
-                <td>{{$value->Email}}</td>
+                <td>{{$value->email}}</td>
                 <td>0{{$value->SDT}}</td>
                 @if (!empty($value->id_giuong))
                 <td>{{$value->giuong->phong->tang->khu->khu}} - {{$value->giuong->phong->tang->tang}} <br> {{$value->giuong->phong->phong}} - {{$value->giuong->giuong}}</td>

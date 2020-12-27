@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="text-container about">
-                    <h4>Cộng đồng Ký túc xá sinh viên Việt - Hàn</h4>
+                    <h4>CỘNG ĐỒNG KÝ TÚC XÁ SINH VIÊN VIỆT - HÀN</h4>
                     <p class="white">Đây không chỉ là nơi ở mà còn là nơi kết nối yêu thương đến với nhau, chung sống như một gia đình.</p>
                 </div> <!-- end of text-container -->
             </div> <!-- end of col -->

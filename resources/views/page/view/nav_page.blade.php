@@ -4,7 +4,7 @@
     <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Aria</a> -->
 
     <!-- Image Logo -->
-    <a class="navbar-brand logo-image" href="index.html"><img src="page_assets/images/logo.svg" alt="alternative"></a>
+    <a class="navbar-brand " href="{{url('/')}}"><img src="{{asset('logo/green2.png')}}" width="20%" alt="alternative"></a>
     
     <!-- Mobile Menu Toggle Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,12 +33,12 @@
 
             <!-- Dropdown Menu -->          
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle page-scroll" href="#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ</a>
+                <a class="nav-link page-scroll" href="#contact" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ</a>
             </li>
             <!-- end of dropdown menu -->
 
             <li class="nav-item">
-                <a class="nav-link page-scroll" href="#contact">Đăng nhập</a>
+                <a class="nav-link page-scroll" href="{{url('dang-nhap')}}">Đăng nhập</a>
             </li>
         </ul>
         <span class="nav-item social-icons">

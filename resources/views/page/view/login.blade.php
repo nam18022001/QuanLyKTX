@@ -3,7 +3,7 @@
 
 <head>
 
-	<title>Quản Lý - Đăng nhập</title>
+	<title>Đăng nhập</title>
 	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 11]>
@@ -52,11 +52,12 @@
                                 {{session('positionlogin')}}
                             </div>
                         @endif
-						<div class="text-center">
+                    
+                        <div class="text-center">
                             <img src="{{asset('logo/green3.png')}}" alt="" width="20%" class="img-fluid mb-4">
                         </div>
-                        <h4 class="mb-3 f-w-400">Quản Lý Đăng Nhập</h4>
-                        <form action="{{ url('quan-ly/dang-nhap') }}" method="post">
+                        <h4 class="mb-3 f-w-400">Đăng Nhập</h4>
+                        <form action="{{ url('dang-nhap') }}" method="post">
                             {{ csrf_field() }}
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
@@ -78,7 +79,8 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary mb-4">Đăng Nhập</button>
-                        <p class="mb-2 text-muted">Quên mật khẩu? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>
+                        <p class="mb-2 text-muted">Quên mật khẩu? <a href="auth-reset-password.html" class="f-w-400">Lấy lại</a></p>
+                        <p class="mb-2 text-muted">Bạn chưa có tài khoản? <a href="{{ url('dang-ki')}}" class="f-w-400">Đăng kí</a></p>
                         </form>
 					</div>
 				</div>

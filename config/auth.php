@@ -46,6 +46,26 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'sinh_vien' => [
+            'driver' => 'session',
+            'provider' => 'sinhvien',
+        ],
+
+        'sinh_vien-api' => [
+            'driver' => 'token',
+            'provider' => 'sinhvien',
+            'hash' => false,
+        ],
+        'nguoi_thue' => [
+            'driver' => 'session',
+            'provider' => 'thue',
+        ],
+
+        'nguoi_thue-api' => [
+            'driver' => 'token',
+            'provider' => 'thue',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +89,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'sinhvien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SinhVien::class,
+        ],
+        'thue' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Thue::class,
         ],
 
         // 'users' => [
@@ -95,6 +123,18 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'sinhvien' => [
+            'provider' => 'sinhvien',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'thue' => [
+            'provider' => 'thue',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

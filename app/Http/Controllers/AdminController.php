@@ -19,7 +19,16 @@ class AdminController extends Controller
     public function login()
     {
         # code...
-        return view('quan-ly.view.login');
+        if (Auth::check()) {
+            # code...
+            return redirect('quan-ly');
+
+        }
+        else {
+            # code...
+            return view('quan-ly.view.login');
+
+        }
     }
 
     public function postlogin(Request $request)

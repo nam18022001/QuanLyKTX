@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title">SERVICES</div>
-                <h2>Choose The Service Package<br> That Suits Your Needs</h2>
+                <div class="section-title">THÔNG TIN KÝ TÚC XÁ</div>
+                <h2><br> That Suits Your Needs</h2>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
         <div class="row">
@@ -13,10 +13,10 @@
                 <!-- Card -->
                 <div class="card">
                     <div class="card-image">
-                        <img class="img-fluid" src="page_assets/images/services-1.jpg" alt="alternative">
+                        <img class="img-fluid" src="page_assets/images/phongo.jpg" alt="alternative">
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Off The Ground Off The Ground</h3>
+                        <h3 class="card-title">Phòng ở</h3>
                         <p>Perfect for fresh ideas or young startups, this package will help get the business off the ground</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
@@ -39,10 +39,10 @@
                 <!-- Card -->
                 <div class="card">
                     <div class="card-image">
-                        <img class="img-fluid" src="page_assets/images/services-2.jpg" alt="alternative">
+                        <img class="img-fluid" src="page_assets/images/phongtuhoc.jpg" alt="alternative">
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Accelerated Growth</h3>
+                        <h3 class="card-title">Phòng tự học</h3>
                         <p>Use this service pack to give your company the necessary impulse to become an industry leader</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
@@ -65,10 +65,10 @@
                 <!-- Card -->
                 <div class="card">
                     <div class="card-image">
-                        <img class="img-fluid" src="page_assets/images/services-3.jpg" alt="alternative">
+                        <img class="img-fluid" src="page_assets/images/cantin.jpg" alt="alternative">
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Market Domination</h3>
+                        <h3 class="card-title">Căn Tin</h3>
                         <p>You already are a reference point in your industry now you need to learn about acquisitions</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">

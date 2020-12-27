@@ -1,6 +1,6 @@
 @extends('quan-ly.layout.master')
 @section('title')
-    Sửa sinh viên
+    Sửa người thuê
 @endsection
 @section('css')
 <style>
@@ -64,7 +64,7 @@
     @endif
  
 <div class="mt-5">
-    <h4 class="header-title mb-3">Sửa sinh viên {{$sinhvien->Ten}}</h4>
+    <h4 class="header-title mb-3">Sửa người thuê {{$sinhvien->Ten}}</h4>
 
     <form class="form-horizontal mt-3" action="{{url('quan-ly/sinh-vien/sua')}}/{{$sinhvien->id}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
