@@ -20,12 +20,18 @@ class regisSV
     public function handle(Request $request, Closure $next)
     {
         
-        if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
+        if (Auth::guard('sinh_vien')->check()) {
             # code...
-            return $next($request);
+            if ( Auth::guard('sinh_vien')->user()->verified == 1) {
+                # code...
+                return $next($request);
+            }else {
+                # code...
+               return redirect('dang-ki');
+            }
         }else {
             # code...
-            return redirect()->back();
+            return redirect('dang-nhap')->with('nologin', 'Bạn chưa đăng nhập');
         }
     }
 }

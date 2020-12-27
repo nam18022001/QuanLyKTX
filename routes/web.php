@@ -23,9 +23,7 @@ Route::get('test', function () {
 
 });
 
-Route::get('a', function () {
-    return view('page.view.mail.verify');
-});
+
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
@@ -88,16 +86,15 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::post('dang-ki', [UserController::class, 'postregis']);
     Route::get('dang-xuat', [UserController::class, 'logout']);
 
-    Route::group(['prefix' => 'load'], function () {
-        Route::get('khu/{id_khu}', [AjaxController::class, 'khu']);
-        Route::get('tang/{id_tang}', [AjaxController::class, 'tang']);
-        Route::get('phong/{id_phong}', [AjaxController::class, 'phong']);
+    Route::group(['prefix' => 'mail'], function () {
+        
     });
-
         // Route của sinh viên
     Route::group(['middleware' => 'sinhvien'], function () {
         Route::group(['prefix' => 'sinh-vien'], function () {
-            
+            Route::get('/', function () {
+                return view('page.view.mail.verify');
+            });
         });
     });
         // Route của người thuê
@@ -106,5 +103,12 @@ Route::group(['middleware' => 'offwebsite'], function () {
             
         });
     });
+
+    Route::group(['prefix' => 'load'], function () {
+        Route::get('khu/{id_khu}', [AjaxController::class, 'khu']);
+        Route::get('tang/{id_tang}', [AjaxController::class, 'tang']);
+        Route::get('phong/{id_phong}', [AjaxController::class, 'phong']);
+    });
+
 });
 

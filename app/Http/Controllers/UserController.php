@@ -270,7 +270,15 @@ class UserController extends Controller
     public function login()
     {
         # code...
-        return view('page.view.login');
+        if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
+            # code...
+            return redirect('sinh-vien');
+        }elseif (Auth::guard('nguoi_thue')->check() && Auth::guard('nguoi_thue')->user()->verified == 1) {
+            # code...
+        }else {
+            return view('page.view.login');
+
+        }
     }
   
         # code...
@@ -279,11 +287,12 @@ class UserController extends Controller
         # code...
         if (Auth::guard('sinh_vien')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             # code...
-            // return redirect('/');
-
+            return redirect('sinh-vien');
+            
         }elseif (Auth::guard('nguoi_thue')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
                 # code...    
-                // return redirect('/');
+                return redirect('nguoi-thue');
+
             
         }else{
             return redirect('dang-nhap')->with('loginfail', 'Sai email hoặc mật khẩu');
