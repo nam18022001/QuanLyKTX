@@ -151,7 +151,7 @@
             {{session('loi')}}
         </div>
     @endif
-        <div class="mt-5">
+    <div class="mt-5">
             <h2 class=" col-md-12 text-center font-bold"><strong>Thêm Sinh Viên hoặc Người thuê</strong></h2>
     
         <!-- Stepper -->
@@ -191,6 +191,10 @@
     
                     </div>
                     <button class="btn btn-primary btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Tiếp Theo</button>
+                    <div class="mt-5 text-center">
+                        <label for="dangki">Bạn đã có tài khoản?</label>&nbsp;
+                        <a href="{{url('dang-nhap')}}"> Đăng nhập ngay nào</a>
+                    </div>
                 </div>
             </div>
     
@@ -337,12 +341,15 @@
                         </div>
                     </div>
                     <button class="btn btn btn-primary btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Quay lại</button>
-                    <button class="btn btn-success btn-rounded float-right" type="submit">Thêm</button>
+                    <button class="btn btn-success btn-rounded float-right" type="submit">Đăng Kí</button>
                 </div>
             </div>
+            
         </form>
+        
         </div>
     </div>
+    
     <!-- Vendor js -->
     <script src="{{asset('admin_assets/assets/js/vendor-all.min.js')}}"></script>
     <script src="{{asset('admin_assets/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>

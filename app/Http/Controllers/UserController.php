@@ -12,6 +12,7 @@ use App\Models\VerifyThue;
 use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyMail;
+use App\Mail\VerifyMail2;
 use Auth;
 class UserController extends Controller
 {
@@ -140,7 +141,7 @@ class UserController extends Controller
                     ];
                     $email = $request->email;
                     $name = $request->name;
-                    
+
                     Mail::to($request->email)
                         ->cc('hnvnam.19it3@vku.udn.vn')
                         ->bcc('hnvnam.19it3@vku.udn.vn')
@@ -154,7 +155,104 @@ class UserController extends Controller
                 return redirect('dang-ki')->with('loi', 'Nhập lại mật khẩu không khớp');
             }
         }elseif ($request->position == 2) {
+            Validator::extend('not_contains', function($attribute, $value, $parameters)
+            {
+                // Banned words
+                $words = array('@vku.udn.vn');
+                foreach ($words as $word)
+                {
+                    if (stripos($value, $word) !== false) return false;
+                }
+                return true;
+            });
+            $this->validate($request, 
+            [
 
+                'email' => 'bail|unique:sinhvien,email|not_contains|unique:thue,email|min:10|max:100',
+                
+            ],
+            [
+                'email.min' => 'Vui lòng nhập đúng email',
+                'email.max' => 'Nhập email dưới 100 ký tự',
+                'email.unique' => 'Email đã tồn tại',
+                'email.not_contains' => 'Bạn chọn người thuê mà lại nhập email trường 😾',
+            ]
+        );
+            if ($request->password == $request->repassword) {
+                # code...
+                $thue = new Thue();
+                $thue->Ten = $request->name;
+                $thue->CMND = $request->CMND;
+                $thue->QueQuan = $request->quequan;
+                $thue->SDT = $request->phone;
+                $thue->email = $request->email;
+                $thue->password = bcrypt($request->repassword);
+                    if ($request->hasFile('avatar')) {
+                        # code...
+                        $avatar = $request->file('avatar');
+                        $avatarType = $avatar->extension();
+                        if ($avatarType == 'jpg' || $avatarType == 'png' || $avatarType == 'gif' || $avatarType == 'jpeg') {
+                            # code...
+                            if ($avatar->getSize() < 8388608) {
+                                # code...
+                                $avatarName = $avatar->getClientOriginalName();
+                                $avatarNem = Str::random(5).'-'.$avatarName;
+                                while (file_exists('admin_asets/upload/'.$avatarNem)) {
+                                    # code...
+                                    $avatarNem = Str::random(5).'-'.$avatarName;
+                                }
+                                $avatar->move('admin_assets/upload/', $avatarNem);
+                                $thue->avatar = $avatarNem;
+                        }else {
+                            # code...
+                            return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                        }
+                    }else {
+                        # code...
+                        return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
+                    }
+
+                }
+                if ($request->mu == 'on') {
+                    # code...
+                    $thue->id_giuong = $request->giuong;
+
+                    $giuong = Giuong::find($request->giuong);
+                    $giuong->hoatdong = 1;
+                    $giuong->save();
+                    $phong = Phong::find($request->phong);
+                    $phong->hoatdong = 1;
+                    $phong->save();
+                }
+                $thue->verified = 0;
+                $thue->save();
+                Auth::guard('nguoi_thue')->attempt(['email' => $request->email, 'password' => $request->password]);
+                    # code...
+                    $sendmail = new VerifyThue();
+                    $sendmail->id_sv = Auth::guard('nguoi_thue')->user()->id;
+                    $sendmail->token = sha1(time());
+                    $sendmail->save();
+
+                    $data = [
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'token' => $sendmail->token,
+                    ];
+                    $email = $request->email;
+                    $name = $request->name;
+
+                    Mail::to($request->email)
+                        ->cc('hnvnam.19it3@vku.udn.vn')
+                        ->bcc('hnvnam.19it3@vku.udn.vn')
+                        ->send(new VerifyMail2($sendmail));
+                
+                    
+                return view('page.view.mail.verify');
+                
+            }
+            else{
+                return redirect()->back()->with('loituychon', 'Nhập lại mật khẩu không khớp');
+            }
 
         }else {
             # code...
