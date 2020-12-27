@@ -25,8 +25,16 @@ class QuanlyController extends Controller
     public function index()
     {
         # code...
-        $sinhvien = SinhVien::where('id_giuong', '!=', 'null')->count();
-        $nguoithue = Thue::where('id_giuong', '!=', 'null')->count();
+        $sinhvien = SinhVien::where([
+            ['id_giuong', '!=', 'null'],
+            ['verified', 1]
+            
+            ])->count();
+        $nguoithue = Thue::where([
+            ['id_giuong', '!=', 'null'],
+            ['verified', 1]
+            
+            ])->count();
 
         $tongtaikhoan = SinhVien::all()->count() + Thue::all()->count();
 
@@ -41,8 +49,8 @@ class QuanlyController extends Controller
     public function tongsinhvien()
     {
         # code...
-        $tongsinhvien = SinhVien::all();
-        $demsinhvien = SinhVien::count();
+        $tongsinhvien = SinhVien::where('verified', 1)->get();
+        $demsinhvien = SinhVien::where('verified', 1)->count();
         return view('quan-ly.view.sinhvien.sinhvien', [
             'tongsinhvien' => $tongsinhvien,
             'demsinhvien' => $demsinhvien,
@@ -51,8 +59,8 @@ class QuanlyController extends Controller
     public function tongnguoithue()
     {
         # code...
-        $tongsinhvien = Thue::all();
-        $demsinhvien = Thue::count();
+        $tongsinhvien = Thue::where('verified', 1)->get();  
+        $demsinhvien = Thue::where('verified', 1)->count();
         return view('quan-ly.view.sinhvien.nguoithue', [
             'tongsinhvien' => $tongsinhvien,
             'demsinhvien' => $demsinhvien,

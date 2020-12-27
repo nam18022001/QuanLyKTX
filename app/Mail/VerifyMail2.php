@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\VerifyThue;
-class VerifyMail extends Mailable
+class VerifyMail2 extends Mailable
 {
     use Queueable, SerializesModels;
     public $sendmail;
@@ -31,6 +31,10 @@ class VerifyMail extends Mailable
      */
     public function build()
     {
-        return $this->view('page.view.mail.sendtokenverify')->from('hnvnam.19it3@vku.udn.vn', 'Green Dormitory Verification')->subject('Xác nhận email');
+        return $this->view('page.view.mail.sendtokenverify2')
+            ->from('hnvnam.19it3@vku.udn.vn', 'Green Dormitory Verification')
+            ->subject('Xác nhận email')
+        
+        ;
     }
 }

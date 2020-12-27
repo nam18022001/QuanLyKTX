@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'offwebsite' => \App\Http\Middleware\onoffwebsite::class,
         'shutdown' => \App\Http\Middleware\shutdownpage::class,
         'adminlogin' => \App\Http\Middleware\adminlogin::class,
+        'sinhvien' => \App\Http\Middleware\regisSV::class,
+        'nguoithue' => \App\Http\Middleware\regisThue::class,
     ];
 }

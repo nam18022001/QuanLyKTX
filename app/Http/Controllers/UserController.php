@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Khu;
+use App\Models\Tang;
+use App\Models\Phong;
+use App\Models\Giuong;
 use App\Models\SinhVien;
 use App\Models\Thue;
 use App\Models\VerifySV;
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyMail;
 use App\Mail\VerifyMail2;
 use Auth;
+use Validator;
 class UserController extends Controller
 {
     //
@@ -23,6 +27,7 @@ class UserController extends Controller
         $khu = Khu::all();
         return view('page.view.regis', ['khu' => $khu]);
     }
+// Star post dang ki
     public function postregis(Request $request)
     {
         # code...
@@ -87,6 +92,7 @@ class UserController extends Controller
                 $sinhvien->SDT = $request->phone;
                 $sinhvien->email = $request->email;
                 $sinhvien->password = bcrypt($request->repassword);
+
                     if ($request->hasFile('avatar')) {
                         # code...
                         $avatar = $request->file('avatar');
@@ -103,16 +109,16 @@ class UserController extends Controller
                                 }
                                 $avatar->move('admin_assets/upload/', $avatarNem);
                                 $sinhvien->avatar = $avatarNem;
+                            }else {
+                                # code...
+                                return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                            }
                         }else {
                             # code...
-                            return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                            return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
                         }
-                    }else {
-                        # code...
-                        return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
-                    }
 
-                }
+                    }
                 if ($request->mu == 'on') {
                     # code...
                     $sinhvien->id_giuong = $request->giuong;
@@ -229,7 +235,7 @@ class UserController extends Controller
                 Auth::guard('nguoi_thue')->attempt(['email' => $request->email, 'password' => $request->password]);
                     # code...
                     $sendmail = new VerifyThue();
-                    $sendmail->id_sv = Auth::guard('nguoi_thue')->user()->id;
+                    $sendmail->id_thue = Auth::guard('nguoi_thue')->user()->id;
                     $sendmail->token = sha1(time());
                     $sendmail->save();
 
@@ -259,6 +265,8 @@ class UserController extends Controller
             return redirect('dang-ki')->with('loi', 'Bạn là sinh viên hay người muốn thuê ?');
         }
     }
+
+// End post dang ki
     public function login()
     {
         # code...

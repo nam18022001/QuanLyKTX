@@ -23,7 +23,9 @@ Route::get('test', function () {
 
 });
 
-
+Route::get('a', function () {
+    return view('page.view.mail.verify');
+});
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
@@ -86,10 +88,6 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::post('dang-ki', [UserController::class, 'postregis']);
     Route::get('dang-xuat', [UserController::class, 'logout']);
 
-    Route::group(['prefix' => 'email'], function () {
-        Route::get('verify/{id}/{token}',[UserController::class, 'sendMail']);
-    });
-
     Route::group(['prefix' => 'load'], function () {
         Route::get('khu/{id_khu}', [AjaxController::class, 'khu']);
         Route::get('tang/{id_tang}', [AjaxController::class, 'tang']);
@@ -97,13 +95,13 @@ Route::group(['middleware' => 'offwebsite'], function () {
     });
 
         // Route của sinh viên
-    Route::group(['middleware' => 'offwebsite'], function () {
+    Route::group(['middleware' => 'sinhvien'], function () {
         Route::group(['prefix' => 'sinh-vien'], function () {
             
         });
     });
         // Route của người thuê
-    Route::group(['middleware' => 'offwebsite'], function () {
+    Route::group(['middleware' => 'nguoithue'], function () {
         Route::group(['prefix' => 'nguoi-thue'], function () {
             
         });
