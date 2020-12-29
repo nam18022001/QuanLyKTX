@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 26, 2020 lúc 04:17 AM
+-- Thời gian đã tạo: Th12 29, 2020 lúc 07:29 AM
 -- Phiên bản máy phục vụ: 10.4.8-MariaDB
 -- Phiên bản PHP: 7.3.11
 
@@ -65,15 +65,15 @@ INSERT INTO `giuong` (`id`, `giuong`, `phi`, `demphi`, `hoatdong`, `id_phong`, `
 (3, 'Giường 03', NULL, NULL, 0, 1, NULL, '2020-12-25 11:40:28'),
 (4, 'Giường 04', NULL, NULL, 0, 1, NULL, '2020-12-20 15:20:40'),
 (5, 'Giường 05', NULL, NULL, 0, 1, NULL, '2020-12-20 15:27:08'),
-(6, 'Giường 06', NULL, NULL, 0, 1, NULL, NULL),
+(6, 'Giường 06', NULL, NULL, 1, 1, NULL, '2020-12-27 10:05:33'),
 (7, 'Giường 01', NULL, NULL, 0, 2, NULL, NULL),
 (8, 'Giường 02', NULL, NULL, 0, 2, NULL, NULL),
-(9, 'Giường 03', NULL, NULL, 0, 2, NULL, NULL),
+(9, 'Giường 03', NULL, NULL, 1, 2, NULL, '2020-12-26 07:05:31'),
 (10, 'Giường 04', NULL, NULL, 0, 2, NULL, NULL),
 (11, 'Giường 05', NULL, NULL, 0, 2, NULL, NULL),
 (12, 'Giường 06', NULL, NULL, 0, 2, NULL, NULL),
 (13, 'Giường 01', NULL, NULL, 0, 3, NULL, NULL),
-(14, 'Giường 02', NULL, NULL, 0, 3, NULL, NULL),
+(14, 'Giường 02', NULL, NULL, 1, 3, NULL, '2020-12-26 07:07:36'),
 (15, 'Giường 03', NULL, NULL, 0, 3, NULL, NULL),
 (16, 'Giường 04', NULL, NULL, 0, 3, NULL, NULL),
 (17, 'Giường 05', NULL, NULL, 0, 3, NULL, NULL),
@@ -710,7 +710,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (72, '2020_12_16_093000_create_dien_website_table', 1),
 (73, '2020_12_16_100921_create_nguoi-ngoai-truong_table', 1),
 (74, '2020_12_16_140023_create_tien_nuoc_table', 1),
-(75, '2020_12_16_140040_create_tien_dien_table', 1);
+(75, '2020_12_16_140040_create_tien_dien_table', 1),
+(76, '2020_12_26_201041_verify_s_v', 2),
+(77, '2020_12_26_201309_verify_thue', 3);
 
 -- --------------------------------------------------------
 
@@ -746,8 +748,8 @@ CREATE TABLE `phong` (
 
 INSERT INTO `phong` (`id`, `phong`, `hoatdong`, `phi`, `id_tang`, `created_at`, `updated_at`) VALUES
 (1, 'Phòng 01', 1, NULL, 1, NULL, NULL),
-(2, 'Phòng 02', 0, NULL, 1, NULL, NULL),
-(3, 'Phòng 03', 0, NULL, 1, NULL, NULL),
+(2, 'Phòng 02', 1, NULL, 1, NULL, '2020-12-26 07:05:31'),
+(3, 'Phòng 03', 1, NULL, 1, NULL, '2020-12-26 07:07:36'),
 (4, 'Phòng 04', 0, NULL, 1, NULL, NULL),
 (5, 'Phòng 05', 0, NULL, 1, NULL, NULL),
 (6, 'Phòng 06', 0, NULL, 1, NULL, NULL),
@@ -863,10 +865,10 @@ CREATE TABLE `sinhvien` (
   `quyen` int(11) DEFAULT 0,
   `avatar` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `SDT` int(11) NOT NULL,
-  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `verified` tinyint(1) DEFAULT NULL,
+  `verified` int(1) DEFAULT 0,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -876,18 +878,19 @@ CREATE TABLE `sinhvien` (
 -- Đang đổ dữ liệu cho bảng `sinhvien`
 --
 
-INSERT INTO `sinhvien` (`id`, `Ten`, `Lop`, `MSSV`, `CMND`, `QueQuan`, `id_giuong`, `quyen`, `avatar`, `SDT`, `Email`, `Password`, `email_verified_at`, `verified`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ChứcSR4', '19it2', '19it321', '838474591904', 'Đà Nẵng', 1, 1, '56899710_1068779503305435_5497314442435624960_n.jpg', 620814707, 'rJbGQ@gmail.com', '$2y$10$FtZ2rXODVUumrk6I/jT9FOkksrNH0sTCo.UHfUpfjODlGnwJvAbHC', NULL, NULL, NULL, '2020-12-17 22:26:30', '2020-12-25 11:59:40'),
-(2, 'ChứcKpZ', '19it3', '19it010', '405364204557', 'Đà Nẵng', 110, 1, NULL, 786070138, 'SiSmH@gmail.com', '$2y$10$waWcQ65lcTjbCv28QwvZA.Uk4eP8iKUB1ghYyeMOpbtB1K7.ywwwC', NULL, NULL, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
-(3, 'ChứcqXP', '19it3', '19it159', '946243304666', 'Đà Nẵng', 272, 1, NULL, 168587091, 'PVluc@gmail.com', '$2y$10$OYNkVhJd9S5W4R8qa91TU.oI6VXOwO8fa2rZfPOBBn7TYNQRzpzTO', NULL, NULL, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
-(4, 'ChứcMos', '19it3', '19it542', '515205611619', 'Đà Nẵng', 22, 1, NULL, 332727619, 'jwTwM@gmail.com', '$2y$10$wM/ncnXVzE/jknPtqg2kHelKcS1ax4kaKxIFSUNuteF1CsWQThpey', NULL, NULL, NULL, '2020-12-17 22:26:31', '2020-12-17 22:26:31'),
-(5, 'ChứcJQq', '19it8', '19it374', '786117300867', 'Đà Nẵng', 69, 1, NULL, 622932438, 'duNNP@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, '2020-12-17 22:26:31', '2020-12-17 22:26:31'),
-(6, 'Chức', '19it1', '19it150', '098765432123', 'Đà Nẵng', 37, 1, NULL, 123123122, 'chuc@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL),
-(7, 'Nam', '19it3', '19it111', '098098098098', 'Đà Nẵng', 74, 1, NULL, 980980980, 'uabsx@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL),
-(8, 'Sang', '19it2', '19it222', '09090909090', 'Đà Nẵng', 527, 1, NULL, 339393939, 'ubu@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL),
-(9, 'Long', '19it3', '19it333', '080808080808', 'Đà Nẵng', 423, 1, NULL, 212121212, 'oihh@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL),
-(10, 'Tường', '19it3', '19it444', '232323232323', 'Quảng Ngãi', 600, 1, NULL, 787878787, '8nn@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL),
-(11, 'Chức', '19ce', '19it126', '098709870987', 'Nghệ An', 2, 0, NULL, 123123127, 'kuda@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sinhvien` (`id`, `Ten`, `Lop`, `MSSV`, `CMND`, `QueQuan`, `id_giuong`, `quyen`, `avatar`, `SDT`, `email`, `password`, `email_verified_at`, `verified`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'ChứcSR4', '19it2', '19it321', '838474591904', 'Đà Nẵng', 1, 1, '56899710_1068779503305435_5497314442435624960_n.jpg', 620814707, 'hihi@gmail.com', '$2y$10$gx7iVs7VNkOi6rAyl/WIQ.Ak2q1WhrE.y/hO24LJz22ZzqsnLMD52', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-25 11:59:40'),
+(2, 'ChứcKpZ', '19it3', '19it010', '405364204557', 'Đà Nẵng', 110, 1, NULL, 786070138, 'SiSmH@gmail.com', '$2y$10$waWcQ65lcTjbCv28QwvZA.Uk4eP8iKUB1ghYyeMOpbtB1K7.ywwwC', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
+(3, 'ChứcqXP', '19it3', '19it159', '946243304666', 'Đà Nẵng', 272, 1, NULL, 168587091, 'PVluc@gmail.com', '$2y$10$OYNkVhJd9S5W4R8qa91TU.oI6VXOwO8fa2rZfPOBBn7TYNQRzpzTO', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
+(4, 'ChứcMos', '19it3', '19it542', '515205611619', 'Đà Nẵng', 22, 1, NULL, 332727619, 'jwTwM@gmail.com', '$2y$10$wM/ncnXVzE/jknPtqg2kHelKcS1ax4kaKxIFSUNuteF1CsWQThpey', NULL, 1, NULL, '2020-12-17 22:26:31', '2020-12-17 22:26:31'),
+(5, 'ChứcJQq', '19it8', '19it374', '786117300867', 'Đà Nẵng', 69, 1, NULL, 622932438, 'duNNP@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, '2020-12-17 22:26:31', '2020-12-17 22:26:31'),
+(6, 'Chức', '19it1', '19it150', '098765432123', 'Đà Nẵng', 37, 1, NULL, 123123122, 'chuc@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(7, 'Nam', '19it3', '19it111', '098098098098', 'Đà Nẵng', 74, 1, NULL, 980980980, 'uabsx@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(8, 'Sang', '19it2', '19it222', '09090909090', 'Đà Nẵng', 527, 1, NULL, 339393939, 'ubu@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(9, 'Long', '19it3', '19it333', '080808080808', 'Đà Nẵng', 423, 1, NULL, 212121212, 'oihh@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(10, 'Tường', '19it3', '19it444', '232323232323', 'Quảng Ngãi', 600, 1, NULL, 787878787, '8nn@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(11, 'Chức', '19ce', '19it126', '098709870987', 'Nghệ An', 2, 0, NULL, 123123127, 'kuda@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
+(50, 'Hoàng Nam', '19it1', '19it1', '987098123453', 'Thanh Hóa', 0, 0, NULL, 981122345, 'nvchuc.19ce@vku.udn.vn', '$2y$10$pts9oCROOMxhYmg2QBy1JOIgLOe0UlrNAlkE6PaObC.i4wIfRvRVq', NULL, 0, NULL, '2020-12-27 12:23:15', '2020-12-27 12:23:15');
 
 -- --------------------------------------------------------
 
@@ -932,15 +935,24 @@ CREATE TABLE `thue` (
   `QueQuan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_giuong` int(11) DEFAULT 0,
   `avatar` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `SDT` int(11) NOT NULL,
-  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SDT` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `verified` int(1) DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thue`
+--
+
+INSERT INTO `thue` (`id`, `Ten`, `CMND`, `QueQuan`, `id_giuong`, `avatar`, `SDT`, `email`, `password`, `email_verified_at`, `verified`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Nam', '123123123123', 'Đà Nẵng', 9, 'JwmrO-76751438_2435950113344422_3947310571224825856_n.jpg', '586034436', 'namkenly2000@gmail.com', '$2y$10$gx7iVs7VNkOi6rAyl/WIQ.Ak2q1WhrE.y/hO24LJz22ZzqsnLMD52', NULL, 1, NULL, '2020-12-26 07:05:31', '2020-12-26 07:05:31'),
+(3, 'Chức', '838474591904', 'Đà Nẵng', 14, '5JGnB-Logoofme-background.png', '853671591', 'quanlytoicao@greendormitory.com', '$2y$10$d8V2mQTZFQTf6EwQB2Ds5uju4lpkfH/I.jGLx0fJQhXU60EXIE0iW', NULL, 1, NULL, '2020-12-26 07:07:36', '2020-12-26 07:07:36'),
+(17, 'Hoàng Nam', '987987654456', 'Đà Nẵng', 6, 'l94k1-Green2.png', '0586034436', 'namkenly2001@gmail.com', '$2y$10$t3sg2dltlzA5YMy/tNjgdeAupmqivEcH9e/H.QkLjlFhXUywG0o9m', NULL, 0, NULL, '2020-12-27 10:05:33', '2020-12-27 10:05:33');
 
 -- --------------------------------------------------------
 
@@ -1210,8 +1222,50 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `position`, `avatar`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Hoàng Nam', 'quanlytoicao@greendormitory.com', '$2y$10$pus49dUyEVTjtGOyIwpeCeYouRFrDc88.wXrJepNDl02UDZ4n5Z9m', 1, '56899710_1068779503305435_5497314442435624960_n.jpg', NULL, 'f6d35ZzKi1kXDdTvuzUeplicHOg7oTv6KrGnsXN5tJjDvgS8Z5TI86rAoibd', NULL, NULL),
-(2, 'Nguyễn Văn Chức', 'admin@greendormitory.com', '$2y$10$pus49dUyEVTjtGOyIwpeCeYouRFrDc88.wXrJepNDl02UDZ4n5Z9m', 1, NULL, NULL, NULL, NULL, NULL);
+(1, 'Hoàng Nam', 'quanlytoicao@greendormitory.com', '$2y$10$pus49dUyEVTjtGOyIwpeCeYouRFrDc88.wXrJepNDl02UDZ4n5Z9m', 1, '56899710_1068779503305435_5497314442435624960_n.jpg', NULL, '2evdnkTyhnSRcuaIQS1LeA6XajAHvaLO4DiO2uvDH7OSKDmVHX3eMAu5IPSt', NULL, NULL),
+(2, 'Nguyễn Văn Chức', 'admin@greendormitory.com', '$2y$10$pus49dUyEVTjtGOyIwpeCeYouRFrDc88.wXrJepNDl02UDZ4n5Z9m', 2, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `verifysv`
+--
+
+CREATE TABLE `verifysv` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_sv` int(10) UNSIGNED NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `verifysv`
+--
+
+INSERT INTO `verifysv` (`id`, `id_sv`, `token`, `created_at`, `updated_at`) VALUES
+(27, 50, 'cf5663217ff3bacc3e087d593a97dbd1a145892d', '2020-12-27 12:23:15', '2020-12-27 12:23:15');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `verifythue`
+--
+
+CREATE TABLE `verifythue` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_thue` int(10) UNSIGNED NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `verifythue`
+--
+
+INSERT INTO `verifythue` (`id`, `id_thue`, `token`, `created_at`, `updated_at`) VALUES
+(5, 17, '3d9d14ff128560e5be489fdfbd4b4401e51a60ef', '2020-12-27 10:05:33', '2020-12-27 10:05:33');
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1287,7 @@ CREATE TABLE `website` (
 --
 
 INSERT INTO `website` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Hoàng Nam', 'Ký Túc Xá Xanh', 1, NULL, '2020-12-19 06:34:44');
+(1, 'Hoàng Nam', 'Ký Túc Xá Xanh', 1, NULL, '2020-12-26 11:46:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1317,6 +1371,18 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Chỉ mục cho bảng `verifysv`
+--
+ALTER TABLE `verifysv`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `verifythue`
+--
+ALTER TABLE `verifythue`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `website`
 --
 ALTER TABLE `website`
@@ -1348,7 +1414,7 @@ ALTER TABLE `khu`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT cho bảng `phong`
@@ -1360,7 +1426,7 @@ ALTER TABLE `phong`
 -- AUTO_INCREMENT cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT cho bảng `tang`
@@ -1372,7 +1438,7 @@ ALTER TABLE `tang`
 -- AUTO_INCREMENT cho bảng `thue`
 --
 ALTER TABLE `thue`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `tiendien`
@@ -1391,6 +1457,18 @@ ALTER TABLE `tiennuoc`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `verifysv`
+--
+ALTER TABLE `verifysv`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT cho bảng `verifythue`
+--
+ALTER TABLE `verifythue`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `website`
