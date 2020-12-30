@@ -152,7 +152,7 @@
         </div>
     @endif
     <div class="mt-5">
-            <h2 class=" col-md-12 text-center font-bold"><strong>Thêm Sinh Viên hoặc Người thuê</strong></h2>
+            <h2 class=" col-md-12 text-center font-bold"><strong>Đăng Kí</strong></h2>
     
         <!-- Stepper -->
         <div class="col-md-12 mt-5 steps-form-2">
