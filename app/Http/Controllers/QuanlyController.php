@@ -10,6 +10,7 @@ use App\Models\Giuong;
 use App\Models\Phong;
 use App\Models\Page;
 use App\Models\SinhVien;
+use App\Models\Thue;
 use App\Models\Dien;
 use App\Models\Nuoc;
 use App\Models\User;
@@ -29,9 +30,13 @@ class QuanlyController extends Controller
             ['verified', 1]
             
             ])->count();
-        $nguoithue = User::where('position', '!=', '1')->count();
+        $nguoithue = Thue::where([
+            ['id_giuong', '!=', 'null'],
+            ['verified', 1]
+            
+            ])->count();
 
-        $tongtaikhoan = SinhVien::all()->count() + User::all()->count();
+        $tongtaikhoan = SinhVien::all()->count() + Thue::all()->count();
 
         $truongtang = SinhVien::where('quyen', 1)->get();
         return view('quan-ly.view.dashboard', [
@@ -51,6 +56,96 @@ class QuanlyController extends Controller
             'demsinhvien' => $demsinhvien,
             ]);
     }
+    public function tongnguoithue()
+    {
+        # code...
+        $tongsinhvien = Thue::where('verified', 1)->get();  
+        $demsinhvien = Thue::where('verified', 1)->count();
+        return view('quan-ly.view.sinhvien.nguoithue', [
+            'tongsinhvien' => $tongsinhvien,
+            'demsinhvien' => $demsinhvien,
+            ]);
+    }
+    public function suanguoithue($id)
+    {
+        # code...
+        $sinhvien = Thue::find($id);
+        $khu = Khu::all();
+        $tang = Tang::all();
+        $phong = Phong::all();
+        $giuong = Giuong::all();
+        return view('quan-ly.view.sinhvien.suanguoithue', [
+            'sinhvien' => $sinhvien,
+            'khu' => $khu,
+            'tang' => $tang,
+            'phong' => $phong,
+            'giuong' => $giuong,
+            ]);
+    }
+    public function postsuanguoithue(Request $request, $id)
+    {
+        // # code...
+        $sinhvien = Thue::find($id);
+        $giuong = Giuong::find($sinhvien->id_giuong);
+        $giuong->hoatdong = 0;
+        $giuong->save();
+        $sinhvien->id_giuong = $request->giuong;
+        $sinhvien->quyen = $request->quyen;
+        if ($request->hasFile('avatar')) {
+            # code...
+            $avatar = $request->file('avatar');
+            $avatarType = $avatar->extension();
+            if ($avatarType == 'jpg' || $avatarType == 'png' || $avatarType == 'gif' || $avatarType == 'jpeg') {
+                # code...
+                if ($avatar->getSize() < 8388608) {
+                    # code...
+                    $avatarName = $avatar->getClientOriginalName();
+                    $avatarNem = Str::random(5).'-'.$avatarName;
+                    while (file_exists('admin_asets/upload/'.$avatarNem)) {
+                        # code...
+                        $avatarNem = Str::random(5).'-'.$avatarName;
+                    }
+                    $avatar->move('admin_assets/upload/', $avatarNem);
+                    $sinhvien->avatar = $avatarNem;
+                }else {
+                    # code...
+                    return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                }
+            }else {
+                # code...
+                return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
+            }
+
+        }
+            if ($request->mu == 'on') {
+                # code...
+                $this->validate($request, 
+                    [
+                    
+                        'password' => 'bail|min:3|max:100',
+                    ],
+
+                    [
+                        'password.min' => 'Nhập mật khẩu lớn hơn 3 ký tự',
+                        'password.max' => 'Nhập mật khẩu ít hơn 100 ký tự',
+
+                    ]
+                );
+                if ($request->password == $request->repassword) {
+                    # code...
+                    $sinhvien->password = bcrypt($request->repassword);
+                }else {
+                    # code...
+                    return redirect()->back()->with('thongbaoimg', 'Nhập lại mật khẩu không khớp');
+                }
+            }
+                $giuong = Giuong::find($request->giuong);
+                $giuong->hoatdong = 1;
+                $giuong->save();
+                $sinhvien->save();
+                return redirect('quan-ly/sinh-vien/nguoi-thue')->with('themthanhcong', 'Sửa người thuê '.$sinhvien->Ten.' thành công');
+    }
+
     public function suasinhvien($id)
     {
         # code...
@@ -146,8 +241,8 @@ class QuanlyController extends Controller
                 'name' => 'bail|string|min:5|max:100',
                 'quequan' => 'bail|string|min:3|max:100',
                 'password' => 'bail|min:3|max:100',
-                'CMND' => 'bail|unique:sinhvien,CMND|min:9|max:12',
-                'phone'  => 'bail|unique:sinhvien,SDT|min:1|max:10',
+                'CMND' => 'bail|unique:sinhvien,CMND|unique:thue,CMND|min:9|max:12',
+                'phone'  => 'bail|unique:sinhvien,SDT|unique:thue,SDT|min:1|max:10',
             ],
 
             [
@@ -168,6 +263,8 @@ class QuanlyController extends Controller
                 'CMND.max' => 'Vui lòng nhập đúng chứng minh nhân dân hoặc thẻ căn cước',
             ]
         );
+        if ($request->position == 1) {
+            # code...
             
             $this->validate($request, 
                 [
@@ -186,7 +283,7 @@ class QuanlyController extends Controller
                     'email.min' => 'Vui lòng nhập đúng email',
                     'email.max' => 'Nhập email dưới 100 ký tự',
                     'email.unique' => 'Email đã tồn tại',
-                    'email.ends_with' => 'Vuilofng nhập đúng địa chỉ email do trường cung cấp',
+                    'email.ends_with' => 'Bạn chọn sinh viên nhưng không đúng email',
                     
                 ]
             );
@@ -246,6 +343,90 @@ class QuanlyController extends Controller
             else{
                 return redirect()->back()->with('loituychon', 'Nhập lại mật khẩu không khớp');
             }
+        }else if($request->position == 2){
+            Validator::extend('not_contains', function($attribute, $value, $parameters)
+            {
+                // Banned words
+                $words = array('@vku.udn.vn');
+                foreach ($words as $word)
+                {
+                    if (stripos($value, $word) !== false) return false;
+                }
+                return true;
+            });
+            $this->validate($request, 
+            [
+
+                'email' => 'bail|unique:sinhvien,email|not_contains|unique:thue,email|min:10|max:100',
+                
+            ],
+            [
+                'email.min' => 'Vui lòng nhập đúng email',
+                'email.max' => 'Nhập email dưới 100 ký tự',
+                'email.unique' => 'Email đã tồn tại',
+                'email.not_contains' => 'Bạn chọn người thuê mà lại nhập email trường 😾',
+            ]
+        );
+            if ($request->password == $request->repassword) {
+                # code...
+                $thue = new Thue();
+                $thue->Ten = $request->name;
+                $thue->CMND = $request->CMND;
+                $thue->QueQuan = $request->quequan;
+                $thue->SDT = $request->phone;
+                $thue->email = $request->email;
+                $thue->password = bcrypt($request->repassword);
+                    if ($request->hasFile('avatar')) {
+                        # code...
+                        $avatar = $request->file('avatar');
+                        $avatarType = $avatar->extension();
+                        if ($avatarType == 'jpg' || $avatarType == 'png' || $avatarType == 'gif' || $avatarType == 'jpeg') {
+                            # code...
+                            if ($avatar->getSize() < 8388608) {
+                                # code...
+                                $avatarName = $avatar->getClientOriginalName();
+                                $avatarNem = Str::random(5).'-'.$avatarName;
+                                while (file_exists('admin_asets/upload/'.$avatarNem)) {
+                                    # code...
+                                    $avatarNem = Str::random(5).'-'.$avatarName;
+                                }
+                                $avatar->move('admin_assets/upload/', $avatarNem);
+                                $thue->avatar = $avatarNem;
+                        }else {
+                            # code...
+                            return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
+                        }
+                    }else {
+                        # code...
+                        return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
+                    }
+
+                }
+                if (!empty($request->giuong)) {
+                    # code...
+                    $thue->id_giuong = $request->giuong;
+
+                    $giuong = Giuong::find($request->giuong);
+                    $giuong->hoatdong = 1;
+                    $giuong->save();
+                    $phong = Phong::find($request->phong);
+                    $phong->hoatdong = 1;
+                    $phong->save();
+
+                }
+                $thue->save();
+                
+                return redirect('quan-ly/sinh-vien/nguoi-thue')->with('themthanhcong', 'Thêm người thuê '.$thue->Ten.' thành công');
+            }
+            else{
+                return redirect()->back()->with('loituychon', 'Nhập lại mật khẩu không khớp');
+            }
+
+        }else {
+            # code...
+            return redirect()->back()->with('loituychon', 'Bạn chưa chọn sinh viên hay người thuê');
+
+        }
 
     }
     public function xoasinhvien($id)
@@ -263,6 +444,21 @@ class QuanlyController extends Controller
         return redirect('quan-ly/sinh-vien')->with('themthanhcong', 'Xóa sinh viên '.$sinhvien->Ten.' thành công');
 
     }
+    public function xoanguoithue($id)
+    {
+        # code...
+        $thue = Thue::find($id);
+        if ($thue->id_giuong > 0) {
+            # code...
+            $giuong = Giuong::where('id', $thue->id_giuong)->first();
+            $giuong->hoatdong = 0;
+            $giuong->save();
+        }
+        $thue->delete();
+   
+        return redirect('quan-ly/sinh-vien/nguoi-thue')->with('themthanhcong', 'Xóa sinh viên '.$thue->Ten.' thành công');
+
+    }
     public function sinhviennam($id)
     {
         # code...
@@ -270,7 +466,7 @@ class QuanlyController extends Controller
         $phong = Giuong::where('id_phong', $id)->get()->first();
 
         return view('quan-ly.view.namsinhvientrongphong', [
-            'sinh_vien' => $giuong,
+            'sinhvien' => $giuong,
             'phong' => $phong,
         ]);
     }
