@@ -36,7 +36,6 @@
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fas fa-user-graduate"></i></span><span class="pcoded-mtext">Sinh viên</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="{{url('quan-ly/sinh-vien')}}" class="">Danh sách sinh viên</a></li>
-						<li class=""><a href="{{url('quan-ly/sinh-vien/nguoi-thue')}}" class="">Danh sách người thuê</a></li>
 						<li class=""><a href="{{url('quan-ly/sinh-vien/them')}}" class="">Thêm</a></li>
 					</ul>
 				</li>

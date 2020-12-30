@@ -43,18 +43,11 @@ Route::group(['middleware' => 'adminlogin'], function () {
 
         Route::group(['prefix' => 'sinh-vien'], function () {
             Route::get('/', [QuanLyController::class, 'tongsinhvien']);
-            Route::get('nguoi-thue', [QuanLyController::class, 'tongnguoithue']);
             Route::get('them', [QuanLyController::class, 'themsinhvien']);
             Route::post('them', [QuanLyController::class, 'postthemsinhvien']);
             Route::get('xoa/{id}', [QuanLyController::class, 'xoasinhvien']);
-            Route::get('nguoi-thue/xoa/{id}', [QuanLyController::class, 'xoanguoithue']);
             Route::get('sua/{id}', [QuanLyController::class, 'suasinhvien']);
             Route::post('sua/{id}', [QuanLyController::class, 'postsuasinhvien']);
-
-            Route::get('nguoi-thue/sua/{id}', [QuanLyController::class, 'suanguoithue']);
-            Route::post('nguoi-thue/sua/{id}', [QuanLyController::class, 'postsuanguoithue']);
-            
-            
         });
 
         Route::group(['prefix' => 'khu-nam'], function () {
@@ -87,7 +80,7 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::get('dang-xuat', [UserController::class, 'logout']);
 
     Route::group(['prefix' => 'mail'], function () {
-        
+        Route::get('verify/{token}', [UserController::class, 'verify']);
     });
         // Route của sinh viên
     Route::group(['middleware' => 'sinhvien'], function () {
@@ -95,12 +88,6 @@ Route::group(['middleware' => 'offwebsite'], function () {
             Route::get('/', function () {
                 return view('page.view.mail.verify');
             });
-        });
-    });
-        // Route của người thuê
-    Route::group(['middleware' => 'nguoithue'], function () {
-        Route::group(['prefix' => 'nguoi-thue'], function () {
-            
         });
     });
 

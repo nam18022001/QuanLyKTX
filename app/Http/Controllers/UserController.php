@@ -9,9 +9,7 @@ use App\Models\Tang;
 use App\Models\Phong;
 use App\Models\Giuong;
 use App\Models\SinhVien;
-use App\Models\Thue;
 use App\Models\VerifySV;
-use App\Models\VerifyThue;
 use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyMail;
@@ -37,8 +35,8 @@ class UserController extends Controller
                 'name' => 'bail|string|min:5|max:100',
                 'quequan' => 'bail|string|min:3|max:100',
                 'password' => 'bail|min:3|max:100',
-                'CMND' => 'bail|unique:sinhvien,CMND|unique:thue,CMND|min:9|max:12',
-                'phone'  => 'bail|unique:sinhvien,SDT|unique:thue,SDT|min:1|max:10',
+                'CMND' => 'bail|unique:sinhvien,CMND|min:9|max:12',
+                'phone'  => 'bail|unique:sinhvien,SDT|min:1|max:10',
             ],
 
             [
@@ -58,8 +56,6 @@ class UserController extends Controller
                 'CMND.max' => 'Vui lòng nhập đúng chứng minh nhân dân hoặc thẻ căn cước',
             ]
         );
-        if ($request->position == 1) {
-            # code...
             $this->validate($request, 
                 [
 
@@ -149,6 +145,7 @@ class UserController extends Controller
                     $name = $request->name;
 
                     Mail::to($request->email)
+                    
                         ->cc('hnvnam.19it3@vku.udn.vn')
                         ->bcc('hnvnam.19it3@vku.udn.vn')
                         ->send(new VerifyMail($sendmail));
@@ -160,110 +157,6 @@ class UserController extends Controller
                 # code...
                 return redirect('dang-ki')->with('loi', 'Nhập lại mật khẩu không khớp');
             }
-        }elseif ($request->position == 2) {
-            Validator::extend('not_contains', function($attribute, $value, $parameters)
-            {
-                // Banned words
-                $words = array('@vku.udn.vn');
-                foreach ($words as $word)
-                {
-                    if (stripos($value, $word) !== false) return false;
-                }
-                return true;
-            });
-            $this->validate($request, 
-            [
-
-                'email' => 'bail|unique:sinhvien,email|not_contains|unique:thue,email|min:10|max:100',
-                
-            ],
-            [
-                'email.min' => 'Vui lòng nhập đúng email',
-                'email.max' => 'Nhập email dưới 100 ký tự',
-                'email.unique' => 'Email đã tồn tại',
-                'email.not_contains' => 'Bạn chọn người thuê mà lại nhập email trường 😾',
-            ]
-        );
-            if ($request->password == $request->repassword) {
-                # code...
-                $thue = new Thue();
-                $thue->Ten = $request->name;
-                $thue->CMND = $request->CMND;
-                $thue->QueQuan = $request->quequan;
-                $thue->SDT = $request->phone;
-                $thue->email = $request->email;
-                $thue->password = bcrypt($request->repassword);
-                    if ($request->hasFile('avatar')) {
-                        # code...
-                        $avatar = $request->file('avatar');
-                        $avatarType = $avatar->extension();
-                        if ($avatarType == 'jpg' || $avatarType == 'png' || $avatarType == 'gif' || $avatarType == 'jpeg') {
-                            # code...
-                            if ($avatar->getSize() < 8388608) {
-                                # code...
-                                $avatarName = $avatar->getClientOriginalName();
-                                $avatarNem = Str::random(5).'-'.$avatarName;
-                                while (file_exists('admin_asets/upload/'.$avatarNem)) {
-                                    # code...
-                                    $avatarNem = Str::random(5).'-'.$avatarName;
-                                }
-                                $avatar->move('admin_assets/upload/', $avatarNem);
-                                $thue->avatar = $avatarNem;
-                        }else {
-                            # code...
-                            return redirect()->back()->with('thongbaoimg', 'Lựa chọn ảnh nào bé hơn 8MB');
-                        }
-                    }else {
-                        # code...
-                        return redirect()->back()->with('thongbaoimg', 'Fie bạn đưa lên không phải file ảnh');
-                    }
-
-                }
-                if ($request->mu == 'on') {
-                    # code...
-                    $thue->id_giuong = $request->giuong;
-
-                    $giuong = Giuong::find($request->giuong);
-                    $giuong->hoatdong = 1;
-                    $giuong->save();
-                    $phong = Phong::find($request->phong);
-                    $phong->hoatdong = 1;
-                    $phong->save();
-                }
-                $thue->verified = 0;
-                $thue->save();
-                Auth::guard('nguoi_thue')->attempt(['email' => $request->email, 'password' => $request->password]);
-                    # code...
-                    $sendmail = new VerifyThue();
-                    $sendmail->id_thue = Auth::guard('nguoi_thue')->user()->id;
-                    $sendmail->token = sha1(time());
-                    $sendmail->save();
-
-                    $data = [
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'token' => $sendmail->token,
-                    ];
-                    $email = $request->email;
-                    $name = $request->name;
-
-                    Mail::to($request->email)
-                        ->cc('hnvnam.19it3@vku.udn.vn')
-                        ->bcc('hnvnam.19it3@vku.udn.vn')
-                        ->send(new VerifyMail2($sendmail));
-                
-                    
-                return view('page.view.mail.verify');
-                
-            }
-            else{
-                return redirect()->back()->with('loituychon', 'Nhập lại mật khẩu không khớp');
-            }
-
-        }else {
-            # code...
-            return redirect('dang-ki')->with('loi', 'Bạn là sinh viên hay người muốn thuê ?');
-        }
     }
 
 // End post dang ki
@@ -273,8 +166,6 @@ class UserController extends Controller
         if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
             # code...
             return redirect('sinh-vien');
-        }elseif (Auth::guard('nguoi_thue')->check() && Auth::guard('nguoi_thue')->user()->verified == 1) {
-            # code...
         }else {
             return view('page.view.login');
 
@@ -288,28 +179,14 @@ class UserController extends Controller
         if (Auth::guard('sinh_vien')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             # code...
             return redirect('sinh-vien');
-            
-        }elseif (Auth::guard('nguoi_thue')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-                # code...    
-                return redirect('nguoi-thue');
-
-            
         }else{
             return redirect('dang-nhap')->with('loginfail', 'Sai email hoặc mật khẩu');
         }
     }
     public function logout()
     {
-        # code...
-        if (Auth::guard('sinh_vien')->check()) {
-            # code...
-            Auth::guard('sinh_vien')->logout();
-        }else {
-            # code...
-            Auth::guard('nguoi_thue')->logout();
 
-        }
-        
+        Auth::guard('sinh_vien')->logout();
         return view('page.view.login');
     }
 }

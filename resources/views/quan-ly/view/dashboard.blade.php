@@ -53,7 +53,7 @@
 			<div class="card-body">
 				<div class="row align-items-center m-b-25">
 					<div class="col">
-						<h6 class="m-b-5 text-white">Tổng Số Người Thuê</h6>
+						<h6 class="m-b-5 text-white">Tổng Số Quản Lý KTX</h6>
 						<h3 class="m-b-0 text-white">{{$thue}}</h3>
 					</div>
 					<div class="col-auto">
@@ -220,7 +220,7 @@
 											{{$item->MSSV}}
 										</td>
 										<td>
-											{{$item->Email}}
+											{{$item->email}}
 										</td>
 										<td>
 											0{{$item->SDT}}

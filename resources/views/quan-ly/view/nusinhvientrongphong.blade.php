@@ -62,7 +62,7 @@
                 <td>{{$value->sinhvien->MSSV}}</td>
                 <td>{{$value->sinhvien->CMND}}</td>
                 <td>{{$value->sinhvien->QueQuan}}</td>
-                <td>{{$value->sinhvien->Email}}</td>
+                <td>{{$value->sinhvien->email}}</td>
                 <td>{{$value->sinhvien->SDT}}</td>
                 <td>{{$value->sinhvien->giuong->giuong}}</td>
                 @if ($value->sinhvien->quyen == 1)

@@ -162,26 +162,6 @@
     <form class="form-horizontal mt-3" action="{{url('quan-ly/sinh-vien/them')}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class=" setup-content-2 mt-5" id="step-1">
-            <div class="col-md-12 text-center">
-                <h3><label class="col-md-6 control-label">Chọn người muốn thêm</label></h3>
-                <div class="checkbox-info">
-                    <input id="radio1" type="radio" value="1" name="position">
-                    <label class="btn btn-outline-info button" onclick="myFunction();" id="pass" for="radio1">
-                        Sinh Viên
-                    </label>
-
-                    <input id="radio4" type="radio" value="2" name="position">
-                    <label class="btn btn-outline-info button" onclick="myFunction2();" for="radio4">
-                        Người thuê
-                    </label>
-
-                </div>
-                <button class="btn btn-primary btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Tiếp Theo</button>
-            </div>
-        </div>
-
-        <!-- Second Step -->
-        <div class="row setup-content-2 mt-4" id="step-2">
             <div class="col-md-12">
                 <h3 class="font-weight-bold text-center pl-0 my-4"><strong>Vui lòng nhập tất cả các trường</strong></h3>
                 <div class="form-group row">
@@ -234,8 +214,8 @@
             </div>
         </div>
 
-        <!-- Third Step -->
-        <div class="row setup-content-2 mt-5" id="step-3">
+        <!-- Second Step -->
+        <div class="row setup-content-2 mt-4" id="step-2">
             <div class="col-md-12">
 
                 <div class="form-group row">
@@ -249,8 +229,8 @@
             </div>
         </div>
 
-        <!-- Fourth Step -->
-        <div class="row setup-content-2 mt-5" id="step-4">
+        <!-- Third Step -->
+        <div class="row setup-content-2 mt-5" id="step-3">
             <div class="col-md-12">
                 <div class="form-group row">
                     <label for="khu" class="col-md-3 control-label">Khu</label>
@@ -287,6 +267,15 @@
                         </select>
                     </div>
                 </div>
+                <button class="btn btn btn-primary btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Quay lại</button>
+                <button class="btn btn btn-primary btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Tiếp Theo</button>
+            </div>
+        </div>
+
+        <!-- Fourth Step -->
+        <div class="row setup-content-2 mt-5" id="step-4">
+            <div class="col-md-12">
+                
                 <div class="form-group row">
                     <label for="password" class="col-md-3 control-label">Mật khẩu</label>
                     <div class="col-md-9">
