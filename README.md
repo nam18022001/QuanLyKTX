@@ -1,5 +1,5 @@
 ## Một trang web quản lý KTX bằng LARAVEL nho nhỏ để gửi tới các bạn
-![Alt text](/public/logo/green2.png?raw=true  "Optional Title")
+![alt](https://raw.github.com/nam18022001/QuanLyKTX/blob/master/public/logo/Green2.png)
 <p>Facebook: <a href="https://facebook.com/nam1822001">HERE</a></p>
  <p>Ủng hộ tui:  Ngân hàng VP Bank<br>
     Số tài khoản: 190004961<br>
