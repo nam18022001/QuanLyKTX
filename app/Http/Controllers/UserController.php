@@ -13,7 +13,6 @@ use App\Models\VerifySV;
 use Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyMail;
-use App\Mail\VerifyMail2;
 use Auth;
 use Validator;
 class UserController extends Controller
@@ -136,13 +135,13 @@ class UserController extends Controller
                     $sendmail->token = sha1(time());
                     $sendmail->save();
 
-                    $data = [
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'token' => $sendmail->token,
-                    ];
-                    $email = $request->email;
-                    $name = $request->name;
+                    // $data = [
+                    //     'name' => $request->name,
+                    //     'email' => $request->email,
+                    //     'token' => $sendmail->token,
+                    // ];
+                    // $email = $request->email;
+                    // $name = $request->name;
 
                     Mail::to($request->email)
                     
@@ -185,8 +184,9 @@ class UserController extends Controller
     }
     public function logout()
     {
-
+        if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
         Auth::guard('sinh_vien')->logout();
         return view('page.view.login');
+        }
     }
 }

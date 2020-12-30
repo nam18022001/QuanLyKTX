@@ -79,7 +79,7 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::post('dang-ki', [UserController::class, 'postregis']);
     Route::get('dang-xuat', [UserController::class, 'logout']);
 
-    Route::group(['prefix' => 'mail'], function () {
+    Route::group(['prefix' => 'email'], function () {
         Route::get('verify/{token}', [UserController::class, 'verify']);
     });
         // Route của sinh viên
