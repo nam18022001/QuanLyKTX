@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'shutdown' => \App\Http\Middleware\shutdownpage::class,
         'adminlogin' => \App\Http\Middleware\adminlogin::class,
         'sinhvien' => \App\Http\Middleware\regisSV::class,
+        'emailverify' => \App\Http\Middleware\EmailVerify::class,
     ];
 }

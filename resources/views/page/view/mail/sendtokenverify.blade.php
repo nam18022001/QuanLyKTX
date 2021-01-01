@@ -61,7 +61,7 @@
         </div>
                 <br><br><br>
         <div class="buttonrVerify mt-3">
-            <a class="btn btn-success" href="{{url('mail/verify')}}/{{$sendmail->token}}">VeriFy Email</a>
+            <a class="btn btn-success" href="{{url('email/verify')}}/{{$sendmail->token}}">VeriFy Email</a>
             <br><br><br>
         </div>
 </div>

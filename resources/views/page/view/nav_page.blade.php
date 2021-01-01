@@ -36,10 +36,20 @@
                 <a class="nav-link page-scroll" href="#contact" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ</a>
             </li>
             <!-- end of dropdown menu -->
-
+            @if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1)   
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle page-scroll" href="javascript:void(0)" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Xin chào, {{Auth::guard('sinh_vien')->user()->Ten}}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{url('sinh-vien')}}"><span class="item-text">Nhà của bạn</span></a>
+                    <div class="dropdown-items-divide-hr"></div>
+                    <a class="dropdown-item" href="{{url('dang-xuat')}}"><span class="item-text">Đăng xuất</span></a>
+                </div>
+            </li>
+           @else
             <li class="nav-item">
                 <a class="nav-link page-scroll" href="{{url('dang-nhap')}}">Đăng nhập</a>
             </li>
+            @endif
         </ul>
         <span class="nav-item social-icons">
             <span class="fa-stack">

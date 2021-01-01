@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifyEmailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +18,11 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test', function () {
+// Route::get('test', function () {
 
-    echo bcrypt('123');
-
-});
+//     echo bcrypt('123');
+//     echo \Carbon\Carbon::now();
+// });
 
 
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
@@ -79,8 +80,10 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::post('dang-ki', [UserController::class, 'postregis']);
     Route::get('dang-xuat', [UserController::class, 'logout']);
 
-    Route::group(['prefix' => 'email'], function () {
-        Route::get('verify/{token}', [UserController::class, 'verify']);
+    Route::group(['prefix' => 'email', 'middleware' => 'emailverify'], function () {
+        Route::get('/', [VerifyEmailController::class, 'email']);
+        Route::get('verify/{token}', [VerifyEmailController::class, 'verify']);
+        Route::get('resend', [VerifyEmailController::class, 'resend']);
     });
         // Route của sinh viên
     Route::group(['middleware' => 'sinhvien'], function () {

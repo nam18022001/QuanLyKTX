@@ -4,11 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
 use Auth;
-use App\Models\SinhVien;
-use App\Models\VerifySV;
-class regisSV
+class EmailVerify
 {
     /**
      * Handle an incoming request.
@@ -19,19 +16,20 @@ class regisSV
      */
     public function handle(Request $request, Closure $next)
     {
-        
         if (Auth::guard('sinh_vien')->check()) {
             # code...
-            if ( Auth::guard('sinh_vien')->user()->verified == 1) {
+            if ( Auth::guard('sinh_vien')->user()->verified != 1) {
                 # code...
                 return $next($request);
             }else {
                 # code...
-               return redirect('email')->with('loi', 'Hãy xác nhận email của bạn, chúng tôi đã gửi nó cho bạn hoặc bạn có thể yêu cầu gửi lại');
+               return redirect('/');
             }
         }else {
             # code...
-            return redirect('dang-nhap')->with('nologin', 'Bạn chưa đăng nhập');
+            abort(404);
+
+            // return redirect('dang-nhap')->with('nologin', 'Bạn chưa đăng nhập');
         }
     }
 }

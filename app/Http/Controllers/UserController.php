@@ -118,12 +118,12 @@ class UserController extends Controller
                     # code...
                     $sinhvien->id_giuong = $request->giuong;
 
-                    $giuong = Giuong::find($request->giuong);
-                    $giuong->hoatdong = 1;
-                    $giuong->save();
-                    $phong = Phong::find($request->phong);
-                    $phong->hoatdong = 1;
-                    $phong->save();
+                    // $giuong = Giuong::find($request->giuong);
+                    // $giuong->hoatdong = 1;
+                    // $giuong->save();
+                    // $phong = Phong::find($request->phong);
+                    // $phong->hoatdong = 1;
+                    // $phong->save();
                 }
                 $sinhvien->verified = 0;
                 $sinhvien->save();
@@ -134,15 +134,6 @@ class UserController extends Controller
                     $sendmail->id_sv = Auth::guard('sinh_vien')->user()->id;
                     $sendmail->token = sha1(time());
                     $sendmail->save();
-
-                    // $data = [
-                    //     'name' => $request->name,
-                    //     'email' => $request->email,
-                    //     'token' => $sendmail->token,
-                    // ];
-                    // $email = $request->email;
-                    // $name = $request->name;
-
                     Mail::to($request->email)
                     
                         ->cc('hnvnam.19it3@vku.udn.vn')
@@ -150,7 +141,7 @@ class UserController extends Controller
                         ->send(new VerifyMail($sendmail));
                 
                     
-                return view('page.view.mail.verify');
+                return redirect('email');
                 
             }else {
                 # code...
@@ -185,8 +176,10 @@ class UserController extends Controller
     public function logout()
     {
         if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
-        Auth::guard('sinh_vien')->logout();
-        return view('page.view.login');
+            Auth::guard('sinh_vien')->logout();
+            return redirect('/');
+        }else{
+            return view('page.view.mail.verify');
         }
     }
 }

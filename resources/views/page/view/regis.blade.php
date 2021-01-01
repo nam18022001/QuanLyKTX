@@ -32,10 +32,6 @@
             margin: auto;
         }
         
-        .display-password {
-            display: none;
-        }
-        
         input[type="email"],
         input[type="text"],
         input[type="tel"],
@@ -175,7 +171,7 @@
         <!-- First Step -->
         <form class="form-horizontal mt-3" action="{{url('dang-ki')}}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class=" setup-content-2 mt-5" id="step-1">
+            <div class=" setup-content-2    " id="step-1">
                 <div class="col-md-12 text-center">
                     <h3 class="font-weight-bold text-center pl-0 my-4"><strong>Vui lòng nhập tất cả các trường</strong></h3>
                     <div class="form-group row">
@@ -316,7 +312,7 @@
             <div class="row setup-content-2" id="step-4">
                 <div class="col-md-12">
                     
-                </div>
+
                     <div class="form-group row">
                         <label for="password" class="col-md-3 control-label">Mật khẩu</label>
                         <div class="col-md-9">
