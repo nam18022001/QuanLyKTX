@@ -8,6 +8,7 @@ use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyEmailController;
+use App\Http\Controllers\SinhVienController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +24,8 @@ use App\Http\Controllers\VerifyEmailController;
 //     echo bcrypt('123');
 //     echo \Carbon\Carbon::now();
 // });
-
-
+Carbon\Carbon::setLocale('vi');
+// Carbon\Carbon::getTranslatedDayName('format-hien-thi');
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
@@ -78,7 +79,6 @@ Route::group(['middleware' => 'offwebsite'], function () {
     Route::post('dang-nhap', [UserController::class, 'postlogin']);
     Route::get('dang-ki', [UserController::class, 'regis']);
     Route::post('dang-ki', [UserController::class, 'postregis']);
-    Route::get('dang-xuat', [UserController::class, 'logout']);
 
     Route::group(['prefix' => 'email', 'middleware' => 'emailverify'], function () {
         Route::get('/', [VerifyEmailController::class, 'email']);
@@ -88,9 +88,20 @@ Route::group(['middleware' => 'offwebsite'], function () {
         // Route của sinh viên
     Route::group(['middleware' => 'sinhvien'], function () {
         Route::group(['prefix' => 'sinh-vien'], function () {
-            Route::get('/', function () {
-                return view('page.view.mail.verify');
-            });
+            Route::get('dang-xuat', [UserController::class, 'logout']);
+            Route::get('/', [SinhVienController::class, 'index']);
+        });
+        Route::group(['prefix' => 'thong-bao'], function () {
+            Route::get('/', [SinhVienController::class, 'mailbox']);
+            Route::get('gui', [SinhVienController::class, 'mailsend']);
+            Route::post('gui', [SinhVienController::class, 'postmailsend']);
+            Route::get('mail/{id}', [SinhVienController::class, 'mailread']);
+            Route::get('mail/da-gui/{id}', [SinhVienController::class, 'mailsentread']);
+            Route::get('da-gui', [SinhVienController::class, 'sent']);
+            Route::post('xoa/tin-da-gui', [SinhVienController::class, 'xoasent']);
+            Route::post('xoa/tin-da-gui/{id}', [SinhVienController::class, 'xoasentwid']);
+            Route::get('tim-kiem' ,[SinhVienController::class, 'searchmail']);
+            Route::get('thung-rac', [SinhVienController::class, 'trash']);
         });
     });
 

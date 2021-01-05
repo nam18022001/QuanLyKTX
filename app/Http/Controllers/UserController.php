@@ -153,11 +153,16 @@ class UserController extends Controller
     public function login()
     {
         # code...
-        if (Auth::guard('sinh_vien')->check() && Auth::guard('sinh_vien')->user()->verified == 1) {
+        if (Auth::guard('sinh_vien')->check()) {
             # code...
-            return redirect('sinh-vien');
+            if (Auth::guard('sinh_vien')->user()->verified == 1) {
+                # code...
+                return redirect('/');
+             }else {
+                return redirect('email')->with('loi', 'Vui lòng xác nhận email của mình');
+            }
         }else {
-            return view('page.view.login');
+            return view('page.view.login')->with('loginfail', 'Sai email hoặc mật khẩu');
 
         }
     }
@@ -168,7 +173,7 @@ class UserController extends Controller
         # code...
         if (Auth::guard('sinh_vien')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             # code...
-            return redirect('sinh-vien');
+            return redirect('/');
         }else{
             return redirect('dang-nhap')->with('loginfail', 'Sai email hoặc mật khẩu');
         }
@@ -179,7 +184,7 @@ class UserController extends Controller
             Auth::guard('sinh_vien')->logout();
             return redirect('/');
         }else{
-            return view('page.view.mail.verify');
+            return redirect('email')->with('loi', 'Vui lòng xác nhận email của mình');
         }
     }
 }

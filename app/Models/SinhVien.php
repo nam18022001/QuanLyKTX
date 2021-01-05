@@ -17,6 +17,10 @@ class SinhVien extends Model implements AuthenticatableContract
         # code...
         return $this->belongsTo('App\Models\Giuong', 'id_giuong', 'id');
     }
+    public function thongbao()
+    {
+        return $this->hasMany('App\Models\ThongBao', 'id_sinhvien', 'id');
+    }
 
     public function verifysv()
     {

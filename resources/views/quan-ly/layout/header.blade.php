@@ -110,7 +110,7 @@
 							@else
 							<img src="{{asset('logo/green3.png')}}" width="40" class="img-radius" alt="User-Profile-Image">
 						@endif
-							<span>John Doe</span>
+							<span>{{Auth::user()->name}}</span>
 							<a href="{{url('quan-ly/dang-xuat')}}" class="dud-logout" title="Logout">
 								<i class="feather icon-log-out"></i>
 							</a>

@@ -3045,7 +3045,7 @@ pre[class*=language-]:before {
 
 @media only screen and (max-width: 991px) {
     .pcoded-header {
-        background: linear-gradient(45deg, #3949AB, #2962FF);
+        background: linear-gradient(45deg, #0594dc, #0bd629);
         color: #fff;
     }
     .pcoded-header .input-group-text,
@@ -3112,8 +3112,8 @@ pre[class*=language-]:before {
         margin-left: 20px;
     }
     .pcoded-header .m-header .b-brand img {
-        -webkit-filter: brightness(0) invert(1);
-        filter: brightness(0) invert(1);
+        /* -webkit-filter: brightness(0) invert(1); */
+        /* filter: brightness(0) invert(1); */
     }
     .pcoded-header .m-header .mobile-menu {
         right: 20px;
@@ -3242,8 +3242,7 @@ pre[class*=language-]:before {
         margin-left: 0;
     }
     .pcoded-navbar.theme-horizontal~.pcoded-header .m-header .b-brand img {
-        -webkit-filter: brightness(0) invert(1);
-        filter: brightness(0) invert(1);
+        /* filter: brightness(0) invert(1); */
     }
     .pcoded-navbar.theme-horizontal~.pcoded-header .container>.collapse:not(.show),
     .pcoded-navbar.theme-horizontal~.pcoded-header>.collapse:not(.show) {
