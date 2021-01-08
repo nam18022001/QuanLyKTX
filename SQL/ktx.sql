@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 29, 2020 lúc 07:29 AM
+-- Thời gian đã tạo: Th1 08, 2021 lúc 05:49 PM
 -- Phiên bản máy phục vụ: 10.4.8-MariaDB
 -- Phiên bản PHP: 7.3.11
 
@@ -65,15 +65,15 @@ INSERT INTO `giuong` (`id`, `giuong`, `phi`, `demphi`, `hoatdong`, `id_phong`, `
 (3, 'Giường 03', NULL, NULL, 0, 1, NULL, '2020-12-25 11:40:28'),
 (4, 'Giường 04', NULL, NULL, 0, 1, NULL, '2020-12-20 15:20:40'),
 (5, 'Giường 05', NULL, NULL, 0, 1, NULL, '2020-12-20 15:27:08'),
-(6, 'Giường 06', NULL, NULL, 1, 1, NULL, '2020-12-27 10:05:33'),
+(6, 'Giường 06', NULL, NULL, 0, 1, NULL, '2020-12-27 10:05:33'),
 (7, 'Giường 01', NULL, NULL, 0, 2, NULL, NULL),
-(8, 'Giường 02', NULL, NULL, 0, 2, NULL, NULL),
-(9, 'Giường 03', NULL, NULL, 1, 2, NULL, '2020-12-26 07:05:31'),
+(8, 'Giường 02', NULL, NULL, 0, 2, NULL, '2020-12-30 15:53:07'),
+(9, 'Giường 03', NULL, NULL, 0, 2, NULL, '2020-12-26 07:05:31'),
 (10, 'Giường 04', NULL, NULL, 0, 2, NULL, NULL),
 (11, 'Giường 05', NULL, NULL, 0, 2, NULL, NULL),
 (12, 'Giường 06', NULL, NULL, 0, 2, NULL, NULL),
 (13, 'Giường 01', NULL, NULL, 0, 3, NULL, NULL),
-(14, 'Giường 02', NULL, NULL, 1, 3, NULL, '2020-12-26 07:07:36'),
+(14, 'Giường 02', NULL, NULL, 0, 3, NULL, '2020-12-26 07:07:36'),
 (15, 'Giường 03', NULL, NULL, 0, 3, NULL, NULL),
 (16, 'Giường 04', NULL, NULL, 0, 3, NULL, NULL),
 (17, 'Giường 05', NULL, NULL, 0, 3, NULL, NULL),
@@ -86,7 +86,7 @@ INSERT INTO `giuong` (`id`, `giuong`, `phi`, `demphi`, `hoatdong`, `id_phong`, `
 (24, 'Giường 06', NULL, NULL, 0, 11, NULL, NULL),
 (25, 'Giường 01', NULL, NULL, 0, 12, NULL, NULL),
 (26, 'Giường 02', NULL, NULL, 0, 12, NULL, NULL),
-(27, 'Giường 03', NULL, NULL, 0, 12, NULL, NULL),
+(27, 'Giường 03', NULL, NULL, 0, 12, NULL, '2020-12-30 15:49:22'),
 (28, 'Giường 04', NULL, NULL, 0, 12, NULL, NULL),
 (29, 'Giường 05', NULL, NULL, 0, 12, NULL, NULL),
 (30, 'Giường 06', NULL, NULL, 0, 12, NULL, NULL),
@@ -712,7 +712,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (74, '2020_12_16_140023_create_tien_nuoc_table', 1),
 (75, '2020_12_16_140040_create_tien_dien_table', 1),
 (76, '2020_12_26_201041_verify_s_v', 2),
-(77, '2020_12_26_201309_verify_thue', 3);
+(77, '2020_12_26_201309_verify_thue', 3),
+(78, '2021_01_05_055515_create_thong_bao_table', 4),
+(79, '2021_01_05_132322_create_thong_baosv_table', 5),
+(80, '2021_01_06_142544_create_thong_baosv_file_table', 5);
 
 -- --------------------------------------------------------
 
@@ -748,8 +751,8 @@ CREATE TABLE `phong` (
 
 INSERT INTO `phong` (`id`, `phong`, `hoatdong`, `phi`, `id_tang`, `created_at`, `updated_at`) VALUES
 (1, 'Phòng 01', 1, NULL, 1, NULL, NULL),
-(2, 'Phòng 02', 1, NULL, 1, NULL, '2020-12-26 07:05:31'),
-(3, 'Phòng 03', 1, NULL, 1, NULL, '2020-12-26 07:07:36'),
+(2, 'Phòng 02', 0, NULL, 1, NULL, '2020-12-30 15:53:07'),
+(3, 'Phòng 03', 0, NULL, 1, NULL, '2020-12-26 07:07:36'),
 (4, 'Phòng 04', 0, NULL, 1, NULL, NULL),
 (5, 'Phòng 05', 0, NULL, 1, NULL, NULL),
 (6, 'Phòng 06', 0, NULL, 1, NULL, NULL),
@@ -758,7 +761,7 @@ INSERT INTO `phong` (`id`, `phong`, `hoatdong`, `phi`, `id_tang`, `created_at`, 
 (9, 'Phòng 09', 0, NULL, 1, NULL, NULL),
 (10, 'Phòng 10', 0, NULL, 1, NULL, NULL),
 (11, 'Phòng 01', 1, NULL, 6, NULL, NULL),
-(12, 'Phòng 02', 0, NULL, 6, NULL, NULL),
+(12, 'Phòng 02', 1, NULL, 6, NULL, '2020-12-30 10:22:57'),
 (13, 'Phòng 03', 0, NULL, 6, NULL, NULL),
 (14, 'Phòng 04', 0, NULL, 6, NULL, NULL),
 (15, 'Phòng 05', 0, NULL, 6, NULL, NULL),
@@ -879,7 +882,7 @@ CREATE TABLE `sinhvien` (
 --
 
 INSERT INTO `sinhvien` (`id`, `Ten`, `Lop`, `MSSV`, `CMND`, `QueQuan`, `id_giuong`, `quyen`, `avatar`, `SDT`, `email`, `password`, `email_verified_at`, `verified`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ChứcSR4', '19it2', '19it321', '838474591904', 'Đà Nẵng', 1, 1, '56899710_1068779503305435_5497314442435624960_n.jpg', 620814707, 'hihi@gmail.com', '$2y$10$gx7iVs7VNkOi6rAyl/WIQ.Ak2q1WhrE.y/hO24LJz22ZzqsnLMD52', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-25 11:59:40'),
+(1, 'Nam', '19it2', '19it321', '838474591904', 'Đà Nẵng', 1, 1, '56899710_1068779503305435_5497314442435624960_n.jpg', 620814707, 'hihi@gmail.com', '$2y$10$gx7iVs7VNkOi6rAyl/WIQ.Ak2q1WhrE.y/hO24LJz22ZzqsnLMD52', NULL, 1, 'zovXKfybYriISf2QhKkdjo6WBzDMEBmDPy4BslWnmeIrj1FIKHzs4BqmM8DG', '2020-12-17 22:26:30', '2020-12-25 11:59:40'),
 (2, 'ChứcKpZ', '19it3', '19it010', '405364204557', 'Đà Nẵng', 110, 1, NULL, 786070138, 'SiSmH@gmail.com', '$2y$10$waWcQ65lcTjbCv28QwvZA.Uk4eP8iKUB1ghYyeMOpbtB1K7.ywwwC', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
 (3, 'ChứcqXP', '19it3', '19it159', '946243304666', 'Đà Nẵng', 272, 1, NULL, 168587091, 'PVluc@gmail.com', '$2y$10$OYNkVhJd9S5W4R8qa91TU.oI6VXOwO8fa2rZfPOBBn7TYNQRzpzTO', NULL, 1, NULL, '2020-12-17 22:26:30', '2020-12-17 22:26:30'),
 (4, 'ChứcMos', '19it3', '19it542', '515205611619', 'Đà Nẵng', 22, 1, NULL, 332727619, 'jwTwM@gmail.com', '$2y$10$wM/ncnXVzE/jknPtqg2kHelKcS1ax4kaKxIFSUNuteF1CsWQThpey', NULL, 1, NULL, '2020-12-17 22:26:31', '2020-12-17 22:26:31'),
@@ -890,7 +893,8 @@ INSERT INTO `sinhvien` (`id`, `Ten`, `Lop`, `MSSV`, `CMND`, `QueQuan`, `id_giuon
 (9, 'Long', '19it3', '19it333', '080808080808', 'Đà Nẵng', 423, 1, NULL, 212121212, 'oihh@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
 (10, 'Tường', '19it3', '19it444', '232323232323', 'Quảng Ngãi', 600, 1, NULL, 787878787, '8nn@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
 (11, 'Chức', '19ce', '19it126', '098709870987', 'Nghệ An', 2, 0, NULL, 123123127, 'kuda@gmail.com', '$2y$10$1XaK7XI0f2HzheukLeVlQ.CCDiYg9BsUscwI/Wrp2lcsZAGbkcvRC', NULL, 1, NULL, NULL, NULL),
-(50, 'Hoàng Nam', '19it1', '19it1', '987098123453', 'Thanh Hóa', 0, 0, NULL, 981122345, 'nvchuc.19ce@vku.udn.vn', '$2y$10$pts9oCROOMxhYmg2QBy1JOIgLOe0UlrNAlkE6PaObC.i4wIfRvRVq', NULL, 0, NULL, '2020-12-27 12:23:15', '2020-12-27 12:23:15');
+(55, 'Hoàng Nam', '19it3', '19it123', '123123765876', 'Đà Nẵng', 0, 0, NULL, 853671591, 'hnvnam.19it3@vku.udn.vn', '$2y$10$PmvYrJp94ybmbGa8F2CeQuoqmHJ2O0YjfH9gbi2wMOtk0QpWchdka', '2021-01-01 10:22:25', 1, 'Szrov20kN5chYCJi54uytyD64FXOnDdqnY6nARhdotidv8yCCtOhTSpJJBci', '2021-01-01 07:56:01', '2021-01-01 10:22:25'),
+(56, 'Hoàng Long', '19it3', '19it124', '123987123666', 'Huế', 0, 0, NULL, 328871237, 'hlong.19it3@vku.udn.vn', '$2y$10$IHM3k0k5QHd5du3SRCwkDet3XkDXC9NtUBZ8ltl8sti6qmp0ul94u', NULL, 0, NULL, '2021-01-01 17:14:10', '2021-01-01 17:14:10');
 
 -- --------------------------------------------------------
 
@@ -921,6 +925,81 @@ INSERT INTO `tang` (`id`, `tang`, `id_khu`, `created_at`, `updated_at`) VALUES
 (8, 'Tầng 03', 2, NULL, NULL),
 (9, 'Tầng 04', 2, NULL, NULL),
 (10, 'Tầng 05', 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongbao`
+--
+
+CREATE TABLE `thongbao` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_sinhvien` int(10) UNSIGNED NOT NULL,
+  `tieude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noidung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tomtat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `xoa` int(11) DEFAULT 0,
+  `read_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongbao`
+--
+
+INSERT INTO `thongbao` (`id`, `id_sinhvien`, `tieude`, `noidung`, `tomtat`, `xoa`, `read_at`, `created_at`, `updated_at`) VALUES
+(121, 1, 'Nam Nam', '<p>hihihihi</p>', 'hihihihi', 1, NULL, '2021-01-08 10:36:54', '2021-01-08 10:36:54'),
+(122, 1, 'Chào buổi sáng', '<p>Hihiii</p>', 'Hihiii', 0, NULL, '2021-01-08 10:37:15', '2021-01-08 10:37:15');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongbaofile`
+--
+
+CREATE TABLE `thongbaofile` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_thongbao` int(10) UNSIGNED DEFAULT 0,
+  `id_thongbaosv` int(10) UNSIGNED DEFAULT 0,
+  `filename` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongbaofile`
+--
+
+INSERT INTO `thongbaofile` (`id`, `id_thongbao`, `id_thongbaosv`, `filename`, `created_at`, `updated_at`) VALUES
+(462, 121, 0, 'VpasA-logo-containental.png', '2021-01-08 10:36:54', '2021-01-08 10:36:54'),
+(464, 122, 0, 'asdasdasd', NULL, NULL),
+(465, 122, 0, 'wertyjujk', NULL, NULL),
+(466, 122, 0, 'wertyjujk', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongbaosv`
+--
+
+CREATE TABLE `thongbaosv` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_sinhvien` int(10) UNSIGNED NOT NULL,
+  `id_quanly` int(10) UNSIGNED NOT NULL,
+  `tieude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noidung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `xoa` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongbaosv`
+--
+
+INSERT INTO `thongbaosv` (`id`, `id_sinhvien`, `id_quanly`, `tieude`, `noidung`, `xoa`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Hihi', 'Hoho', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1244,28 +1323,8 @@ CREATE TABLE `verifysv` (
 --
 
 INSERT INTO `verifysv` (`id`, `id_sv`, `token`, `created_at`, `updated_at`) VALUES
-(27, 50, 'cf5663217ff3bacc3e087d593a97dbd1a145892d', '2020-12-27 12:23:15', '2020-12-27 12:23:15');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `verifythue`
---
-
-CREATE TABLE `verifythue` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `id_thue` int(10) UNSIGNED NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `verifythue`
---
-
-INSERT INTO `verifythue` (`id`, `id_thue`, `token`, `created_at`, `updated_at`) VALUES
-(5, 17, '3d9d14ff128560e5be489fdfbd4b4401e51a60ef', '2020-12-27 10:05:33', '2020-12-27 10:05:33');
+(31, 55, 'be2f6e9c312a6fc90b26bf4f48328b7bd430717a', '2021-01-01 07:56:01', '2021-01-01 10:22:04'),
+(32, 56, '98f5138fcdf3f4f3a19b0b5f062716a70dc32c3d', '2021-01-01 17:14:11', '2021-01-01 17:15:51');
 
 -- --------------------------------------------------------
 
@@ -1287,7 +1346,7 @@ CREATE TABLE `website` (
 --
 
 INSERT INTO `website` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Hoàng Nam', 'Ký Túc Xá Xanh', 1, NULL, '2020-12-26 11:46:23');
+(1, 'Hoàng Nam', 'Ký Túc Xá Xanh', 1, NULL, '2021-01-06 15:57:33');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1346,6 +1405,24 @@ ALTER TABLE `tang`
   ADD KEY `tang_id_khu_foreign` (`id_khu`);
 
 --
+-- Chỉ mục cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `thongbaofile`
+--
+ALTER TABLE `thongbaofile`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `thongbaosv`
+--
+ALTER TABLE `thongbaosv`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `thue`
 --
 ALTER TABLE `thue`
@@ -1374,12 +1451,6 @@ ALTER TABLE `users`
 -- Chỉ mục cho bảng `verifysv`
 --
 ALTER TABLE `verifysv`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `verifythue`
---
-ALTER TABLE `verifythue`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1414,7 +1485,7 @@ ALTER TABLE `khu`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT cho bảng `phong`
@@ -1426,13 +1497,31 @@ ALTER TABLE `phong`
 -- AUTO_INCREMENT cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `tang`
 --
 ALTER TABLE `tang`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbaofile`
+--
+ALTER TABLE `thongbaofile`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=467;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbaosv`
+--
+ALTER TABLE `thongbaosv`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `thue`
@@ -1462,13 +1551,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `verifysv`
 --
 ALTER TABLE `verifysv`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT cho bảng `verifythue`
---
-ALTER TABLE `verifythue`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `website`
