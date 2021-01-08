@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThongBaosvTable extends Migration
+class CreateThongBaosvFileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateThongBaosvTable extends Migration
      */
     public function up()
     {
-        Schema::create('thongbaosv', function (Blueprint $table) {
+        Schema::create('thongbaofile', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_quanly')->unsigned();
-            $table->string('tieude');
-            $table->text('noidung');
-            $table->integer('xoa');
+            $table->integer('id_thongbao')->unsigned();
+            $table->integer('id_thongbaosv')->unsigned();
+            $table->text('filename');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateThongBaosvTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thongbaosv');
+        Schema::dropIfExists('thongbaofile');
     }
 }

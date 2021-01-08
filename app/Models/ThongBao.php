@@ -14,4 +14,9 @@ class ThongBao extends Model
     {
         return $this->belongsTo('App\Models\SinhVien', 'id_sinhvien', 'id');
     }
+    public function file()
+    {
+        # code...
+        return $this->hasMany('App\Models\ThongBaoFile', 'id_thongbao', 'id');
+    }
 }

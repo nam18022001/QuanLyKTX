@@ -42,7 +42,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{url('sinh-vien')}}"><span class="item-text">Nhà của bạn</span></a>
                     <div class="dropdown-items-divide-hr"></div>
-                    <a class="dropdown-item" href="{{url('dang-xuat')}}"><span class="item-text">Đăng xuất</span></a>
+                    <a class="dropdown-item" href="{{url('sinh-vien/dang-xuat')}}"><span class="item-text">Đăng xuất</span></a>
                 </div>
             </li>
            @else

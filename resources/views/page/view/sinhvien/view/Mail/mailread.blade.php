@@ -9,7 +9,14 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<style>
+  .filename{
+    overflow: hidden;
+    /* width: 100px; */
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+  }
+</style>
 @endsection
 @section('content')
 <div class="mail-box">
@@ -44,60 +51,29 @@
             <i class="fa fa-print"></i></button>
         </div>
         <!-- /.mailbox-controls -->
-        <div class="mailbox-read-message">
+        <div class="mailbox-read-message mailbox-controls with-border">
           {!! $thongbao->noidung !!}
         </div>
         <!-- /.mailbox-read-message -->
-      </div>
+      </div><br>
       <!-- /.box-body -->
-      {{-- <div class="box-footer">
+      <div class="box-footer">
         <ul class="mailbox-attachments clearfix">
+          @foreach ($file as $value)
           <li>
-            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+            <span class="mailbox-attachment-icon"><i class="fas fa-file"></i></span>
 
             <div class="mailbox-attachment-info">
-              <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</a>
+              <a href="#" class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> {{ $value->filename }}</p></a>
                   <span class="mailbox-attachment-size">
-                    1,245 KB
-                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fas fa-download"></i></a>
+                    
+                    <a href="{{url('thong-bao/file-download', $value->id)}}" class="btn btn-default btn-xs"><i class="fas fa-download"></i></a>
                   </span>
             </div>
           </li>
-          <li>
-            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-
-            <div class="mailbox-attachment-info">
-              <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> App Description.docx</a>
-                  <span class="mailbox-attachment-size">
-                    1,245 KB
-                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fas fa-download"></i></a>
-                  </span>
-            </div>
-          </li>
-          <li>
-            <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo1.png" ></span>
-
-            <div class="mailbox-attachment-info">
-              <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo1.png</a>
-                  <span class="mailbox-attachment-size">
-                    2.67 MB
-                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fas fa-download"></i></a>
-                  </span>
-            </div>
-          </li>
-          <li>
-            <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo2.png" ></span>
-
-            <div class="mailbox-attachment-info">
-              <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo2.png</a>
-                  <span class="mailbox-attachment-size">
-                    1.9 MB
-                    <a href="../../dist/img/photo2.png" download class="btn btn-default btn-xs pull-right"><i class="fas fa-download"></i></a>
-                  </span>
-            </div>
-          </li>
+          @endforeach
         </ul>
-      </div> --}}
+      </div>
       <!-- /.box-footer -->
       <div class="box-footer">
         <div class="pull-right">

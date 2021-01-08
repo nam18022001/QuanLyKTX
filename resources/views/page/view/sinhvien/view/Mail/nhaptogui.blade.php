@@ -3,10 +3,14 @@
     Gửi phản ánh
 @endsection
 @section('css')
+    
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <style>
       ul{
         list-style-type: none ;
@@ -14,6 +18,17 @@
       .submit{
         cursor: deffault;
         pointer-events: none;
+      }
+      .filename{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+      .hov{
+          border: 1px rgba(0, 0, 0, 0.251) solid;
+      }
+      .hov:hover{
+            box-shadow: 0 0 5px black;
       }
     </style>
 @endsection
@@ -39,22 +54,55 @@
             <input class="form-control" value="Gửi tới: QuanLyKTX@greendormitory.com" disabled>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" required name="tieude" placeholder="Tiêu đề:">
+            <input class="form-control" type="text" required name="tieude" value="{{$sua->tieude}}" placeholder="Tiêu đề:">
           </div>
           <div class="form-group">
-              <textarea id="compose-textarea" id="summernote" class="form-control" name="noidung" style="height: 300px"></textarea>
+              <textarea id="compose-textarea" id="summernote" class="form-control" name="noidung" style="height: 300px">{!! $sua->noidung !!}</textarea>
               <input type="text" name="tomtat" style="display:none" id="tomtat" value="">
           </div>
           <div class="form-group">
             <div class="btn btn-default btn-file">
               <i class="fas fa-paperclip"></i> Tệp đính kèm
             <input type="file" id="file" name="files[]" multiple onchange="javascript:updateList()">
-
             </div>
-
             <p class="help-block" id="list"></p>
             <p class="help-block">Tối đa. 39MB</p>
           </div>
+          <div class="form-group row">
+              @php
+                  $i = 1;
+              @endphp
+            @foreach ($file as $value)
+
+                @php
+                    $u = $i++;
+                @endphp
+            <div class="col-md-2 hov" id="innerxoa">
+              <span class="mailbox-attachment-icon"><i class="fas fa-file"></i></span>
+
+              <div class="mailbox-attachment-info">
+                <span class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> {{ $value->filename }}</p></span>
+                <input type="hidden" name="xoa" id="idxoaok{{$u}}" value="{{ $value->id}}">
+                    <span class="mailbox-attachment-size">
+                      
+                      <button type="button"id="xoa{{$u}}" class="btn btn-default btn-xs"><i class="fas fa-trash"></i></button>
+                    </span>
+              </div>
+            </div>
+            @endforeach
+            <div class="col-md-2 hov" id="innerxoa">
+                <span class="mailbox-attachment-icon"><i class="fas fa-file"></i></span>
+  
+                <div class="mailbox-attachment-info">
+                  <span class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> a</p></span>
+                  <input type="hidden" name="xoa" id="idxoaok" value="465">
+                      <span class="mailbox-attachment-size">
+                        
+                        <button type="button"id="xoa" class="btn btn-default btn-xs"><i class="fas fa-trash"></i></button>
+                      </span>
+                </div>
+              </div>
+        </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -72,6 +120,29 @@
 @endsection
 
 @section('script')
+{{-- @php
+    $o = 1;
+ @endphp
+@foreach ($file as $value)
+@php
+    $p = $o++;
+ @endphp --}}
+<script>
+    $('#xoa').on('click', function(){
+        $value = $('idxoaok').val();
+        $.ajax({
+            type: 'get',
+            url: 'http://greendormitory.com/thong-bao/file-discard/xoa',
+            data:{
+                'xoa' : $value
+            }, 
+            success: function(data){
+                $('#innerxoa').html(data);
+            }
+        });
+    });
+</script>
+{{-- @endforeach --}}
 <script>
   updateList = function() {
     var input = document.getElementById('file');

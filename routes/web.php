@@ -21,11 +21,9 @@ use App\Http\Controllers\SinhVienController;
 */
 // Route::get('test', function () {
 
-//     echo bcrypt('123');
-//     echo \Carbon\Carbon::now();
+   
 // });
 Carbon\Carbon::setLocale('vi');
-// Carbon\Carbon::getTranslatedDayName('format-hien-thi');
 Route::get('quan-ly/dang-nhap', [AdminController::class, 'login']);
 Route::post('quan-ly/dang-nhap', [AdminController::class, 'postlogin']);
 Route::get('quan-ly/dang-xuat', [AdminController::class, 'logout']);
@@ -102,6 +100,12 @@ Route::group(['middleware' => 'offwebsite'], function () {
             Route::post('xoa/tin-da-gui/{id}', [SinhVienController::class, 'xoasentwid']);
             Route::get('tim-kiem' ,[SinhVienController::class, 'searchmail']);
             Route::get('thung-rac', [SinhVienController::class, 'trash']);
+            Route::post('thung-rac/xoa', [SinhVienController::class, 'posttrash']);
+            Route::get('ban-nhap' ,[SinhVienController::class, 'discard']);
+            Route::get('sua-ban-nhap/{id}' ,[SinhVienController::class, 'suadiscard']);
+            Route::post('xoa/ban-nhap', [SinhVienController::class, 'xoadiscard']);
+            Route::get('file-download/{id}', [SinhVienController::class, 'download']);
+            Route::get('file-discard/xoa', [SinhVienController::class, 'filediscarddelete']);
         });
     });
 

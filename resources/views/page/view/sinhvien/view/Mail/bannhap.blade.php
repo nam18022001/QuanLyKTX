@@ -1,6 +1,6 @@
 @extends('page.view.sinhvien.layout.master')
 @section('title')
-    Thư đã gửi
+    Thư nháp
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
@@ -58,7 +58,7 @@
               <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
               </button>
               <div class="btn-group">
-                <form action="{{url('thong-bao/xoa/tin-da-gui')}}" method="POST" >
+                <form action="{{url('thong-bao/xoa/ban-nhap')}}" method="POST" >
                     {{ csrf_field() }}
                 <button type="submit" class="btn btn-default btn-sm">  
                   <i class="far fa-trash-alt"></i>
@@ -72,13 +72,13 @@
               </div>
               <!-- /.btn-group -->
               <button type="button" class="btn btn-default btn-sm">
-                <a href="{{url('thong-bao/da-gui')}}"><i class="fas fa-sync-alt"></i></a>
+                <a href="{{url('thong-bao/ban-nhap')}}"><i class="fas fa-sync-alt"></i></a>
               </button>
               <div class="float-right">
-                {{$sent->firstItem()}} - {{$sent->lastItem()}} / {{$sent->total()}}
+                {{$nhap->firstItem()}} - {{$nhap->lastItem()}} / {{$nhap->total()}}
                 <div class="btn-group">
-                    @if ($sent->currentPage() != 1)
-                        <a href="{{$sent->previousPageUrl()}}" class="btn btn-default btn-sm">
+                    @if ($nhap->currentPage() != 1)
+                        <a href="{{$nhap->previousPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-left"></i>
                         </a> 
                         @else 
@@ -86,8 +86,8 @@
                             <i class="fas fa-chevron-left"></i>
                         </span>
                     @endif
-                  @if ($sent->currentPage() != $sent->lastPage())
-                        <a href="{{$sent->nextPageUrl()}}" class="btn btn-default btn-sm">
+                  @if ($nhap->currentPage() != $nhap->lastPage())
+                        <a href="{{$nhap->nextPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-right"></i>
                         </a>  
                         @else 
@@ -106,8 +106,8 @@
                    @php
                        $i=1;
                    @endphp
-                   @if ($sent->total() != null)
-                    @foreach ($sent as $value)
+                   @if ($nhap->total() != null)
+                    @foreach ($nhap as $value)
                     @php
                     
                     $u = $i++;
@@ -120,15 +120,15 @@
                       <label for="check{{$u}}"></label>
                     </div>
                   </td>
-                  <td class="mailbox-name clickable-row" data-href='{{url('thong-bao/mail/da-gui', $value->id)}}'><b>{{$value->tieude}}</b></td>
-                  <td class="mailbox-subject clickable-row" data-href='{{url('thong-bao/mail/da-gui', $value->id)}}'><p>{{ $value->tomtat }}</p>
+                  <td class="mailbox-name clickable-row" data-href='{{url('thong-bao/sua-ban-nhap', $value->id)}}'><b>{{$value->tieude}}</b></td>
+                  <td class="mailbox-subject clickable-row" data-href='{{url('thong-bao/sua-ban-nhap', $value->id)}}'><p>{{ $value->tomtat }}</p>
                   </td>
-                  <td class="mailbox-attachment clickable-row" data-href='{{url('thong-bao/mail/da-gui', $value->id)}}'>
+                  <td class="mailbox-attachment clickable-row" data-href='{{url('thong-bao/sua-ban-nhap', $value->id)}}'>
                     @php
                         $file = App\Models\ThongBaoFile::where('id_thongbao', $value->id)->get()->first();
                         if (!empty($file)) {
                           # code...
-                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/thong-bao/mail/da-gui",'. $value->id.'></i>';
+                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/thong-bao/sua-ban-nhap",'. $value->id.'></i>';
                         } 
                     @endphp
                   </td>
@@ -152,10 +152,10 @@
           <div class="card-footer p-0">
             <div class="mailbox-controls">
               <div class="float-right">
-                {{$sent->firstItem()}} - {{$sent->lastItem()}} / {{$sent->total()}}
+                {{$nhap->firstItem()}} - {{$nhap->lastItem()}} / {{$nhap->total()}}
                 <div class="btn-group">
-                    @if ($sent->currentPage() != 1)
-                        <a href="{{$sent->previousPageUrl()}}" class="btn btn-default btn-sm">
+                    @if ($nhap->currentPage() != 1)
+                        <a href="{{$nhap->previousPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-left"></i>
                         </a> 
                         @else 
@@ -163,8 +163,8 @@
                             <i class="fas fa-chevron-left"></i>
                         </span>
                     @endif
-                  @if ($sent->currentPage() != $sent->lastPage())
-                        <a href="{{$sent->nextPageUrl()}}" class="btn btn-default btn-sm">
+                  @if ($nhap->currentPage() != $nhap->lastPage())
+                        <a href="{{$nhap->nextPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-right"></i>
                         </a>  
                         @else 

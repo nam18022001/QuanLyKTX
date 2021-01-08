@@ -45,6 +45,9 @@
 						<li class=""><a href="{{url('thong-bao')}}" class="">Thông báo của tổ quản lý</a></li>
 						<li class=""><a href="{{url('thong-bao/gui')}}" class="">Phản ánh tới tổ quản lý</a></li>
 						<li class=""><a href="{{url('thong-bao/da-gui')}}" class="">Thư đã gửi</a></li>
+						<li class=""><a href="{{url('thong-bao/ban-nhap')}}" class="">Bản nháp</a></li>
+						<li class=""><a href="{{url('thong-bao/thung-rac')}}" class="">Thùng rác</a></li>
+
 					</ul>
 				</li>
 				<li class="nav-item pcoded-hasmenu">
