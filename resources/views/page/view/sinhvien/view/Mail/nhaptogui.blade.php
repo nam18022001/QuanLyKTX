@@ -3,13 +3,15 @@
     Gửi phản ánh
 @endsection
 @section('css')
-    
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
 
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <style>
       ul{
@@ -68,7 +70,7 @@
             <p class="help-block" id="list"></p>
             <p class="help-block">Tối đa. 39MB</p>
           </div>
-          <div class="form-group row">
+          <div class="row">
               @php
                   $i = 1;
               @endphp
@@ -77,31 +79,21 @@
                 @php
                     $u = $i++;
                 @endphp
-            <div class="col-md-2 hov" id="innerxoa">
+            <div class="col-md-2">
+              <div class=" hov" id="innerxoa{{$u}}">
               <span class="mailbox-attachment-icon"><i class="fas fa-file"></i></span>
 
               <div class="mailbox-attachment-info">
                 <span class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> {{ $value->filename }}</p></span>
-                <input type="hidden" name="xoa" id="idxoaok{{$u}}" value="{{ $value->id}}">
                     <span class="mailbox-attachment-size">
                       
-                      <button type="button"id="xoa{{$u}}" class="btn btn-default btn-xs"><i class="fas fa-trash"></i></button>
+                      <input type="text "id="xoa{{$u}}" name="id" value="{{ $value->id}}"><label class="fas fa-trash btn btn-default btn-xs" for="xoa{{$u}}"></label>
                     </span>
               </div>
             </div>
+          </div>
             @endforeach
-            <div class="col-md-2 hov" id="innerxoa">
-                <span class="mailbox-attachment-icon"><i class="fas fa-file"></i></span>
-  
-                <div class="mailbox-attachment-info">
-                  <span class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> a</p></span>
-                  <input type="hidden" name="xoa" id="idxoaok" value="465">
-                      <span class="mailbox-attachment-size">
-                        
-                        <button type="button"id="xoa" class="btn btn-default btn-xs"><i class="fas fa-trash"></i></button>
-                      </span>
-                </div>
-              </div>
+
         </div>
         </div>
         <!-- /.card-body -->
@@ -117,32 +109,38 @@
       <!-- /.card -->
     </div>
 </form>
+
 @endsection
 
 @section('script')
-{{-- @php
+@php
     $o = 1;
  @endphp
 @foreach ($file as $value)
 @php
     $p = $o++;
- @endphp --}}
-<script>
-    $('#xoa').on('click', function(){
-        $value = $('idxoaok').val();
-        $.ajax({
-            type: 'get',
-            url: 'http://greendormitory.com/thong-bao/file-discard/xoa',
-            data:{
-                'xoa' : $value
-            }, 
-            success: function(data){
-                $('#innerxoa').html(data);
-            }
-        });
-    });
+ @endphp
+ <script>
+
+  $("#xoa{!! $p !!}").click(function(){
+    var id = $(this).val();
+$.ajax(
+{
+    url: 'http://greendormitory.com/thong-bao/file-discard/xoa/' + id,
+    type: 'GET', 
+    // dataType: "JSON",
+    data: {
+        "id": id 
+    },
+    success: function (response)
+    {
+      $("#innerxoa{{$p}}").html(response);
+    }
+});
+  });
 </script>
-{{-- @endforeach --}}
+
+@endforeach
 <script>
   updateList = function() {
     var input = document.getElementById('file');

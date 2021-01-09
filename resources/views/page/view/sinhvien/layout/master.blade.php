@@ -33,7 +33,6 @@
 <!-- style css -->
 <link rel="stylesheet" href="{{ asset('assets/css/styles.css')}}">
 <!-- modernizr css -->
-<script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 <!-- fontawesome icon -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/fontawesome/css/all.css')}}">
 <!-- animation css -->
@@ -42,6 +41,8 @@
 <!-- vendor css -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/css/style.css')}}">
 @yield('css')
+<script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 <style>
     .mailbox-subject p{
         font-size:16px;

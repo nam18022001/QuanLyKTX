@@ -18,7 +18,7 @@ use App\Models\User;
 use App\Models\ThongBao;
 use App\Models\ThongBaoFile;
 use App\Models\ThongBaoSV;
-use Carbon;
+use Carbon\Carbon;
 use File;
 use View;
 use Mail;
@@ -35,7 +35,26 @@ class SinhVienController extends Controller
     public function mailbox()
     {
         # code...
-        return view('page.view.sinhvien.view.Mail.index');
+        $nofi = ThongBaoSV::where([['id_sinhvien', Auth::guard('sinh_vien')->id()], ['xoa', 1]])->orderBy('created_at', 'desc')->paginate(5);
+        
+        return view('page.view.sinhvien.view.Mail.index', ['nofi' => $nofi]);
+    }
+    public function readnofi($id)
+    {
+        # code...
+        
+        $thongbao = ThongBaoSV::find($id);
+        
+        if ($thongbao) {
+            # code...
+            $thongbao->read_at = Carbon::now();
+            $thongbao->save();
+            $file = ThongBaoFile::where('id_thongbaosv', $id)->get();
+            return view('page.view.sinhvien.view.Mail.mailread', ['thongbao' => $thongbao, 'file' => $file]);
+        }else {
+            # code...
+            return redirect('thong-bao');
+        }
     }
     public function mailsend()
     {
@@ -143,12 +162,6 @@ class SinhVienController extends Controller
             return redirect('thong-bao/da-gui');
         }
     }
-    public function mailread($id)
-    {
-        # code...
-        return view('page.view.sinhvien.view.Mail.mailread');
-    }
-
     public function sent()
     {
         # code...
@@ -184,10 +197,17 @@ class SinhVienController extends Controller
     public function xoasentwid($id)
     {
         # code...
-        $thongbao = ThongBao::find($id);
-        $thongbao->xoa = 2;
-        $thongbao->save();
-        return redirect('thong-bao/da-gui');
+        $thongbao = ThongBao::where([['id', $id], ['id_sinhvien', Auth::guard('sinh_vien')->id()]])->first();
+        if ($thongbao) {
+            # code...
+            $thongbao->xoa = 2;
+            $thongbao->save();
+            return redirect('thong-bao/thung-rac')->with('update', 'Đã di chuyển vào thùng rác');
+        }else {
+            # code...
+            return redirect('thong-bao/thung-rac')->with('loi', 'Không thể xóa');
+        }
+        
         
     }
     public function searchmail(Request $request)
@@ -238,9 +258,15 @@ class SinhVienController extends Controller
     public function mailsentread($id)
     {
         # code...
-        $thongbao = ThongBao::find($id);
-        $file = ThongBaoFile::where('id_thongbao', $id)->get();
-        return view('page.view.sinhvien.view.Mail.mailread', ['thongbao' => $thongbao, 'file' => $file]);
+        $thongbao = ThongBao::where([['id', $id], ['id_sinhvien', Auth::guard('sinh_vien')->id()], ['xoa', 1]])->get()->first();
+        if ($thongbao) {
+            # code...
+            $file = ThongBaoFile::where('id_thongbao', $id)->get();
+            return view('page.view.sinhvien.view.Mail.mailread', ['thongbao' => $thongbao, 'file' => $file]);
+        }else{
+            return redirect('thong-bao/da-gui')->with('loi', 'Thư không tồn tại hoặc có thể nằm trong thùng rác');
+        }
+        
     }
     public function trash(){
      
@@ -403,15 +429,25 @@ class SinhVienController extends Controller
     public function suadiscard($id)
     {
         # code...
-        $discard = ThongBao::where([['id', $id], ['xoa', 0]])->get()->first();
-        $file = ThongBaoFile::where('id_thongbao', $id)->get();
-        return view('page.view.sinhvien.view.Mail.nhaptogui', ['sua' => $discard, 'file' => $file]);
+        $discard = ThongBao::where([['id', $id], ['xoa', 0], ['id_sinhvien', Auth::guard('sinh_vien')->id()]])->get()->first();
+        if ($discard) {
+            # code...
+            $file = ThongBaoFile::where('id_thongbao', $id)->get();
+            return view('page.view.sinhvien.view.Mail.nhaptogui', ['sua' => $discard, 'file' => $file]);
+        }else {
+            # code...
+            return redirect('thong-bao/ban-nhap')->with('loi', 'Không thể sửa bản nháp này');
+        }
+        
     }
-    public function filediscarddelete()
+
+    public function filediscarddelete(Request $request, $id)
     {
         # code...
         if ($request->ajax()) {
-            $file = ThongBaoFile::where(['id', $request->xoa]);
+            # code...
+            $output = '';
+            $file = ThongBaoFile::where('id', $id)->get()->first();
             if (Auth::guard('sinh_vien')->id() < 10) {
                     # code...
                     $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
@@ -421,27 +457,45 @@ class SinhVienController extends Controller
                 }
             File::delete('FileMail/ToQL/'.$id_sinhvien.'/'.$file->filename);
             $file->delete();
-            $output = '';
-            
-            if ($xoa) {
-                    $output .= '';
+            if ($file) {
+                # code...
+                $output .= 'Đã Xóa';
+
             }
+            
             return response($output);
+        }else {
+            # code...
+            return redirect()->back();
         }
-        return redirect()->back();
+    
     }
     public function download($id)
     {
         # code...
         $file = ThongBaoFile::find($id);
-        if (Auth::guard('sinh_vien')->id() < 10) {
+        if ($file) {
             # code...
-            $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
+        
+            if ($file->thongbao->id_sinhvien == Auth::guard('sinh_vien')->id()) {
+                # code...
+                
+                if (Auth::guard('sinh_vien')->id() < 10) {
+                    # code...
+                    $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
+                }else {
+                    # code...
+                    $id_sinhvien = Auth::guard('sinh_vien')->id();
+                }
+                $path = 'FileMail/ToQL/'.$id_sinhvien.'/'.$file->filename;
+                return response()->download($path, $file->filename, ['Content-Type' => $file->id]);
+            }else {
+                # code...
+                return redirect()->back();
+            }
         }else {
             # code...
-            $id_sinhvien = Auth::guard('sinh_vien')->id();
-        }
-        $path = 'FileMail/ToQL/'.$id_sinhvien.'/'.$file->filename;
-        return response()->download($path, $file->filename, ['Content-Type' => $file->id]);
+            return redirect()->back();
+    }
     }
 }

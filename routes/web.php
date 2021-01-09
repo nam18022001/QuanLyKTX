@@ -91,13 +91,13 @@ Route::group(['middleware' => 'offwebsite'], function () {
         });
         Route::group(['prefix' => 'thong-bao'], function () {
             Route::get('/', [SinhVienController::class, 'mailbox']);
+            Route::get('doc/{id}', [SinhVienController::class, 'readnofi']);
             Route::get('gui', [SinhVienController::class, 'mailsend']);
             Route::post('gui', [SinhVienController::class, 'postmailsend']);
-            Route::get('mail/{id}', [SinhVienController::class, 'mailread']);
             Route::get('mail/da-gui/{id}', [SinhVienController::class, 'mailsentread']);
             Route::get('da-gui', [SinhVienController::class, 'sent']);
             Route::post('xoa/tin-da-gui', [SinhVienController::class, 'xoasent']);
-            Route::post('xoa/tin-da-gui/{id}', [SinhVienController::class, 'xoasentwid']);
+            Route::get('xoa/tin-da-gui/{id}', [SinhVienController::class, 'xoasentwid']);
             Route::get('tim-kiem' ,[SinhVienController::class, 'searchmail']);
             Route::get('thung-rac', [SinhVienController::class, 'trash']);
             Route::post('thung-rac/xoa', [SinhVienController::class, 'posttrash']);
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'offwebsite'], function () {
             Route::get('sua-ban-nhap/{id}' ,[SinhVienController::class, 'suadiscard']);
             Route::post('xoa/ban-nhap', [SinhVienController::class, 'xoadiscard']);
             Route::get('file-download/{id}', [SinhVienController::class, 'download']);
-            Route::get('file-discard/xoa', [SinhVienController::class, 'filediscarddelete']);
+            Route::get('file-discard/xoa/{id}', [SinhVienController::class, 'filediscarddelete']);
         });
     });
 
