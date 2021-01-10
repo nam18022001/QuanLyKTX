@@ -9,6 +9,8 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\SinhVienController;
+use App\Http\Controllers\DienNuocController;
+use App\Http\Controllers\ThongBaoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,39 @@ Route::group(['middleware' => 'adminlogin'], function () {
         Route::get('/', [QuanLyController::class, 'index']);
         Route::get('danh-sach', [QuanLyController::class, 'danhsachquanly']);
 
+        Route::group(['prefix' => 'thong-bao'], function () {
+            Route::get('/', [ThongBaoController::class, 'mailbox']);
+            Route::get('doc/{id}', [ThongBaoController::class, 'readnofi']);
+            Route::get('gui', [ThongBaoController::class, 'mailsend']);
+            Route::post('gui', [ThongBaoController::class, 'postmailsend']);
+            Route::get('mail/da-gui/{id}', [ThongBaoController::class, 'mailsentread']);
+            Route::get('da-gui', [ThongBaoController::class, 'sent']);
+            Route::post('xoa/tin-da-gui', [ThongBaoController::class, 'xoasent']);
+            Route::get('xoa/tin-da-gui/{id}', [ThongBaoController::class, 'xoasentwid']);
+            Route::get('tim-kiem' ,[ThongBaoController::class, 'searchmail']);
+            Route::get('tim-kiem-email' ,[ThongBaoController::class, 'searchmailwemail']);
+            Route::get('tin-da-gui/tim-kiem' ,[ThongBaoController::class, 'searchmailsent']);
+            Route::get('tin-da-gui/tim-kiem-email' ,[ThongBaoController::class, 'searchmailsentwemail']);
+            Route::get('thung-rac', [ThongBaoController::class, 'trash']);
+            Route::post('thung-rac/xoa', [ThongBaoController::class, 'posttrash']);
+            Route::get('ban-nhap' ,[ThongBaoController::class, 'discard']);
+            Route::get('sua-ban-nhap/{id}' ,[ThongBaoController::class, 'suadiscard']);
+            Route::post('xoa/ban-nhap', [ThongBaoController::class, 'xoadiscard']);
+            Route::get('file-download/{id}', [ThongBaoController::class, 'download']);
+            Route::get('file-discard/xoa/{id}', [ThongBaoController::class, 'filediscarddelete']);
+        });
+        Route::group(['prefix' => 'dien-nuoc'], function () {
+            Route::group(['prefix' => 'khu-nam'], function () {
+                Route::get('dien', [DienNuocController::class, 'qldiennam']);
+                Route::get('nuoc', [DienNuocController::class, 'qlnuocnam']);
+            });
+            Route::group(['prefix' => 'khu-nu'], function () {
+                Route::get('dien', [DienNuocController::class, 'qldiennu']);
+                Route::get('nuoc', [DienNuocController::class, 'qlnuocnu']);
+            });
+
+            
+        });
         Route::group(['prefix' => 'sinh-vien'], function () {
             Route::get('/', [QuanLyController::class, 'tongsinhvien']);
             Route::get('them', [QuanLyController::class, 'themsinhvien']);
@@ -88,6 +123,9 @@ Route::group(['middleware' => 'offwebsite'], function () {
         Route::group(['prefix' => 'sinh-vien'], function () {
             Route::get('dang-xuat', [UserController::class, 'logout']);
             Route::get('/', [SinhVienController::class, 'index']);
+            Route::get('dien-thang-nay', [DienNuocController::class, 'dien']);
+            Route::get('nuoc-thang-nay', [DienNuocController::class, 'nuoc']);
+            
         });
         Route::group(['prefix' => 'thong-bao'], function () {
             Route::get('/', [SinhVienController::class, 'mailbox']);
@@ -99,6 +137,7 @@ Route::group(['middleware' => 'offwebsite'], function () {
             Route::post('xoa/tin-da-gui', [SinhVienController::class, 'xoasent']);
             Route::get('xoa/tin-da-gui/{id}', [SinhVienController::class, 'xoasentwid']);
             Route::get('tim-kiem' ,[SinhVienController::class, 'searchmail']);
+            Route::get('tin-da-gui/tim-kiem' ,[SinhVienController::class, 'searchmailsent']);
             Route::get('thung-rac', [SinhVienController::class, 'trash']);
             Route::post('thung-rac/xoa', [SinhVienController::class, 'posttrash']);
             Route::get('ban-nhap' ,[SinhVienController::class, 'discard']);

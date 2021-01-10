@@ -1,6 +1,6 @@
-@extends('page.view.sinhvien.layout.master')
+@extends('quan-ly.layout.master')
 @section('title')
-    Thông báo của tổ quản lý
+    Hộp thư
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
@@ -23,6 +23,11 @@
     background-image: linear-gradient(90deg, rgba(68, 52, 52, 0.449), rgba(27, 140, 132, 0.7));
     border-bottom: 1px solid black;
     font-weight: bold;
+  }
+  thead th{
+    font-size:14px;
+    font-weight: 400;
+    color: rgb(8, 66, 125);
   }
   p{
 
@@ -49,17 +54,29 @@ white-space: nowrap;
       <div class="col-md-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">Thư đã gửi</h3>
+            <h3 class="card-title">Hộp thư đến</h3>
 
             <div class="card-tools">
               <div class="input-group input-group-sm">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm thư">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Tìm theo tiêu đề hoặc nội dung">
                 <div class="input-group-append">
                   <div class="btn btn-primary">
                     <i class="fas fa-search" style="color: white;"></i>
                   </div>
                 </div>
               </div>
+              
+            </div><br><br>
+            <div class="card-tools">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" id="searchemail" name="searchemail" placeholder="Tìm theo email sinh viên">
+                <div class="input-group-append">
+                  <div class="btn btn-primary">
+                    <i class="fas fa-search" style="color: white;"></i>
+                  </div>
+                </div>
+              </div>
+              
             </div>
             <!-- /.card-tools -->
           </div>
@@ -70,7 +87,7 @@ white-space: nowrap;
               <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
               </button>
               <div class="btn-group">
-                <form action="{{url('thong-bao/xoa/tin-da-gui')}}" method="POST" >
+                <form action="{{url('quan-ly/thong-bao/xoa/tin-da-gui')}}" method="POST" >
                     {{ csrf_field() }}
                 <button type="submit" class="btn btn-default btn-sm">  
                   <i class="far fa-trash-alt"></i>
@@ -84,7 +101,7 @@ white-space: nowrap;
               </div>
               <!-- /.btn-group -->
               <button type="button" class="btn btn-default btn-sm">
-                <a href="{{url('thong-bao')}}"><i class="fas fa-sync-alt"></i></a>
+                <a href="{{url('quan-ly/thong-bao')}}"><i class="fas fa-sync-alt"></i></a>
               </button>
               <div class="float-right">
                 {{$nofi->firstItem()}} - {{$nofi->lastItem()}} / {{$nofi->total()}}
@@ -114,7 +131,18 @@ white-space: nowrap;
             </div>
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Người gửi</th>
+                    <th>Tiêu đề</th>
+                    <th>Nội dung</th>
+                    <th></th>
+                    <th>Hoạt động</th>
+                  </tr>
+                </thead>
                 <tbody>
+                 
                    @php
                        $i=1;
                    @endphp
@@ -139,19 +167,22 @@ white-space: nowrap;
                       <label for="check{{$u}}"></label>
                     </div>
                   </td>
-                  <td class="mailbox-name clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'><b>{{$value->tieude}}</b></td>
-                  <td class="mailbox-subject clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'><p>{{ $value->tomtat }}</p>
+                  <td class="mail-rateing">
+                    {{$value->sinhvien->email}}
+                </td>
+                  <td class="mailbox-name clickable-row" data-href='{{url('quan-ly/thong-bao/doc', $value->id)}}'><b>{{$value->tieude}}</b></td>
+                  <td class="mailbox-subject clickable-row" data-href='{{url('quan-ly/thong-bao/doc', $value->id)}}'><p>{{ $value->tomtat }}</p>
                   </td>
-                  <td class="mailbox-attachment clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'>
+                  <td class="mailbox-attachment clickable-row" data-href='{{url('quan-ly/thong-bao/doc', $value->id)}}'>
                     @php
-                        $file = App\Models\ThongBaoFile::where('id_thongbaosv', $value->id)->get()->first();
+                        $file = App\Models\ThongBaoFile::where('id_thongbao', $value->id)->get()->first();
                         if (!empty($file)) {
                           # code...
-                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/thong-bao/doc",'. $value->id.'></i>';
+                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/quan-ly/thong-bao/doc",'. $value->id.'></i>';
                         } 
                     @endphp
                   </td>
-                  <td class="mailbox-date clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'>{{$value->created_at->diffForHumans()}}</td>
+                  <td class="mailbox-date clickable-row" data-href='{{url('quan-ly/thong-bao/doc', $value->id)}}'>{{$value->created_at->diffForHumans()}}</td>
                 
                 </tr>
                 @endforeach
@@ -228,7 +259,7 @@ white-space: nowrap;
         $value = $(this).val();
         $.ajax({
             type: 'get',
-            url: 'http://greendormitory.com/thong-bao/tim-kiem',
+            url: 'http://greendormitory.com/quan-ly/thong-bao/tim-kiem',
             data:{
                 'search' : $value
             }, 
@@ -238,7 +269,21 @@ white-space: nowrap;
         });
     });
 </script>
-
+<script>
+  $('#searchemail').on('keyup', function(){
+      $value = $(this).val();
+      $.ajax({
+          type: 'get',
+          url: 'http://greendormitory.com/quan-ly/thong-bao/tim-kiem-email',
+          data:{
+              'searchemail' : $value
+          }, 
+          success: function(data){
+              $('tbody').html(data);
+          }
+      });
+  });
+</script>
 <script>
     $(function () {
       //Enable check and uncheck all functionality

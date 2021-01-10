@@ -19,6 +19,13 @@
     cursor: pointer;
     pointer-events: auto;
   }
+  p{
+
+overflow: hidden;
+width: 350px;
+text-overflow: ellipsis;
+white-space: nowrap; 
+}
 </style>
 @endsection
 @section('content')
@@ -128,7 +135,7 @@
                         $file = App\Models\ThongBaoFile::where('id_thongbao', $value->id)->get()->first();
                         if (!empty($file)) {
                           # code...
-                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/thong-bao/mail/da-gui",'. $value->id.'></i>';
+                          echo '<i class="fas fa-paperclip clickable-row" data-href="'.url('thong-bao/mail/da-gui').'",'. $value->id.'></i>';
                         } 
                     @endphp
                   </td>
@@ -209,13 +216,15 @@
         $value = $(this).val();
         $.ajax({
             type: 'get',
-            url: 'http://greendormitory.com/thong-bao/tim-kiem',
+            url: 'http://greendormitory.com/thong-bao/tin-da-gui/tim-kiem',
             data:{
                 'search' : $value
             }, 
             success: function(data){
                 $('tbody').html(data);
-            }
+                
+            },
+            
         });
     });
 </script>

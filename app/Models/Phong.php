@@ -21,11 +21,11 @@ class Phong extends Model
     }
     public function tiendien()
     {
-        return $this->hasMany('App\Models\Dien', 'id_phong', 'id');
+        return $this->hasOne('App\Models\Dien', 'id_phong', 'id');
     }
     public function tiennuoc()
     {
-        return $this->hasMany('App\Models\Nuoc', 'id_phong', 'id');
+        return $this->hasOne('App\Models\Nuoc', 'id_phong', 'id');
     }
     public function sinhvien()
     {

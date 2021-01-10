@@ -1,6 +1,6 @@
 @extends('quan-ly.layout.master')
 @section('title')
-    Tất Cả {{$demsinhvien}} người đang thuê
+    Quản lý nước
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.semanticui.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <style>
+    
     table{
         font-family:Verdana;
         
@@ -39,51 +40,52 @@
         {{session('themthanhcong')}}
     </div>
 @endif
-<table id="example" class="ui celled table" style="width:100%">
+<table id="example" class="ui celled table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>CMND</th>
-            <th>Quê Quán</th>
-            <th>Email</th>
-            <th>SĐT</th>
-            <th>Giường</th>
-            <th>Chức vụ</th>
+            <th>STT</th>
+            <th>Phòng</th>
+            <th>Số nước cuối tháng trước</th>
+            <th>Số nước cuối tháng này</th>
+            <th>Thành tiền</th>
+            <th>Tình Trạng</th>
             <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($tongsinhvien as $value)
+        @php
+            $i = 1;
+        @endphp
+        @foreach ($nuoc as $value)
             <tr>
-                <td>{{$value->id}}</td>
-                <td>{{$value->Ten}}</td>
-                <td>{{$value->CMND}}</td>
-                <td>{{$value->QueQuan}}</td>
-                <td>{{$value->email}}</td>
-                <td>0{{$value->SDT}}</td>
-                @if (!empty($value->id_giuong))
-                <td>{{$value->giuong->phong->tang->khu->khu}} - {{$value->giuong->phong->tang->tang}} <br> {{$value->giuong->phong->phong}} - {{$value->giuong->giuong}}</td>
+                <td>{{$i++}}</td>
+                <td>{{$value->phong->phong}} - {{$value->phong->tang->tang}}</td>
+                @if ($value->soNuocDauThang != 0)
+                <td>{{$value->soNuocDauThang}}</td>
+                    @else
+                <td>{{'Chưa có'}}</td>
+
+                @endif
+                @if ($value->soNuocCuoiThang != 0)
+                <td>{{$value->soNuocCuoiThang}}</td>
+                    @else
+                <td>{{'Chưa có'}}</td>
+
+                @endif
+                @if ($value->tongtien != 0)
+                <td>{{$value->tongtien}} <small><sup>VNĐ</sup></small></td>
+                    
                 @else
-                <td>{{'Chưa đăng ký giường'}}</td>
+                    <td>Chưa có</td>
+                @endif
+                @if ($value->phi != 0)
+                <td>{{$value->phi}}  </td>
+                @else
+                <td>{{'Chưa đóng'}}  </td>
                 @endif
                 
-                @if ($value->quyen == 1)
                 <td>
-                    Trưởng Tầng
-                </td>
-                    @elseif($value->quyen == 2)
-                    <td>
-                        Trưởng Phòng
-                    </td>
-                    @else
-                    <td>
-                        Không có
-                    </td>
-                @endif
-                <td>
-                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/sinh-vien/nguoi-thue/sua')}}/{{$value->id}}">Sửa</a>
-                    <a class="btn btn-outline-danger btn-rounded " href="{{url('quan-ly/sinh-vien/nguoi-thue/xoa')}}/{{$value->id}}">Xóa</a>
+                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/dien-nuoc/khu-nam/dien/sua')}}/{{$value->id}}">Sửa</a>
                 </td>
             </tr>
 

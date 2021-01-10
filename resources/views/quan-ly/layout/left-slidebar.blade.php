@@ -19,8 +19,19 @@
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fas fa-bolt"></i><i class="fas fa-tint"></i></i></span><span class="pcoded-mtext">Điện nước</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="#" class="">Điện nước khu Nam</a></li>
-						<li class=""><a href="#" class="">Điện nước khu nữ</a></li>
+						<li class="nav-item pcoded-hasmenu"><a href="#" class="">Khu Nam</a>
+							<ul class="pcoded-submenu">
+								<li class=""><a href="{{url('quan-ly/dien-nuoc/khu-nam/dien')}}" class="">Điện</a></li>
+								<li class=""><a href="{{url('quan-ly/dien-nuoc/khu-nam/nuoc')}}" class="">Nước</a></li>
+
+							</ul>
+						</li>
+						<li class="nav-item pcoded-hasmenu"><a href="#" class="">Khu Nữ</a>
+							<ul class="pcoded-submenu">
+								<li class=""><a href="{{url('quan-ly/dien-nuoc/khu-nu/dien')}}" class="">Điện</a></li>
+								<li class=""><a href="{{url('quan-ly/dien-nuoc/khu-nu/nuoc')}}" class="">Nước</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 				
@@ -44,6 +55,17 @@
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Danh sách</a></li>
 						<li class=""><a href="#" class="">Thêm</a></li>
+					</ul>
+				</li>
+				<li class="nav-item pcoded-hasmenu">
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="far fa-envelope" aria-hidden="true"></i></span><span class="pcoded-mtext">Thông báo</span></a>
+					<ul class="pcoded-submenu">
+						<li class=""><a href="{{url('quan-ly/thong-bao')}}" class="">Thông báo của sinh viên</a></li>
+						<li class=""><a href="{{url('quan-ly/thong-bao/gui')}}" class="">Thông báo tới sinh viên</a></li>
+						<li class=""><a href="{{url('quan-ly/thong-bao/da-gui')}}" class="">Thư đã gửi</a></li>
+						<li class=""><a href="{{url('quan-ly/thong-bao/ban-nhap')}}" class="">Bản nháp</a></li>
+						<li class=""><a href="{{url('quan-ly/thong-bao/thung-rac')}}" class="">Thùng rác</a></li>
+
 					</ul>
 				</li>
 				<li class="nav-item pcoded-hasmenu">

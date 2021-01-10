@@ -42,7 +42,7 @@
 						<h3 class="m-b-0 text-white">{{$sinhvien}}</h3>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-money-bill-alt text-c-red f-18"></i>
+						<i class="fas fa-user-graduate text-c-red f-18"></i>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 						<h3 class="m-b-0 text-white">{{$thue}}</h3>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-database text-c-blue f-18"></i>
+						<i class="fas fa-cogs text-c-blue f-18"></i>
 					</div>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 						<h3 class="m-b-0 text-white">{{$tongtaikhoan }}</h3>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-dollar-sign text-c-green f-18"></i>
+						<i class="fas fa-users text-c-green f-18"></i>
 					</div>
 				</div>
 			</div>
@@ -83,11 +83,11 @@
 			<div class="card-body">
 				<div class="row align-items-center m-b-25">
 					<div class="col">
-						<h6 class="m-b-5 text-white">Product Sold</h6>
-						<h3 class="m-b-0 text-white">6,784</h3>
+						<h6 class="m-b-5 text-white">Thông Báo</h6>
+						<h3 class="m-b-0 text-white">{{$thongbao}}</h3>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-tags text-c-yellow f-18"></i>
+						<i class="fas fa-envelope-open text-c-yellow f-18"></i>
 					</div>
 				</div>
 			</div>

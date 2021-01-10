@@ -1,6 +1,6 @@
-@extends('page.view.sinhvien.layout.master')
+@extends('quan-ly.layout.master') 
 @section('title')
-    Thông báo của tổ quản lý
+    Thùng rác
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
@@ -15,14 +15,14 @@
         pointer-events: none;
         background-color: rgb(186, 170, 170);
     }
-  tr{
+    tr{
     cursor: pointer;
     pointer-events: auto;
   }
-  .bachgorao{
-    background-image: linear-gradient(90deg, rgba(68, 52, 52, 0.449), rgba(27, 140, 132, 0.7));
-    border-bottom: 1px solid black;
-    font-weight: bold;
+  thead th{
+    font-size:14px;
+    font-weight: 400;
+    color: rgb(8, 66, 125);
   }
   p{
 
@@ -39,26 +39,21 @@ white-space: nowrap;
             {{session('loi')}}
         </div>
 @endif
-@if (session('success'))
+@if (session('update'))
         <div class="alert alert-success">
-            {{session('success')}}
+            {{session('update')}}
         </div>
 @endif
+<div class="alert alert-primary">Hộp thư sẽ tự động xóa sau 30 ngày</div>
 <section class="content">
     <div class="row">
       <div class="col-md-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">Thư đã gửi</h3>
+            <h3 class="card-title">Thùng rác</h3>
 
             <div class="card-tools">
               <div class="input-group input-group-sm">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm thư">
-                <div class="input-group-append">
-                  <div class="btn btn-primary">
-                    <i class="fas fa-search" style="color: white;"></i>
-                  </div>
-                </div>
               </div>
             </div>
             <!-- /.card-tools -->
@@ -70,11 +65,14 @@ white-space: nowrap;
               <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
               </button>
               <div class="btn-group">
-                <form action="{{url('thong-bao/xoa/tin-da-gui')}}" method="POST" >
+                <form action="{{url('quan-ly/thong-bao/thung-rac/xoa')}}" method="POST" >
                     {{ csrf_field() }}
-                <button type="submit" class="btn btn-default btn-sm">  
+                <button type="submit"  name="delete" value="delete" class="btn btn-default btn-sm">  
                   <i class="far fa-trash-alt"></i>
                 </button>
+                <button type="submit" name="update" value="update" class="btn btn-default btn-sm">  
+                    <i class="fas fa-trash-restore"></i>
+                  </button>
                 {{-- <button type="button" class="btn btn-default btn-sm">
                   <i class="fas fa-reply"></i>
                 </button>
@@ -84,13 +82,13 @@ white-space: nowrap;
               </div>
               <!-- /.btn-group -->
               <button type="button" class="btn btn-default btn-sm">
-                <a href="{{url('thong-bao')}}"><i class="fas fa-sync-alt"></i></a>
+                <a href="{{url('quan-ly/thong-bao/thung-rac')}}"><i class="fas fa-sync-alt"></i></a>
               </button>
               <div class="float-right">
-                {{$nofi->firstItem()}} - {{$nofi->lastItem()}} / {{$nofi->total()}}
+                {{$trash->firstItem()}} - {{$trash->lastItem()}} / {{$trash->total()}}
                 <div class="btn-group">
-                    @if ($nofi->currentPage() != 1)
-                        <a href="{{$nofi->previousPageUrl()}}" class="btn btn-default btn-sm">
+                    @if ($trash->currentPage() != 1)
+                        <a href="{{$trash->previousPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-left"></i>
                         </a> 
                         @else 
@@ -98,8 +96,8 @@ white-space: nowrap;
                             <i class="fas fa-chevron-left"></i>
                         </span>
                     @endif
-                  @if ($nofi->currentPage() != $nofi->lastPage())
-                        <a href="{{$nofi->nextPageUrl()}}" class="btn btn-default btn-sm">
+                  @if ($trash->currentPage() != $trash->lastPage())
+                        <a href="{{$trash->nextPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-right"></i>
                         </a>  
                         @else 
@@ -114,44 +112,50 @@ white-space: nowrap;
             </div>
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Người gửi</th>
+                    <th>Tiêu đề</th>
+                    <th>Nội dung</th>
+                    <th></th>
+                    <th>Hoạt động</th>
+                  </tr>
+                </thead>
                 <tbody>
+                  
                    @php
                        $i=1;
                    @endphp
-                   @if ($nofi->total() != null)
-                    @foreach ($nofi as $value)
-                    
+                    @if ($trash->total() != null)
+                    @foreach ($trash as $value)
                     @php
                     
                     $u = $i++;
                 @endphp
-                
-                <tr 
-                  @if ($value->read_at === null)
-                      class="bachgorao"
-
-                  @endif
-                >
-                 
+                <tr>
                   <td>
                     <div class="icheck-primary">
                       <input type="checkbox" name="checked[]" value="{{$value->id}}" id="check{{$u}}">
                       <label for="check{{$u}}"></label>
                     </div>
                   </td>
-                  <td class="mailbox-name clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'><b>{{$value->tieude}}</b></td>
-                  <td class="mailbox-subject clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'><p>{{ $value->tomtat }}</p>
+                  <td class="mail-rateing">
+                    {{$value->sinhvien->email}}
+                </td>
+                  <td class="mailbox-name clickable-row" ><b>{{$value->tieude}}</b></td>
+                  <td class="mailbox-subject clickable-row"><p>{{ $value->tomtat }}</p>
                   </td>
-                  <td class="mailbox-attachment clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'>
+                  <td class="mailbox-attachment clickable-row">
                     @php
                         $file = App\Models\ThongBaoFile::where('id_thongbaosv', $value->id)->get()->first();
                         if (!empty($file)) {
                           # code...
-                          echo '<i class="fas fa-paperclip clickable-row" data-href="http://greendormitory.com/thong-bao/doc",'. $value->id.'></i>';
+                          echo '<i class="fas fa-paperclip clickable-row"></i>';
                         } 
                     @endphp
                   </td>
-                  <td class="mailbox-date clickable-row" data-href='{{url('thong-bao/doc', $value->id)}}'>{{$value->created_at->diffForHumans()}}</td>
+                  <td class="mailbox-date clickable-row">{{$value->created_at->diffForHumans()}}</td>
                 
                 </tr>
                 @endforeach
@@ -171,10 +175,10 @@ white-space: nowrap;
           <div class="card-footer p-0">
             <div class="mailbox-controls">
               <div class="float-right">
-                {{$nofi->firstItem()}} - {{$nofi->lastItem()}} / {{$nofi->total()}}
+                {{$trash->firstItem()}} - {{$trash->lastItem()}} / {{$trash->total()}}
                 <div class="btn-group">
-                    @if ($nofi->currentPage() != 1)
-                        <a href="{{$nofi->previousPageUrl()}}" class="btn btn-default btn-sm">
+                    @if ($trash->currentPage() != 1)
+                        <a href="{{$trash->previousPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-left"></i>
                         </a> 
                         @else 
@@ -182,8 +186,8 @@ white-space: nowrap;
                             <i class="fas fa-chevron-left"></i>
                         </span>
                     @endif
-                  @if ($nofi->currentPage() != $nofi->lastPage())
-                        <a href="{{$nofi->nextPageUrl()}}" class="btn btn-default btn-sm">
+                  @if ($trash->currentPage() != $trash->lastPage())
+                        <a href="{{$trash->nextPageUrl()}}" class="btn btn-default btn-sm">
                             <i class="fas fa-chevron-right"></i>
                         </a>  
                         @else 
@@ -209,35 +213,7 @@ white-space: nowrap;
 @section('script')
 <script src="{{url('dist/js/demo.js')}}"></script>
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>
-<script>
-//   window.setInterval(function ()
-// {
-    
-// }, 3000);
-</script>
-<script>
-  
-  jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
-</script>
-<script>
-    $('#search').on('keyup', function(){
-        $value = $(this).val();
-        $.ajax({
-            type: 'get',
-            url: 'http://greendormitory.com/thong-bao/tim-kiem',
-            data:{
-                'search' : $value
-            }, 
-            success: function(data){
-                $('tbody').html(data);
-            }
-        });
-    });
-</script>
+
 
 <script>
     $(function () {

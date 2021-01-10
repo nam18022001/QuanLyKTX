@@ -19,6 +19,13 @@
     cursor: pointer;
     pointer-events: auto;
   }
+  p{
+
+overflow: hidden;
+width: 350px;
+text-overflow: ellipsis;
+white-space: nowrap; 
+}
 </style>
 @endsection
 @section('content')

@@ -19,8 +19,8 @@
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fas fa-bolt"></i><i class="fas fa-tint"></i></i></span><span class="pcoded-mtext">Điện nước</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="#" class="">Điện tháng này</a></li>
-						<li class=""><a href="#" class="">Nước tháng này</a></li>
+						<li class=""><a href="{{url('sinh-vien/dien-thang-nay')}}" class="">Điện tháng này</a></li>
+						<li class=""><a href="{{url('sinh-vien/nuoc-thang-nay')}}" class="">Nước tháng này</a></li>
 					</ul>
 				</li>
 				

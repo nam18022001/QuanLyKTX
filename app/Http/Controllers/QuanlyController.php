@@ -14,6 +14,7 @@ use App\Models\Thue;
 use App\Models\Dien;
 use App\Models\Nuoc;
 use App\Models\User;
+use App\Models\ThongBao;
 use Carbon;
 use View;
 use Validator;
@@ -36,11 +37,13 @@ class QuanlyController extends Controller
         $tongtaikhoan = SinhVien::all()->count() + User::all()->count();
         $nguoithue = User::count();
         $truongtang = SinhVien::where('quyen', 1)->get();
+        $thongbao = ThongBao::where('xoa', 1)->count();
         return view('quan-ly.view.dashboard', [
             'truong_tang' => $truongtang,
             'sinhvien' => $sinhvien,
             'thue' => $nguoithue,
             'tongtaikhoan' =>  $tongtaikhoan,
+            'thongbao' => $thongbao,
             ]);
     }
     public function tongsinhvien()

@@ -19,6 +19,13 @@
     cursor: pointer;
     pointer-events: auto;
   }
+  p{
+
+overflow: hidden;
+width: 350px;
+text-overflow: ellipsis;
+white-space: nowrap; 
+}
 </style>
 @endsection
 @section('content')
@@ -132,7 +139,7 @@
                         } 
                     @endphp
                   </td>
-                  <td class="mailbox-date clickable-row" data-href='{{url('thong-bao/mail/da-gui', $value->id)}}'>{{$value->created_at->diffForHumans()}}</td>
+                  <td class="mailbox-date clickable-row" data-href='{{url('thong-bao/sua-ban-nhap', $value->id)}}'>{{$value->created_at->diffForHumans()}}</td>
                 
                 </tr>
                 @endforeach

@@ -210,7 +210,77 @@ class SinhVienController extends Controller
         
         
     }
+    
     public function searchmail(Request $request)
+    {
+        # code...
+        if ($request->ajax()) {
+            # code...
+            
+            $output = '';
+            $thongbao = ThongBaoSV::where([
+                ['id_sinhvien', Auth::guard('sinh_vien')->id()], 
+                ['xoa', 1],
+                ['tieude', 'LIKE', '%'.$request->search.'%'],
+            ])
+            ->orWhere([
+                ['id_sinhvien', Auth::guard('sinh_vien')->id()], 
+                ['xoa', 1],
+                ['tomtat', 'LIKE', '%'.$request->search.'%'],
+            ])
+            ->get();
+            if ($thongbao) {
+                # code...
+                $i = 1;
+                foreach ($thongbao as $key => $value) {
+                    # code...
+                    $u = $i++;
+                    $ahihi = ThongBaoFile::where('id_thongbaosv', $value->id)->get()->first();
+                    if (!empty($ahihi)) {
+                        # code...
+                        $if = '<i class="fas fa-paperclip clickable-row" data-href="'.url('thong-bao/mail/da-gui').'",'. $value->id.'></i>';
+                      }else {
+                          # code...
+                          $if = '';
+                      }
+                      if ($value->read_at === null) {
+                          # code...
+                          $readat = 'bachgorao';
+                      }else{
+                          $readat = '';
+                      }
+                    $output .= '
+                    <tr class="'.$readat.'">
+                    <td>
+                        <div class="icheck-primary">
+                        <input type="checkbox" name="checked[]" value="'.$value->id.'" id="check'.$u.'">
+                        <label for="check'.$u.'"></label>
+                        </div>
+                    </td>
+                <td class="mailbox-name clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'><b>'.$value->tieude.'</b></td>
+                    <td class="mailbox-subject clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'><p>'. $value->tomtat .'</p>
+                    </td>
+                    <td class="mailbox-attachment clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'>'.$if.'</td>
+                    <td class="mailbox-date clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'>'.$value->created_at->diffForHumans().'</td>
+                    </tr>
+                    <script>
+  
+                    jQuery(document).ready(function($) {
+                        $(".clickable-row").click(function() {
+                            window.location = $(this).data("href");
+                        });
+                    });
+                    </script>';
+                }
+            }
+            return response($output);
+        }else {
+            # code...
+            return redirect()->back(); 
+
+        }
+    }
+    public function searchmailsent(Request $request)
     {
         # code...
         if ($request->ajax()) {
@@ -234,6 +304,14 @@ class SinhVienController extends Controller
                 foreach ($thongbao as $key => $value) {
                     # code...
                     $u = $i++;
+                    $ahihi = ThongBaoFile::where('id_thongbao', $value->id)->get()->first();
+                    if (!empty($ahihi)) {
+                        # code...
+                        $if = '<i class="fas fa-paperclip clickable-row" data-href="'.url('thong-bao/mail/da-gui').'",'. $value->id.'></i>';
+                      }else {
+                          # code...
+                          $if = '';
+                      }
                     $output .= '
                     <tr>
                     <td>
@@ -242,18 +320,28 @@ class SinhVienController extends Controller
                         <label for="check'.$u.'"></label>
                         </div>
                     </td>
-                    <td class="mailbox-name"><a href="'.url('thong-bao/mail/da-gui', $value->id).'">'.$value->tieude.'</a></td>
-                    <td class="mailbox-subject"><p>'. $value->tomtat .'</p>
+                <td class="mailbox-name clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'><b>'.$value->tieude.'</b></td>
+                    <td class="mailbox-subject clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'><p>'. $value->tomtat .'</p>
                     </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">'.$value->created_at->diffForHumans().'</td>
+                    <td class="mailbox-attachment clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'>'.$if.'</td>
+                    <td class="mailbox-date clickable-row" data-href='.url('thong-bao/mail/da-gui', $value->id).'>'.$value->created_at->diffForHumans().'</td>
                     </tr>
-                    ';
+                    <script>
+  
+                    jQuery(document).ready(function($) {
+                        $(".clickable-row").click(function() {
+                            window.location = $(this).data("href");
+                        });
+                    });
+                    </script>';
                 }
             }
-            return Response($output);
+            return response($output);
+        }else {
+            # code...
+            return redirect()->back(); 
+
         }
-        return redirect()->back(); 
     }
     public function mailsentread($id)
     {
@@ -476,7 +564,6 @@ class SinhVienController extends Controller
         $file = ThongBaoFile::find($id);
         if ($file) {
             # code...
-        
             if ($file->thongbao->id_sinhvien == Auth::guard('sinh_vien')->id()) {
                 # code...
                 
