@@ -22,7 +22,7 @@ class ThongBaoSV extends Model
         return $this->belongsTo('App\Models\User', 'id_quanly', 'id');
         
     }
-    public function file()
+    public function filesv()
     {
         return $this->hasmany('App\Models\ThongBaoFile', 'id_thongbaosv', 'id');
     }

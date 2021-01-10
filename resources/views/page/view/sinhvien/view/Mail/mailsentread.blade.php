@@ -1,6 +1,6 @@
-@extends('quan-ly.layout.master')
+@extends('page.view.sinhvien.layout.master')
 @section('title')
-{{$thongbao->tieude}} - {{Auth::user()->email}}
+{{$thongbao->tieude}} - {{Auth::guard('sinh_vien')->user()->email}}
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
@@ -66,7 +66,7 @@
             <div class="mailbox-attachment-info">
               <a href="#" class="mailbox-attachment-name"><p class="filename"><i class="fa fa-paperclip"></i> {{ $value->filename }}</p></a>
                   <span class="mailbox-attachment-size">
-                    <a href="{{url('quan-ly/thong-bao/file-download', $value->id)}}" class="btn btn-default btn-xs"><i class="fas fa-download"></i></a>
+                   
                   </span>
             </div>
           </li>

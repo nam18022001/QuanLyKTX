@@ -62,7 +62,7 @@ class ThongBaoController extends Controller
         $this->validate($request, 
             [
                 'tieude' => 'bail|between:5,100',
-                'email' => 'bail|between:10,255|ends_with:@vku.udn.vn',
+                'email' => 'bail|between:10,255',
                 'noidung' => 'bail|required|min:30',
             ],
             [
@@ -147,7 +147,7 @@ class ThongBaoController extends Controller
 
                     $fileinsert = new ThongBaoFile();
                     $fileinsert->filename = $name;
-                    $fileinsert->id_thongbao = $phananh->id;
+                    $fileinsert->id_thongbaos = $phananh->id;
                     $fileinsert->save();
                 }
 
@@ -484,7 +484,7 @@ class ThongBaoController extends Controller
         if ($thongbao) {
             # code...
             $file = ThongBaoFile::where('id_thongbaosv', $id)->get();
-            return view('quan-ly.view.Mail.mailread', ['thongbao' => $thongbao, 'file' => $file]);
+            return view('quan-ly.view.Mail.mailsentread', ['thongbao' => $thongbao, 'file' => $file]);
         }else{
             return redirect('quan-ly/thong-bao/da-gui')->with('loi', 'Thư không tồn tại hoặc có thể nằm trong thùng rác');
         }
@@ -698,22 +698,17 @@ class ThongBaoController extends Controller
         $file = ThongBaoFile::find($id);
         if ($file) {
             # code...
-            if ($file->thongbao->id_sinhvien == Auth::id()) {
+            $id_a = $file->thongbao->sinhvien->id;
+            if ($id_a < 10) {
                 # code...
-                
-                if (Auth::id() < 10) {
-                    # code...
-                    $id_sinhvien = '0'.Auth::id();
-                }else {
-                    # code...
-                    $id_sinhvien = Auth::id();
-                }
-                $path = 'FileMail/ToSV/'.$id_sinhvien.'/'.$file->filename;
-                return response()->download($path, $file->filename, ['Content-Type' => $file->id]);
+                $id_sinhvien = '0'.$id_a;
             }else {
                 # code...
-                return redirect()->back();
+                $id_sinhvien = $id_a;
             }
+                $path = 'FileMail/ToQL/'.$id_sinhvien.'/'.$file->filename;
+                return response()->download($path, $file->filename, ['Content-Type' => $file->id]);
+
         }else {
             # code...
             return redirect()->back();

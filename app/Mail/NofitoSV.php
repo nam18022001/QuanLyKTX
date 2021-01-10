@@ -36,7 +36,7 @@ class NofitoSV extends Mailable
     {
         $mail = $this->view('page.view.mail.phananhtoiql');
         $mail->subject($this->phananh->sinhvien->email. ' && '. $this->phananh->tieude);
-        $mail->from('GreenDormitory.com', 'Green Dormitory');
+        $mail->from('admin@GreenDormitory.com', 'Green Dormitory');
         if ($this->attachment) {
             # code...
             foreach ($this->attachment as $files)
