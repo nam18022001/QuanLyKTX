@@ -128,7 +128,7 @@ white-space: nowrap;
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Người gửi</th>
+                    <th>Người nhận</th>
                     <th>Tiêu đề</th>
                     <th>Nội dung</th>
                     <th></th>

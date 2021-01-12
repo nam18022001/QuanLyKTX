@@ -53,8 +53,11 @@
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fa fa-tasks" aria-hidden="true"></i></span><span class="pcoded-mtext">Quản lý</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="#" class="">Danh sách</a></li>
-						<li class=""><a href="#" class="">Thêm</a></li>
+						<li class=""><a href="{{url('quan-ly/danh-sach')}}" class="">Danh sách</a></li>
+						@if (Auth::user()->position == 1)
+						<li class=""><a href="{{url('quan-ly/them')}}" class="">Thêm</a></li>
+							
+						@endif
 					</ul>
 				</li>
 				<li class="nav-item pcoded-hasmenu">
@@ -71,8 +74,7 @@
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fas fa-user-cog"></i></span><span class="pcoded-mtext">Cài đặt tài khoản</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="#" class="">Hồ sơ</a></li>
-						<li class=""><a href="#" class="">Đổi mật khẩu</a></li>
+						<li class=""><a href="{{url('quan-ly/doi-mat-khau', Auth::id())}}" class="">Đổi mật khẩu</a></li>
 						<li class=""><a href="{{url('quan-ly/dang-xuat')}}" class="">Đăng xuất</a></li>
 					</ul>
 				</li>

@@ -253,26 +253,9 @@
 						@endif
 				</div>
 				<h6 class="f-w-600 m-t-25 m-b-10">{{Auth::user()->name}}</h6>
-				<p>Active | Male | Born 23.05.1992</p>
+				<p>{{Auth::user()->email}} | {{Auth::user()->SDT}} | {{Auth::user()->CMND}} | {{Auth::user()->QueQuan}}</p>
 				<hr>
 				<p class="m-t-15">Activity Level: 87%</p>
-				<div class="bg-c-blue counter-block m-t-10 p-20">
-					<div class="row">
-						<div class="col-4">
-							<i class="fas fa-calendar-check text-white f-20"></i>
-							<h6 class="text-white mt-2 mb-0">1256</h6>
-						</div>
-						<div class="col-4">
-							<i class="fas fa-user text-white f-20"></i>
-							<h6 class="text-white mt-2 mb-0">8562</h6>
-						</div>
-						<div class="col-4">
-							<i class="fas fa-folder-open text-white f-20"></i>
-							<h6 class="text-white mt-2 mb-0">189</h6>
-						</div>
-					</div>
-				</div>
-				<p class="m-t-15">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 				<hr>
 				<div class="row justify-content-center user-social-link">
 					<div class="col-auto"><a href="#!"><i class="fab fa-facebook-f text-primary f-22"></i></a></div>

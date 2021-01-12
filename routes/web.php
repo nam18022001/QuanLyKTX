@@ -42,6 +42,13 @@ Route::group(['middleware' => 'adminlogin'], function () {
     Route::group(['prefix' => 'quan-ly'], function () {
         Route::get('/', [QuanLyController::class, 'index']);
         Route::get('danh-sach', [QuanLyController::class, 'danhsachquanly']);
+        Route::get('xoa/{id}', [QuanLyController::class, 'xoaquanly']);
+        Route::get('sua/{id}', [QuanLyController::class, 'suaquanly']);
+        Route::post('sua/{id}', [QuanLyController::class, 'postsuaquanly']);
+        Route::get('them', [QuanLyController::class, 'themquanly']);
+        Route::post('them', [QuanLyController::class, 'postthemquanly']);
+        Route::get('doi-mat-khau/{id}', [QuanLyController::class, 'changepass']);
+        Route::post('doi-mat-khau/{id}', [QuanLyController::class, 'postchangepass']);
 
         Route::group(['prefix' => 'thong-bao'], function () {
             Route::get('/', [ThongBaoController::class, 'mailbox']);

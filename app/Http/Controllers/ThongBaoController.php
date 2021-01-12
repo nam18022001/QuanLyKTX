@@ -62,7 +62,7 @@ class ThongBaoController extends Controller
         $this->validate($request, 
             [
                 'tieude' => 'bail|between:5,100',
-                'email' => 'bail|between:10,255',
+                'email' => 'bail|between:10,255|ends_with:@vku.udn.vn',
                 'noidung' => 'bail|required|min:30',
             ],
             [
@@ -147,7 +147,7 @@ class ThongBaoController extends Controller
 
                     $fileinsert = new ThongBaoFile();
                     $fileinsert->filename = $name;
-                    $fileinsert->id_thongbaos = $phananh->id;
+                    $fileinsert->id_thongbaosv = $phananh->id;
                     $fileinsert->save();
                 }
 
@@ -541,8 +541,9 @@ class ThongBaoController extends Controller
                                 if (file_exists('FileMail/ToSV/'.$id_sinhvien.'/'.$item->filename)) {
                                     # code...
                                     File::delete('FileMail/ToSV/'.$id_sinhvien.'/'.$item->filename);
-                                    $item->delete();
                                 }
+                                $item->delete();
+
                             }
                     }
                     $value->delete();
@@ -563,15 +564,17 @@ class ThongBaoController extends Controller
                     }
                         if (!ThongBaoFile::where('id_thongbaosv', $value->id)->exists()) {
                             # code...
-                            echo 'yes';
                             File::deleteDirectory('FileMail/ToSV/'.$id_sinhvien);
+                            echo "done";
                         }else {
                             foreach ($deletefile as $item) {
                                 if (file_exists('FileMail/ToSV/'.$id_sinhvien.'/'.$item->filename)) {
                                     # code...
                                     File::delete('FileMail/ToSV/'.$id_sinhvien.'/'.$item->filename);
-                                    $item->delete();
                                 }
+                                echo 'ok<br>';
+                                $item->delete();
+
                             }
                     }
                     $value->delete();

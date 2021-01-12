@@ -180,7 +180,7 @@ class SinhVienController extends Controller
             $lenhxoa = ThongBao::where('xoa', 2)->get();
                 foreach ($lenhxoa as $value) {
                     # code...
-                    $del = Carbon\Carbon::now()->diffInMonths($value->updated_at);
+                    $del = Carbon::now()->diffInMonths($value->updated_at);
                     if ($del == 1) {
                         # code...
                         $value->delete();
@@ -361,7 +361,7 @@ class SinhVienController extends Controller
         $lenhxoa = ThongBao::where('xoa', 2)->get();
             foreach ($lenhxoa as $value) {
                 # code...
-                $del = Carbon\Carbon::now()->diffInMonths($value->updated_at);
+                $del = Carbon::now()->diffInMonths($value->updated_at);
                 if ($del == 1) {
                     # code...
                     $value->delete();
@@ -383,63 +383,63 @@ class SinhVienController extends Controller
             $lenhxoa = ThongBao::where('xoa', 2)->get();
             foreach ($lenhxoa as $value) {
                 # code...
-                $del = Carbon\Carbon::now()->diffInMonths($value->updated_at);
+                $del = Carbon::now()->diffInMonths($value->updated_at);
                 if ($del == 1) {
                     # code...
-                    // $deletefile = ThongBaoFile::where('id_thongbao', $value->id)->get();
-                    // $id_sinhvien = Auth::guard('sinh_vien')->id();
-                    // if (Auth::guard('sinh_vien')->id() < 10) {
-                    //     # code...
-                    //     $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
-                    // }else {
-                    //     # code...
-                    //     $id_sinhvien = Auth::guard('sinh_vien')->id();
-                    // }
+                    $deletefile = ThongBaoFile::where('id_thongbao', $value->id)->get();
+                    $id_sinhvien = Auth::guard('sinh_vien')->id();
+                    if (Auth::guard('sinh_vien')->id() < 10) {
+                        # code...
+                        $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
+                    }else {
+                        # code...
+                        $id_sinhvien = Auth::guard('sinh_vien')->id();
+                    }
 
                     
-                    //     if (!ThongBaoFile::where('id_thongbao', $value->id)->exists()) {
-                    //         # code...
-                    //         File::deleteDirectory('FileMail/ToQL/'.$id_sinhvien);
-                    //     }else {
-                    //         foreach ($deletefile as $item) {
-                    //             # code...
+                        if (!ThongBaoFile::where('id_thongbao', $value->id)->exists()) {
+                            # code...
+                            File::deleteDirectory('FileMail/ToQL/'.$id_sinhvien);
+                        }else {
+                            foreach ($deletefile as $item) {
+                                # code...
                                 
-                    //             if (file_exists('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename)) {
-                    //                 # code...
-                    //                 File::delete('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename);
-                    //                 $item->delete();
-                    //             }
-                    //         }
-                    // }
+                                if (file_exists('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename)) {
+                                    # code...
+                                    File::delete('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename);
+                                    $item->delete();
+                                }
+                            }
+                    }
                     $value->delete();
                 }
             }
             if ($request->has('delete')) {
                 $thongbao = ThongBao::whereIn("id", $checked)->get();
                 foreach ($thongbao as $value) {
-                    // # code...
-                    // $deletefile = ThongBaoFile::where('id_thongbao', $value->id)->get();
-                    // $id_sinhvien = Auth::guard('sinh_vien')->id();
-                    // if (Auth::guard('sinh_vien')->id() < 10) {
-                    //     # code...
-                    //     $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
-                    // }else {
-                    //     # code...
-                    //     $id_sinhvien = Auth::guard('sinh_vien')->id();
-                    // }
-                    //     if (!ThongBaoFile::where('id_thongbao', $value->id)->exists()) {
-                    //         # code...
-                    //         echo 'yes';
-                    //         File::deleteDirectory('FileMail/ToQL/'.$id_sinhvien);
-                    //     }else {
-                    //         foreach ($deletefile as $item) {
-                    //             if (file_exists('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename)) {
-                    //                 # code...
-                    //                 File::delete('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename);
-                    //                 $item->delete();
-                    //             }
-                    //         }
-                    // }
+                    # code...
+                    $deletefile = ThongBaoFile::where('id_thongbao', $value->id)->get();
+                    $id_sinhvien = Auth::guard('sinh_vien')->id();
+                    if (Auth::guard('sinh_vien')->id() < 10) {
+                        # code...
+                        $id_sinhvien = '0'.Auth::guard('sinh_vien')->id();
+                    }else {
+                        # code...
+                        $id_sinhvien = Auth::guard('sinh_vien')->id();
+                    }
+                        if (!ThongBaoFile::where('id_thongbao', $value->id)->exists()) {
+                            # code...
+                            echo 'yes';
+                            File::deleteDirectory('FileMail/ToQL/'.$id_sinhvien);
+                        }else {
+                            foreach ($deletefile as $item) {
+                                if (file_exists('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename)) {
+                                    # code...
+                                    File::delete('FileMail/ToQL/'.$id_sinhvien.'/'.$item->filename);
+                                    $item->delete();
+                                }
+                            }
+                    }
                     $value->delete();
                 }
                 return redirect('thong-bao/thung-rac')->with('update', 'Đã xóa');
@@ -500,7 +500,7 @@ class SinhVienController extends Controller
             $lenhxoa = ThongBao::where('xoa', 2)->get();
                 foreach ($lenhxoa as $value) {
                     # code...
-                    $del = Carbon\Carbon::now()->diffInMonths($value->updated_at);
+                    $del = Carbon::now()->diffInMonths($value->updated_at);
                     if ($del == 1) {
                         # code...
                         $value->delete();
