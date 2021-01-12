@@ -1,10 +1,6 @@
 ## Một trang web quản lý KTX bằng LARAVEL nho nhỏ để gửi tới các bạn
 <img src="https://github.com/nam18022001/QuanLyKTX/blob/master/public/logo/Green2.png" width="30%">
 <p>Facebook: <a href="https://facebook.com/nam1822001">HERE</a></p>
- <p>Ủng hộ tui:  Ngân hàng VP Bank<br>
-    Số tài khoản: 190004961<br>
-    Chi nhánh:  Hồ Chí Minh
-</p>
 
 ## Hướng dẫn
 <p>Dùng git bash hoặc cmd của bạn vào tới thư mục htdocs trong xampp rồi sao chép và dán lệnh sau: </p>
