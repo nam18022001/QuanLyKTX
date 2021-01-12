@@ -13,7 +13,7 @@
 		<a href="#" class="mob-toggler"></a>
 		
 		<ul class="navbar-nav ml-auto">
-			<li>
+			{{-- <li>
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
 					<div class="dropdown-menu dropdown-menu-right notification">
@@ -91,7 +91,7 @@
 						</div>
 					</div>
 				</div>
-			</li>
+			</li> --}}
 			<li>
 				<div class="dropdown drp-user">
 					<a href="#" class="a" data-toggle="dropdown">
@@ -116,10 +116,8 @@
 							</a>
 						</div>
 						<ul class="pro-body">
-							<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-							<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-							<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-							<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+							<li><a href="{{url('/')}}" class="dropdown-item"><i class="feather icon-home"></i> Trang chủ</a></li>
+							<li><a href="{{url('quan-ly/doi-mat-khau', Auth::id())}}" class="dropdown-item"><i class="feather icon-user"></i> Đổi mật khẩu</a></li>
 						</ul>
 					</div>
 				</div>

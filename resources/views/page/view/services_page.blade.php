@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">THÔNG TIN KÝ TÚC XÁ</div>
-                <h2><br> That Suits Your Needs</h2>
+                <h2>Những phòng chính tại Ký túc xá</h2>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
         <div class="row">
             <div class="col-lg-12">
-                
+
                 <!-- Card -->
                 <div class="card">
                     <div class="card-image">
@@ -17,22 +17,22 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">Phòng ở</h3>
-                        <p>Perfect for fresh ideas or young startups, this package will help get the business off the ground</p>
+                        <p>Mỗi phòng ở có 6 giường kiểu tầng, tủ quần áo chia ngăn và phòng tắm, nhà vệ sinh riêng biệt</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Environment and competition</div>
+                                <div class="media-body">Phòng ở rộng rãi</div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Designing the marketing plan</div>
+                                <div class="media-body">Vệ sinh sạch sẽ</div>
                             </li>
                         </ul>
-                        <p class="price">Starting at <span>$199</span></p>
+
                     </div>
-                    <div class="button-container">
+                    {{-- <div class="button-container">
                         <a class="btn-solid-reg page-scroll" href="#callMe">DETAILS</a>
-                    </div> <!-- end of button-container -->
+                    </div> <!-- end of button-container --> --}}
                 </div>
                 <!-- end of card -->
 
@@ -43,22 +43,22 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">Phòng tự học</h3>
-                        <p>Use this service pack to give your company the necessary impulse to become an industry leader</p>
+                        <p>Phòng tự học với 30 bàn, thoáng mát, sạch sẽ, được vệ sinh mỗi ngày</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Business strategy planning</div>
+                                <div class="media-body">Luôn luôn mở cửa</div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Taking the planned actions</div>
+                                <div class="media-body">Có WiFi miễn phí cho sinh viên</div>
                             </li>
                         </ul>
-                        <p class="price">Starting at <span>$299</span></p>
+
                     </div>
-                    <div class="button-container">
+                    {{-- <div class="button-container">
                         <a class="btn-solid-reg page-scroll" href="#callMe">DETAILS</a>
-                    </div> <!-- end of button-container -->
+                    </div> <!-- end of button-container --> --}}
                 </div>
                 <!-- end of card -->
 
@@ -69,22 +69,22 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">Căn Tin</h3>
-                        <p>You already are a reference point in your industry now you need to learn about acquisitions</p>
+                        <p>Căn Tin phục vụ đầy đủ 3 bữa sáng trưa tối với đầy đủ dinh dưỡng, giá cả hợp lí</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Maintaining the leader status</div>
+                                <div class="media-body">Đảm bảo thực phẩm an toàn</div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Acquisitions the right way</div>
+                                <div class="media-body">Thoáng mát, sạch sẽ</div>
                             </li>
                         </ul>
-                        <p class="price">Starting at <span>$299</span></p>
+
                     </div>
-                    <div class="button-container">
+                    {{-- <div class="button-container">
                         <a class="btn-solid-reg page-scroll" href="#callMe">DETAILS</a>
-                    </div> <!-- end of button-container -->
+                    </div> <!-- end of button-container --> --}}
                 </div>
                 <!-- end of card -->
 

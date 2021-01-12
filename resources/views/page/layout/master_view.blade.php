@@ -35,6 +35,8 @@
     <link href="{{asset('page_assets/css/swiper.css')}}" rel="stylesheet">
     <link href="{{asset('page_assets/css/magnific-popup.css')}}" rel="stylesheet">
     <link href="{{asset('page_assets/css/styles.css')}}" rel="stylesheet">
+    <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
 <style>
 input[type=datetime-local]:required:invalid::-webkit-datetime-edit {
@@ -75,20 +77,21 @@ input[type=date]:focus::-webkit-datetime-edit {
 @include('page.view.intro_page')
 {{-- @include('page.view.description_page') --}}
 @include('page.view.services_page')
-@include('page.view.detail1_page')
+{{-- @include('page.view.detail1_page') --}}
 @include('page.view.detail2_page')
 {{-- @include('page.view.testimonials_page') --}}
 @include('page.view.callme_page')
 
 @include('page.view.project_page')
 @include('page.view.lightbox_page')
-@include('page.view.team_page')
+{{-- @include('page.view.team_page') --}}
 {{-- @include('page.view.about_page') --}}
 @include('page.view.contact_page')
 @include('page.view.footer_page')
 
 
     <!-- Scripts -->
+    <script src="{{asset('admin_assets/assets/js/vendor-all.min.js')}}"></script>
     <script src="{{asset('page_assets/js/jquery.min.js')}}"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="{{asset('page_assets/js/popper.min.js')}}"></script>
@@ -122,17 +125,39 @@ input[type=date]:focus::-webkit-datetime-edit {
         document.getElementById("top-mess").classList.add('cut');
     }
 </script>
-    <script>
-        $basic_url = "http://oceanhotel.com/phong/";
-        $(document).ready(function(){
-            $("#tang").change(function(){
-                var idtang = $(this).val();
-                $.get($basic_url +idtang, function(data){
-                    $("#phong").html(data);
-                });
+<script>
+    $basic_url = "http://greendormitory.com/load/khu/";
+    $(document).ready(function(){
+        $("#khu").change(function(){
+            var idtang = $(this).val();
+            $.get($basic_url +idtang, function(data){
+                $("#tang").html(data);
             });
         });
-    </script>
+    });
+</script>
+<script>
+    $url = "http://greendormitory.com/load/tang/";
+    $(document).ready(function(){
+        $("#tang").change(function(){
+            var idphong = $(this).val();
+            $.get($url + idphong, function(data){
+                $("#phong").html(data);
+            });
+        });
+    });
+</script>
+<script>
+    $url_phong = "http://greendormitory.com/load/phong/";
+    $(document).ready(function(){
+        $("#phong").change(function(){
+            var idgiuong = $(this).val();
+            $.get($url_phong + idgiuong, function(data){
+                $("#giuong").html(data);
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

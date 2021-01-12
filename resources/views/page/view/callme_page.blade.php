@@ -14,7 +14,7 @@
                         </li>
                         <li class="media">
                             <i class="fas fa-square"></i>
-                            <div class="media-body">Dăng ký tài khoản để có thể đặt phòng</div>
+                            <div class="media-body">Đăng ký tài khoản để có thể đặt phòng</div>
                         </li>
                         <li class="media">
                             <i class="fas fa-square"></i>
@@ -24,53 +24,47 @@
                 </div>
             </div> <!-- end of col -->
             <div class="col-lg-6">
-               
+
                 <!-- Call Me Form -->
                 <form id="callMeForm" data-toggle="validator" data-focus="false">
                     {{--  --}}
                     <div class="form-group">
-                        <select class="form-control-select" id="lselect" required>
+                        <select class="form-control-select" id="khu" required>
                             <option class="select-option" value="" disabled selected>Khu</option>
-                            <option class="select-option" value="Off The Ground">Khu nam</option>
-                            <option class="select-option" value="Accelerated Growth">Khu nữ</option>
-                
+                            @foreach ($khu as $value){
+                            <option class="select-option" value="{{$value->id}}">{{$value->khu}}</option>
+
+                            }
+                            @endforeach
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control-select" id="lselect" required>
+                        <select class="form-control-select" id="tang" required>
                             <option class="select-option" value="" disabled selected>Tầng</option>
-                            <option class="select-option" value="Off The Ground">Off The Ground</option>
-                            <option class="select-option" value="Accelerated Growth">Accelerated Growth</option>
-                            <option class="select-option" value="Market Domination">Market Domination</option>
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control-select" id="lselect" required>
+                        <select class="form-control-select" id="phong" required>
                             <option class="select-option" value="" disabled selected>Phòng</option>
-                            <option class="select-option" value="Off The Ground">Off The Ground</option>
-                            <option class="select-option" value="Accelerated Growth">Accelerated Growth</option>
-                            <option class="select-option" value="Market Domination">Market Domination</option>
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control-select" id="lselect" required>
+                        <select class="form-control-select" id="giuong" required>
                             <option class="select-option" value="" disabled selected>Giường trống</option>
-                            <option class="select-option" value="Off The Ground">Off The Ground</option>
-                            <option class="select-option" value="Accelerated Growth">Accelerated Growth</option>
-                            <option class="select-option" value="Market Domination">Market Domination</option>
+
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>
-                   
+
                     <div class="form-message">
                         <div id="lmsgSubmit" class="h3 text-center hidden"></div>
                     </div>
                 </form>
                 <!-- end of call me form -->
-                
+
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of container -->
