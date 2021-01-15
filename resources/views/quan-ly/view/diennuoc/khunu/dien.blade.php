@@ -40,6 +40,8 @@
         {{session('themthanhcong')}}
     </div>
 @endif
+<h3>Tháng {{Carbon\Carbon::now()->format('d / m / y')}}</h3>
+
 <table id="example" class="ui celled table">
     <thead>
         <tr>
