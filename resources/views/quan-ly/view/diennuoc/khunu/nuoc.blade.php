@@ -40,6 +40,7 @@
         {{session('themthanhcong')}}
     </div>
 @endif
+<h3>{{Carbon\Carbon::now()->format('d / m / y')}}</h3>
 <table id="example" class="ui celled table">
     <thead>
         <tr>
@@ -85,7 +86,7 @@
                 @endif
                 
                 <td>
-                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/dien-nuoc/khu-nu/dien/sua')}}/{{$value->id}}">Sửa</a>
+                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/dien-nuoc/khu-nu/nuoc/sua')}}/{{$value->id}}">Sửa</a>
                 </td>
             </tr>
 

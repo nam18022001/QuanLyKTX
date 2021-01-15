@@ -53,7 +53,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($sinh_vien as $value)
+        @foreach ($sinhvien as $value)
             @if ($value->hoatdong == 1)
             <tr>
                 <td>{{$value->sinhvien->id}}</td>

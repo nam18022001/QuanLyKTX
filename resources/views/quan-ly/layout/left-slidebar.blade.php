@@ -51,7 +51,7 @@
 					</ul>
 				</li>
 				<li class="nav-item pcoded-hasmenu">
-					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fa fa-tasks" aria-hidden="true"></i></span><span class="pcoded-mtext">Quản lý</span></a>
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="fa fa-tasks" aria-hidden="true"></i></span><span class="pcoded-mtext">Quản lý {{--<input type="button" id="hihihi" value="Send">--}}</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="{{url('quan-ly/danh-sach')}}" class="">Danh sách</a></li>
 						@if (Auth::user()->position == 1)
@@ -61,9 +61,10 @@
 					</ul>
 				</li>
 				<li class="nav-item pcoded-hasmenu">
-					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="far fa-envelope" aria-hidden="true"></i></span><span class="pcoded-mtext">Thông báo</span></a>
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="far fa-envelope" aria-hidden="true"></i></span><span class="pcoded-mtext" id="thongbao">Thông báo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 </span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="{{url('quan-ly/thong-bao')}}" class="">Thông báo của sinh viên</a></li>
+						<li class=""><a href="{{url('quan-ly/thong-bao')}}" class="">Thông báo của sinh viên </a></li>
 						<li class=""><a href="{{url('quan-ly/thong-bao/gui')}}" class="">Thông báo tới sinh viên</a></li>
 						<li class=""><a href="{{url('quan-ly/thong-bao/da-gui')}}" class="">Thư đã gửi</a></li>
 						<li class=""><a href="{{url('quan-ly/thong-bao/ban-nhap')}}" class="">Bản nháp</a></li>

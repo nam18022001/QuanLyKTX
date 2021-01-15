@@ -70,15 +70,26 @@ Route::group(['middleware' => 'adminlogin'], function () {
             Route::post('xoa/ban-nhap', [ThongBaoController::class, 'xoadiscard']);
             Route::get('file-download/{id}', [ThongBaoController::class, 'download']);
             Route::get('file-discard/xoa/{id}', [ThongBaoController::class, 'filediscarddelete']);
+            Route::get('time/real', [ThongBaoController::class, 'realtime']);
         });
+
         Route::group(['prefix' => 'dien-nuoc'], function () {
             Route::group(['prefix' => 'khu-nam'], function () {
                 Route::get('dien', [DienNuocController::class, 'qldiennam']);
+                Route::get('dien/sua/{id}', [DienNuocController::class, 'suadiennam']);
+                Route::post('dien/sua/{id}', [DienNuocController::class, 'postsuadiennam']);
                 Route::get('nuoc', [DienNuocController::class, 'qlnuocnam']);
+                Route::get('nuoc/sua/{id}', [DienNuocController::class, 'suanuocnam']);
+                Route::post('nuoc/sua/{id}', [DienNuocController::class, 'postsuanuocnam']);
+
             });
             Route::group(['prefix' => 'khu-nu'], function () {
                 Route::get('dien', [DienNuocController::class, 'qldiennu']);
+                Route::get('dien/sua/{id}', [DienNuocController::class, 'suadiennam']);
+                Route::post('dien/sua/{id}', [DienNuocController::class, 'postsuadiennam']);
                 Route::get('nuoc', [DienNuocController::class, 'qlnuocnu']);
+                Route::get('nuoc/sua/{id}', [DienNuocController::class, 'suanuocnam']);
+                Route::post('nuoc/sua/{id}', [DienNuocController::class, 'postsuanuocnam']);
             });
 
             

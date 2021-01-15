@@ -42,7 +42,7 @@
                     <div class="card-body">
                         <div class="row align-items-center m-b-25">
                             <div class="col">
-                                <h6 class="m-b-5 ">Số điện cuối cùng của tháng này</h6>
+                                <h6 class="m-b-5 ">Số nướcx cuối cùng của tháng này</h6>
                                 <h3 class="m-b-0 ">{{$nuoc->soNuocCuoiThang}}</h3>
                             </div>
                             <div class="col-auto">
@@ -64,7 +64,7 @@
                     <div class="card-body">
                         <div class="row align-items-center m-b-25">
                             <div class="col">
-                                <h6 class="m-b-5 ">Số điện cuối cùng của tháng trước</h6>
+                                <h6 class="m-b-5 ">Số nước cuối cùng của tháng trước</h6>
                                 <h3 class="m-b-0 ">{{$nuoc->soNuocDauThang}}</h3>
                             </div>
                             <div class="col-auto">
@@ -91,8 +91,8 @@
                     <div class="card-body">
                         <div class="row align-items-center m-b-25">
                             <div class="col">
-                                <h6 class="m-b-5 ">1 chữ điện</h6>
-                                <h3 class="m-b-0">3000 <small><sup>VNĐ</sup></small></h3>
+                                <h6 class="m-b-5 ">1 khối nước</h6>
+                                <h3 class="m-b-0">5000 <small><sup>VNĐ</sup></small></h3>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-money-bill-alt text-c-red f-18"></i>

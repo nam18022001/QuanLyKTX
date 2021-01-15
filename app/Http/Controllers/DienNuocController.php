@@ -58,7 +58,94 @@ class DienNuocController extends Controller
             
             return view('quan-ly.view.diennuoc.khunam.nuoc', ['nuoc' => $nuoc]);
     }
-
+    public function suadiennam($id)
+    {
+        # code...
+        $sua = Dien::find($id);
+        if ($sua) {
+            # code...
+            return view('quan-ly.view.diennuoc.khunam.suadiennam', ['suadiennam' => $sua]);
+        }else {
+            # code...
+            return redirect()->back();
+        }
+    }
+    public function postsuadiennam(Request $request, $id)
+    {
+        $sua = Dien::find($id);
+        $sua->soDienDauThang = $request->dientruoc;
+        $sua->soDienCuoiThang = $request->dien;
+        $sua->tongtien = ($request->dien - $request->dientruoc) * 3;
+        $sua->save();
+        return redirect('quan-ly/dien-nuoc/khu-nam/dien/sua/'.$id);
+       
+    }
+    public function suanuocnam($id)
+    {
+        # code...
+        $sua = Nuoc::find($id);
+        if ($sua) {
+            # code...
+            return view('quan-ly.view.diennuoc.khunam.suanuocnam', ['suadiennam' => $sua]);
+        }else {
+            # code...
+            return redirect()->back();
+        }
+    }
+    public function postsuanuocnam(Request $request, $id)
+    {
+        $sua = Nuoc::find($id);
+        $sua->soNuocDauThang = $request->dientruoc;
+        $sua->soNuocCuoiThang = $request->dien;
+        $sua->tongtien = ($request->dien - $request->dientruoc) * 5;
+        $sua->save();
+        return redirect('quan-ly/dien-nuoc/khu-nu/nuoc/sua/'.$id);
+       
+    }
+    public function suadiennu($id)
+    {
+        # code...
+        $sua = Dien::find($id);
+        if ($sua) {
+            # code...
+            return view('quan-ly.view.diennuoc.khunu.suadiennu', ['suadiennam' => $sua]);
+        }else {
+            # code...
+            return redirect()->back();
+        }
+    }
+    public function postsuadiennu(Request $request, $id)
+    {
+        $sua = Dien::find($id);
+        $sua->soDienDauThang = $request->dientruoc;
+        $sua->soDienCuoiThang = $request->dien;
+        $sua->tongtien = ($request->dien - $request->dientruoc) * 3;
+        $sua->save();
+        return redirect('quan-ly/dien-nuoc/khu-nu/dien/sua/'.$id);
+       
+    }
+    public function suanuocnu($id)
+    {
+        # code...
+        $sua = Nuoc::find($id);
+        if ($sua) {
+            # code...
+            return view('quan-ly.view.diennuoc.khunu.suanuocnu', ['suadiennam' => $sua]);
+        }else {
+            # code...
+            return redirect()->back();
+        }
+    }
+    public function postsuanuocnu(Request $request, $id)
+    {
+        $sua = Nuoc::find($id);
+        $sua->soNuocDauThang = $request->dientruoc;
+        $sua->soNuocCuoiThang = $request->dien;
+        $sua->tongtien = ($request->dien - $request->dientruoc) * 5;
+        $sua->save();
+        return redirect('quan-ly/dien-nuoc/khu-nam/nuoc/sua/'.$id);
+       
+    }
     public function qldiennam()
     {
             $dien = Dien::where('id_khu', 1)->get();
@@ -77,6 +164,7 @@ class DienNuocController extends Controller
             $dien = Dien::where('id_khu', 2)->get();
             return view('quan-ly.view.diennuoc.khunu.dien', ['dien' => $dien]);
     }
+
 
     function __construct()
     {

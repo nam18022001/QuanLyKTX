@@ -171,8 +171,14 @@ class ThongBaoController extends Controller
         # code...
         $sent = ThongBaoSV::where([['id_quanly', Auth::id()], ['xoa', 1]])->orderBy('created_at', 'desc')->paginate(5);
 
-        
-        return view('quan-ly.view.Mail.sent', ['sent' => $sent]);
+        if ($sent) {
+            # code...
+         return view('quan-ly.view.Mail.sent', ['sent' => $sent]);
+
+        }else {
+            # code...
+            return redirect()->back();
+        }
     }
     public function xoasent(Request $request)
     {
@@ -715,15 +721,32 @@ class ThongBaoController extends Controller
         }else {
             # code...
             return redirect()->back();
-    }
+        }
     }
 
-
+    public function realtime(Request $request)
+    {
+        # code...
+        // if ($request->ajax()) {
+            # code...
+            $output = '';
+            $thongbao = ThongBao::where('xoa', 1)->count();
+            if ($thongbao) {
+                # code...
+                $output .= 'Thông báo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                '.$thongbao;
+                echo $output;
+                return responsse($output);
+            }
+        // }else{
+        //     return redirect()->back();
+        // }
+    }
     function __construct()
     {
         # code...
         $page = Page::find(1);
         // $pageoff = $page->status
         View::share('pageoff', $page);
-    }   
+    }
 }

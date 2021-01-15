@@ -72,7 +72,7 @@ class UserController extends Controller
                     'email.min' => 'Vui lòng nhập đúng email',
                     'email.max' => 'Nhập email dưới 100 ký tự',
                     'email.unique' => 'Email đã tồn tại',
-                    'email.ends_with' => 'Bạn chọn sinh viên nhưng không đúng email',
+                    'email.ends_with' => 'Vui lòng nhập đúng email trường',
                     
                 ]
             );
@@ -118,12 +118,12 @@ class UserController extends Controller
                     # code...
                     $sinhvien->id_giuong = $request->giuong;
 
-                    // $giuong = Giuong::find($request->giuong);
-                    // $giuong->hoatdong = 1;
-                    // $giuong->save();
-                    // $phong = Phong::find($request->phong);
-                    // $phong->hoatdong = 1;
-                    // $phong->save();
+                    $giuong = Giuong::find($request->giuong);
+                    $giuong->hoatdong = 1;
+                    $giuong->save();
+                    $phong = Phong::find($request->phong);
+                    $phong->hoatdong = 1;
+                    $phong->save();
                 }
                 $sinhvien->verified = 0;
                 $sinhvien->save();

@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- vendor css -->
 <link rel="stylesheet" href="{{asset('admin_assets/assets/css/style.css')}}">
+
 @yield('css')
 <style>
     i{
@@ -100,7 +101,23 @@
     <script src="{{asset('assets/js/scripts.js')}}"></script>
 <!-- modernizr css -->
 <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-
+<script>
+      $("#hihihi").click(function(){
+    $.ajax(
+{
+    url: 'http://greendormitory.com/quan-ly/thong-bao/time/real',
+    type: 'GET', 
+    // dataType: "JSON",
+    data: {
+        "id": '1' 
+    },
+    success: function (response)
+    {
+      $("#thongbao").html(response);
+    }
+});
+});
+</script>
 @yield('script')
 </body>
 

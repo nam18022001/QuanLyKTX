@@ -146,7 +146,7 @@
                 </div>
             </div>
         <div class="form-group row justify-content-end mb-0">
-                <button class="col-md-12 btn btn-info" type="submit">Thêm</button>
+                <button class="col-md-12 btn btn-info" type="submit">Cập nhật</button>
         </div>
     </form>
 </div>

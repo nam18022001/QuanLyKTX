@@ -579,4 +579,11 @@ class SinhVienController extends Controller
             return redirect()->back();
     }
     }
+    function __hihi()
+    {
+        # code...
+        $count = Thongbao::where(['xoa', 1])->count();
+        // $pageoff = $page->status
+        View::share('thongbao', $count);
+    }
 }

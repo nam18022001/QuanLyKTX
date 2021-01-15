@@ -85,7 +85,7 @@
                 @endif
                 
                 <td>
-                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/dien-nuoc/khu-nam/dien/sua')}}/{{$value->id}}">Sửa</a>
+                    <a class="btn btn-outline-warning btn-rounded" href="{{url('quan-ly/dien-nuoc/khu-nam/nuoc/sua')}}/{{$value->id}}">Sửa</a>
                 </td>
             </tr>
 

@@ -274,13 +274,20 @@ class QuanlyController extends Controller
     public function sinhviennam($id)
     {
         # code...
+
         $giuong = Giuong::where('id_phong', $id)->get();
         $phong = Giuong::where('id_phong', $id)->get()->first();
-
-        return view('quan-ly.view.namsinhvientrongphong', [
-            'sinhvien' => $giuong,
-            'phong' => $phong,
-        ]);
+        if ($giuong) {
+            # code...
+            return view('quan-ly.view.namsinhvientrongphong', [
+                'sinhvien' => $giuong,
+                'phong' => $phong,
+            ]);
+        }else {
+            # code...
+            return redirect()->back();
+        }
+        
     }
     public function sinhviennu($id)
     {
@@ -578,6 +585,7 @@ class QuanlyController extends Controller
             return redirect('quan-ly/doi-mat-khau/'.$id)->with('loi', 'Mật khẩu cũ không khớp');
         }
     }
+
     function __construct()
     {
         # code...
@@ -585,4 +593,5 @@ class QuanlyController extends Controller
         // $pageoff = $page->status
         View::share('pageoff', $page);
     }
+    
 }

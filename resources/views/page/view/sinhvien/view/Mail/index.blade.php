@@ -49,7 +49,7 @@ white-space: nowrap;
       <div class="col-md-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">Thư đã gửi</h3>
+            <h3 class="card-title">Hộp thư đến</h3>
 
             <div class="card-tools">
               <div class="input-group input-group-sm">

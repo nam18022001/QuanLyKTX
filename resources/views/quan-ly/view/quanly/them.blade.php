@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="QueQuan" class="col-md-3 control-label">Quên Quán</label>
+            <label for="QueQuan" class="col-md-3 control-label">Quê Quán</label>
             <div class="col-md-9">
                 <input type="text" class="form-control" id="QueQuan" name='QueQuan' required placeholder="Nhập Quê quán" >
             </div>
